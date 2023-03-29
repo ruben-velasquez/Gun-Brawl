@@ -44,9 +44,18 @@ Thumbs.db
 # Visual Studio #
 # ============ #
 .vs/
+.vscode/
 
 # =========== #
 # Test Scenes #
 # =========== #
 Test.unity
 Test.unity.meta
+
+# ======== #
+# Packages #
+# ======== #
+LeanTween/
+LeanTween.meta
+Plugins/
+Plugins.meta
