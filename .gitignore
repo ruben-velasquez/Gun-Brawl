@@ -51,6 +51,8 @@ Thumbs.db
 # =========== #
 Test.unity
 Test.unity.meta
+Assets/Scripts/Test.meta
+Assets/Scripts/Test/
 
 # ======== #
 # Packages #

@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class FighterMovement : FighterJump {
     // Variables públicas
+    [Space]
+    [Header("Movement")]
     public float speed = 5f; // Velocidad de movimiento
+
+    // Variables privadas
     private bool facingRight = true; // Dirección a la que mira el personaje
     
     // Método que se ejecuta en cada fotograma fijo
-    public void Move(int input)
+    public void Move(float input)
     {
         // Movemos el personaje según la entrada horizontal y la velocidad
         rb.velocity = new Vector2(input * speed, rb.velocity.y);

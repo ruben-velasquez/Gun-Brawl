@@ -7,14 +7,6 @@ public class FighterJump : GroundCheck
     // Variables públicas
     public float jumpForce; // La fuerza del salto
 
-    public override void Update() {
-        base.Update(); // Ejecutamos la lógica anterior
-        
-        if(Input.GetKeyDown(KeyCode.W)) {
-            Jump();
-        }
-    }
-
     public void Jump()
     {
         // Si el luchador está en el suelo, le aplica una fuerza hacia arriba
