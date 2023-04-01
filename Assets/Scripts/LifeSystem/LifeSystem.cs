@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class LifeSystem : MonoBehaviour
+public class LifeSystem : Entity
 {
     // Variables públicas
-    public int maxLife = 5; // Vida máxima del peleador
+    [Header("Life")]
+    [SerializeField]
+    private int maxLife = 5; // Vida máxima del peleador
     public int currentLife = 0; // Vida actual del peleador
     public bool alive = true; // Define si el jugador está vivo
+    public FighterUILife lifeUI; // NOTA: Temporal hasta que se desarrolle el FighterUI.cs
 
     public void Hurt(int damage)
     {
@@ -16,7 +19,9 @@ public class LifeSystem : MonoBehaviour
         if (currentLife < maxLife)
         {
             alive = false;
-        }
+            OnDie();
+        } 
+        OnHurt();
     }
 
     public void Heal(int life)
@@ -29,5 +34,20 @@ public class LifeSystem : MonoBehaviour
         {
             currentLife = maxLife;
         }
+        OnHeal();
+    }
+
+    public virtual void OnHurt() {
+        // La lógica tras ser golpeado
+        lifeUI.UpdateLife(currentLife / maxLife);
+    }
+    
+    public virtual void OnHeal() {
+        // La lógica tras ser curado
+        lifeUI.UpdateLife(currentLife / maxLife);
+    }
+    
+    public virtual void OnDie() {
+        // La lógica tras morir
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MovementManager : FighterMovement {
     // Variables públicas
+    [Space]
+    [Header("Movement Manager")]
     [SerializeField]
     public IInputController inputController;
 

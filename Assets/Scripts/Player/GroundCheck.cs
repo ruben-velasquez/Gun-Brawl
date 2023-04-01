@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class GroundCheck : Entity
+public class GroundCheck : LifeSystem
 {
+    [Space]
     [Header("Ground Check")]
     public bool grounded; // Variable pública que indica si el objeto está en el suelo o no
     [SerializeField]
