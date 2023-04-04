@@ -11,6 +11,12 @@ namespace Fighter {
         public int currentLife = 0; // Vida actual del peleador
         public bool alive = true; // Define si el jugador está vivo
 
+        public override void Start() {
+            base.Start();
+
+            ui.UpdateLife((float)currentLife / maxLife);
+        }
+
         public void Hurt(int damage)
         {
             currentLife -= damage; // Se le resta la vida

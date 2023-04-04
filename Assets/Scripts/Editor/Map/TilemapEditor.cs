@@ -24,8 +24,6 @@ namespace TilemapEditor
             if(map) {
                 tiles = map.GetComponentsInChildren<Transform>();
             }
-
-            print("Se han encontrado " + tiles.Length + " tiles");
         }
 
         static void FixPositions() {

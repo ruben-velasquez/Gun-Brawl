@@ -10,7 +10,7 @@ namespace Fighter {
 
         // Variables Privadas
         [SerializeField]
-        private bool move;
+        public bool move;
 
         public override void Update() {
             base.Update(); // Ejecutamos la lógica anterior

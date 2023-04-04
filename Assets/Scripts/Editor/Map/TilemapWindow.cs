@@ -32,7 +32,7 @@ namespace TilemapEditor
                 GameObject tile = Instantiate(prefab, prefabPosition, new Quaternion(), map);
 
                 if(isGround) {
-                    tile.AddComponent<BoxCollider2D>();
+                    tile.AddComponent<BoxCollider2D>().usedByComposite = true;
                     tile.layer = LayerMask.NameToLayer("Ground");
                 }
                 

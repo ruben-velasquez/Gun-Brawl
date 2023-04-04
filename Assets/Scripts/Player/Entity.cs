@@ -7,7 +7,7 @@ namespace Fighter {
         [HideInInspector]
         public Animator animator;
 
-        private void Start() {
+        public virtual void Start() {
             rb = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
         }

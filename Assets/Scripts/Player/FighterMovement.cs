@@ -6,9 +6,7 @@ namespace Fighter {
         [Space]
         [Header("Movement")]
         public float speed = 5f; // Velocidad de movimiento
-
-        // Variables privadas
-        private bool facingRight = true; // Dirección a la que mira el personaje
+        public bool facingRight = true; // Dirección a la que mira el personaje
         
         // Método que se ejecuta en cada fotograma fijo
         public void Move(float input)
