@@ -11,6 +11,11 @@ namespace Fighter {
         // Método que se ejecuta en cada fotograma fijo
         public void Move(float input)
         {
+            if(input != 0)
+                animator.Play(walkingAnimation);
+            else
+                animator.Play(idleAnimation);
+
             // Movemos el personaje según la entrada horizontal y la velocidad
             rb.velocity = new Vector2(input * speed, rb.velocity.y);
 

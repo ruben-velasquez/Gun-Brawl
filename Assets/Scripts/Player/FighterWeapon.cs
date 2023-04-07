@@ -1,4 +1,5 @@
 using UnityEngine;
+using Animation;
 
 namespace Fighter
 {
@@ -12,8 +13,12 @@ namespace Fighter
         public override void Start()
         {
             base.Start();
+            
+            if (weapon == null) return;
 
-            ui.UpdateWeapon(weapon);
+            UpdateWeapon();
+
+            attackHorAnim.onFrameAction += Attack;
         }
 
         public override void Update() {
@@ -33,12 +38,28 @@ namespace Fighter
 
             lastAttack = Time.time;
 
-            weapon.AttackHorizontal(transform, facingRight); // Llamamos al metodo atacar del arma
+            animator.Play(attackHorAnim);
+        }
+
+        private void Attack(Transform t) {
+            if(t == transform) {
+                weapon.AttackHorizontal(transform, facingRight); // Llamamos al metodo atacar del arma
+            }
         }
 
         public void ChangeWeapon(Weapon.Weapon newWeapon) {
             weapon = newWeapon;
+            UpdateWeapon();
+        }
+
+        private void UpdateWeapon() {
+            if(weapon == null) return;
             ui.UpdateWeapon(weapon);
+            attackHorAnim = animator.GetAnimation(weapon.GetAnimationName(true));
+        }
+
+        private void OnDestroy() {
+            attackHorAnim.onFrameAction -= Attack;
         }
     }
 }

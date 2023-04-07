@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Fighter {
-    public class UIManager : Entity {
+    public class UIManager : AnimationManager {
         [Header("UI Manager")]
         [SerializeField]
        public UI.FighterUI ui;

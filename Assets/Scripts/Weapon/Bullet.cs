@@ -5,6 +5,7 @@ namespace Weapon
     
     public class Bullet : MonoBehaviour {
         private Rigidbody2D rb2d;
+        private BoxCollider2D bx2d;
         [HideInInspector]
         public Transform parent; // Padre de la bala
         [HideInInspector]
@@ -19,6 +20,7 @@ namespace Weapon
 
         private void Start() {
             rb2d = GetComponent <Rigidbody2D>();
+            bx2d = GetComponent <BoxCollider2D>();
             animator = GetComponent <Animation.GBAnimator>();
 
             animator.GetAnimation("Destroy").onAnimationStart += OnAnimationStart;
@@ -52,6 +54,7 @@ namespace Weapon
 
         private void OnAnimationStart(Transform t) {
             if(t == transform) {
+                bx2d.enabled = false;
                 rb2d.velocity = Vector3.zero;
             }
         }

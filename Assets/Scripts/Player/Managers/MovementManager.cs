@@ -7,8 +7,6 @@ namespace Fighter {
         [Header("Movement Manager")]
         [SerializeField]
         public InputController.IInputController inputController;
-
-        // Variables Privadas
         [SerializeField]
         public bool move;
 

@@ -14,13 +14,14 @@ namespace Weapon
 
             // Definimos la posición resultante
             Vector3 bulletPos = new Vector3(bulletPosX, bulletPosY, player.position.z);
-            
+            Vector3 direction = isFacingRight ? Vector3.right : Vector3.left;
+
             // Creamos la bala en esa posición
             Bullet bullet = Instantiate(bulletPrefab, bulletPos, new Quaternion());
 
             // Configuramos sus atributos
             bullet.parent = player;
-            bullet.direction = isFacingRight ? Vector3.right : Vector3.left;
+            bullet.direction = direction;
             bullet.damage = damage;
         }
 
