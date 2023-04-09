@@ -5,7 +5,6 @@ namespace Weapon
     public abstract class Weapon : ScriptableObject {
         public new string name; // Nombre del arma
         public int damage; // Daño que causa el arma
-        public int range; // Rango del arma
         public float cooldown; // Cooldown al atacar del arma
         public bool isProyectile; // ¿Dispara proyectiles?
         public Vector3 horizontalOffset; // Offset horizontal del ataque

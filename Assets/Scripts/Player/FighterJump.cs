@@ -1,6 +1,7 @@
 using UnityEngine;
 
-namespace Fighter {
+namespace Fighter
+{
     public class FighterJump : GroundCheck
     {
         [Space]
@@ -15,6 +16,7 @@ namespace Fighter {
             {
                 grounded = false; // El luchador ya no está en el suelo
                 jumpTime = 0; // Reiniciamos
+                animator.Play(jumpingAnimation);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }

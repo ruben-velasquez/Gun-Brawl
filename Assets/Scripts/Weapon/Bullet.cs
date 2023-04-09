@@ -46,6 +46,9 @@ namespace Weapon
                 col.GetComponent<Fighter.LifeSystem>().Hurt(damage);
                 Destroy();
             }
+            else if(col.gameObject.CompareTag("Map")) {
+                Destroy();
+            }
         }
 
         private void Destroy() {

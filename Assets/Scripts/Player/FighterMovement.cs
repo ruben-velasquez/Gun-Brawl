@@ -7,14 +7,15 @@ namespace Fighter {
         [Header("Movement")]
         public float speed = 5f; // Velocidad de movimiento
         public bool facingRight = true; // Dirección a la que mira el personaje
+        public bool walking;
         
         // Método que se ejecuta en cada fotograma fijo
         public void Move(float input)
         {
             if(input != 0)
-                animator.Play(walkingAnimation);
+                walking = true;
             else
-                animator.Play(idleAnimation);
+                walking = false;
 
             // Movemos el personaje según la entrada horizontal y la velocidad
             rb.velocity = new Vector2(input * speed, rb.velocity.y);

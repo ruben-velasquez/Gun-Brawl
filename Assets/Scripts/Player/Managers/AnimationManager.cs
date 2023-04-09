@@ -10,6 +10,8 @@ namespace Fighter
         [HideInInspector]
         public GBAnimation idleAnimation;
         [HideInInspector]
+        public GBAnimation airAnimation;
+        [HideInInspector]
         public GBAnimation walkingAnimation;
         [HideInInspector]
         public GBAnimation jumpingAnimation;
@@ -32,6 +34,7 @@ namespace Fighter
             animator.onAnimationEnd += OnAnimationEnd;
 
             idleAnimation = animator.GetAnimation("Idle");
+            airAnimation = animator.GetAnimation("Air");
             walkingAnimation = animator.GetAnimation("Walk");
             jumpingAnimation = animator.GetAnimation("Jump");
         }
@@ -54,7 +57,6 @@ namespace Fighter
                 animator.Play(animationRequest);
                 animationRequest = null;
             }
-            animator.Play(idleAnimation);
         }
 
         // Estados:
