@@ -1,5 +1,5 @@
 using UnityEngine;
-using Animation;
+using Weapon;
 
 namespace Fighter
 {
@@ -17,8 +17,6 @@ namespace Fighter
             if (weapon == null) return;
 
             UpdateWeapon();
-
-            attackHorAnim.onFrameAction += Attack;
         }
 
         public override void Update() {
@@ -28,22 +26,41 @@ namespace Fighter
             if (!move) return;
 
             if(inputController.IsShooting()) {
-                AttackHorizontal();
+                Attack();
             }
         }
-        public void AttackHorizontal() {
-            if(Time.time - lastAttack < weapon.cooldown) {
+
+        public void Attack() {
+            if (Time.time - lastAttack < weapon.cooldown)
+            {
                 return;
             }
 
             lastAttack = Time.time;
 
-            animator.Play(attackHorAnim);
+            if (inputController.IsUp()) {
+                animator.Play(attackUpAnim);
+            }
+            else if(inputController.IsDown()) {
+                animator.Play(attackDownAnim);
+            }
+            else
+                animator.Play(attackHorAnim);
         }
 
-        private void Attack(Transform t) {
+        private void AttackHorCallback(Transform t) {
             if(t == transform) {
                 weapon.AttackHorizontal(transform, facingRight); // Llamamos al metodo atacar del arma
+            }
+        }
+        private void AttackUpCallback(Transform t) {
+            if(t == transform) {
+                weapon.AttackUp(transform, facingRight); // Llamamos al metodo atacar del arma
+            }
+        }
+        private void AttackDownCallback(Transform t) {
+            if(t == transform) {
+                weapon.AttackDown(transform, facingRight); // Llamamos al metodo atacar del arma
             }
         }
 
@@ -55,11 +72,19 @@ namespace Fighter
         private void UpdateWeapon() {
             if(weapon == null) return;
             ui.UpdateWeapon(weapon);
-            attackHorAnim = animator.GetAnimation(weapon.GetAnimationName(true));
+            attackHorAnim = animator.GetAnimation(weapon.GetAnimationName(Direction.Horizontal));
+            attackUpAnim = animator.GetAnimation(weapon.GetAnimationName(Direction.Up));
+            attackDownAnim = animator.GetAnimation(weapon.GetAnimationName(Direction.Down));
+
+            attackHorAnim.onFrameAction += AttackHorCallback;
+            attackUpAnim.onFrameAction += AttackUpCallback;
+            attackDownAnim.onFrameAction += AttackDownCallback;
         }
 
         private void OnDestroy() {
-            attackHorAnim.onFrameAction -= Attack;
+            attackHorAnim.onFrameAction -= AttackHorCallback;
+            attackUpAnim.onFrameAction -= AttackUpCallback;
+            attackDownAnim.onFrameAction -= AttackDownCallback;
         }
     }
 }

@@ -31,9 +31,9 @@ namespace Weapon
                 GetComponent<SpriteRenderer>().flipX = true;
             }
             else if(direction == Vector3.up) {
-                transform.rotation = new Quaternion(0f, 90f, 0f, 0f);
+                transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             } else if(direction == Vector3.down) {
-                transform.rotation = new Quaternion(0f, -90f, 0f, 0f);
+                transform.rotation = Quaternion.Euler(0f, 0f, -90f);
             }
             // Le damos velocidad a la bala
             rb2d.velocity = direction * velocity;
@@ -59,6 +59,7 @@ namespace Weapon
             if(t == transform) {
                 bx2d.enabled = false;
                 rb2d.velocity = Vector3.zero;
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             }
         }
         private void OnAnimationEnd(Transform t) {

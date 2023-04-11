@@ -17,5 +17,7 @@ namespace InputController {
         public abstract bool IsJumping();
         public abstract bool IsShooting();
         public abstract bool IsInteracting();
+        public abstract bool IsUp();
+        public abstract bool IsDown();
     }
 }

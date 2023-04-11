@@ -22,6 +22,12 @@ namespace InputController {
             return axis;
         }
 
+        public override bool IsUp() {
+            return Input.GetKey(inputUser.up);
+        }
+        public override bool IsDown() {
+            return Input.GetKey(inputUser.down);
+        }
         public bool IsMovingLeft() {
             return Input.GetKey(inputUser.left);
         }
@@ -48,6 +54,12 @@ namespace InputController {
 
         // Modificar controles
 
+        public void ChangeUp(KeyCode key) {
+            inputUser.up = key;
+        }
+        public void ChangeDown(KeyCode key) {
+            inputUser.down = key;
+        }
         public void ChangeLeft(KeyCode key) {
             inputUser.left = key;
         }
