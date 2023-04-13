@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Fighter
 {
-    public class FighterAnimator : FighterWeapon {
+    public class FighterAnimator : FighterPunch {
         public override void Update() {
             base.Update();
 

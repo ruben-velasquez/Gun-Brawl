@@ -30,7 +30,7 @@ namespace Fighter
             }
         }
 
-        public void Attack() {
+        private void Attack() {
             if (Time.time - lastAttack < weapon.cooldown)
             {
                 return;

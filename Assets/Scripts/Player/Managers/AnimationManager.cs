@@ -21,6 +21,8 @@ namespace Fighter
         public GBAnimation attackUpAnim; // Animación del ataque hacia arriba
         [HideInInspector]
         public GBAnimation attackDownAnim; // Animación del ataque hacia abajo
+        [HideInInspector]
+        public GBAnimation punchAnimation; // Animación del ataque hacia abajo
         private GBAnimation animationRequest;
 
         public override void Start()
@@ -37,6 +39,7 @@ namespace Fighter
             airAnimation = animator.GetAnimation("Air");
             walkingAnimation = animator.GetAnimation("Walk");
             jumpingAnimation = animator.GetAnimation("Jump");
+            punchAnimation = animator.GetAnimation("Punch");
         }
 
         public virtual void OnAnimationStart() {
