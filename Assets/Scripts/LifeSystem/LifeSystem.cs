@@ -14,7 +14,7 @@ namespace Fighter {
         public override void Start() {
             base.Start();
 
-            ui.UpdateLife((float)currentLife / maxLife);
+            UpdateUI();
         }
 
         public void Hurt(int damage)
@@ -46,16 +46,20 @@ namespace Fighter {
 
         public virtual void OnHurt() {
             // La lógica tras ser golpeado
-            ui.UpdateLife((float)currentLife / maxLife);
+            UpdateUI();
         }
         
         public virtual void OnHeal() {
             // La lógica tras ser curado
-            ui.UpdateLife((float)currentLife / maxLife);
+            UpdateUI();
         }
         
         public virtual void OnDie() {
             // La lógica tras morir
+        }
+
+        private void UpdateUI() {
+            ui.UpdateLife((float)currentLife  / maxLife);
         }
     }
 }

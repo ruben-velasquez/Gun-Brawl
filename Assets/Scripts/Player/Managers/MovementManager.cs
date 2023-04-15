@@ -20,6 +20,10 @@ namespace Fighter {
                 Jump();
             }
 
+            else if(!inputController.IsFollowingJump() && rb.velocity.y > 0) {
+                FollowJump();
+            }
+
             Move(inputController.MoveAxis());
         }
 

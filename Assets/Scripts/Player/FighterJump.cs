@@ -8,6 +8,8 @@ namespace Fighter
         [Header("Jump")]
         // Variables públicas
         public float jumpForce; // La fuerza del salto
+        public float minJumpDuration = 1; // Minima duración del salto
+        private float LastJump = 0; // Momento en el que se hizo el último salto
 
         public void Jump()
         {
@@ -16,8 +18,18 @@ namespace Fighter
             {
                 grounded = false; // El luchador ya no está en el suelo
                 jumpTime = 0; // Reiniciamos
+                LastJump = Time.time;
                 animator.Play(jumpingAnimation);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+        }
+
+
+        // Esta función se ejecuta cuando no se está presionando el boton de saltar
+        // Pero aún así el jugador sigue teniendo un impulso hacia arriba
+        public void FollowJump() {
+            if (Time.time - LastJump > minJumpDuration) {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
             }
         }
     }

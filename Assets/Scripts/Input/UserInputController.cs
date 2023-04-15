@@ -36,6 +36,9 @@ namespace InputController {
             return Input.GetKey(inputUser.right);
         }
         
+        public override bool IsFollowingJump() {
+            return Input.GetKey(inputUser.jump);
+        }
         public override bool IsJumping() {
             return Input.GetKeyDown(inputUser.jump);
         }

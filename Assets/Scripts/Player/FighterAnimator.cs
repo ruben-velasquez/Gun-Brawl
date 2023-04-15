@@ -8,6 +8,9 @@ namespace Fighter
 
             if(!grounded)
                 animator.Play(airAnimation);
+            else if (animator.running && animator.currentAnimation.name == jumpingAnimation.name) {
+                animator.Stop(true);
+            }
             else if (walking)
                 animator.Play(walkingAnimation);
             else

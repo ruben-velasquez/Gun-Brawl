@@ -15,6 +15,7 @@ namespace InputController {
         public abstract int MoveAxis();
         public abstract bool IsPunching();
         public abstract bool IsJumping();
+        public abstract bool IsFollowingJump();
         public abstract bool IsShooting();
         public abstract bool IsInteracting();
         public abstract bool IsUp();
