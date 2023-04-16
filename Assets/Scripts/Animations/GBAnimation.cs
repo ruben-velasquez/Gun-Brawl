@@ -12,7 +12,7 @@ namespace Animation
         public new string name; // Nombre de la animación
         public bool loop; // ¿La animación se reproduce en bucle?
         [HideInInspector]
-        public List<Frame> frames = new List<Frame>(); // Todos los frames de la animación
+        public List<Frame> frames = new List<Frame>(); // Los frames de la animación
         public event Action<Transform> onAnimationStart; // Evento que se ejecuta cuando empieza la animación
         public event Action<Transform> onAnimationEnd; // Evento que se ejecuta cuando termina la animación
         public event Action<Transform> onFrameAction; // Evento que se ejecuta cuando se encuentra un "Frame Action"
@@ -48,6 +48,16 @@ namespace Animation
         public void Loop(Transform transform) {
             if (onLoop != null)
                 onLoop(transform);
+        }
+
+        // Management
+
+        public void AddFrame(Frame newFrame) {
+            frames.Add(newFrame);
+        }
+
+        public void Clear() {
+            frames.Clear();
         }
     }
 }

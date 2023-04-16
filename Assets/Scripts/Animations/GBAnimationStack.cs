@@ -5,7 +5,7 @@ namespace Animation
 {
     [CreateAssetMenu(fileName = "Animation Stack", menuName = "Gun Brawl/Animation Stack", order = 0)]
     public class GBAnimationStack : ScriptableObject {
-        public List<GBAnimation> animations; // Animaciones
+        public List<GBAnimation> animations = new List<GBAnimation>(); // Animaciones
         public bool playOnStart;
         public string initialAnimation; // Animación inicial (central)
 
@@ -24,6 +24,16 @@ namespace Animation
 
         public GBAnimation GetInitialAnimation() {
             return GetAnimation(initialAnimation);
+        }
+
+        // Management
+
+        public void AddAnimation(GBAnimation newAnimation) {
+            animations.Add(newAnimation);
+        }
+
+        public void Clear() {
+            animations.Clear();
         }
     }
 }

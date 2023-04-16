@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 6cee454e9483de8419856dc9cb9be0f3
-timeCreated: 1680580917
+timeCreated: 1681605239
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -114,7 +114,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 416
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 416
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -140,7 +140,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 416
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -153,7 +153,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 416
+        y: 224
         width: 32
         height: 32
       alignment: 0
@@ -166,7 +166,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 384
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -179,7 +179,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 384
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -191,8 +191,8 @@ TextureImporter:
       name: Player 2_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 352
+        x: 64
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -204,8 +204,8 @@ TextureImporter:
       name: Player 2_7
       rect:
         serializedVersion: 2
-        x: 32
-        y: 352
+        x: 96
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -217,8 +217,8 @@ TextureImporter:
       name: Player 2_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 320
+        x: 128
+        y: 192
         width: 32
         height: 32
       alignment: 0
@@ -230,8 +230,8 @@ TextureImporter:
       name: Player 2_9
       rect:
         serializedVersion: 2
-        x: 32
-        y: 320
+        x: 0
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -243,8 +243,8 @@ TextureImporter:
       name: Player 2_10
       rect:
         serializedVersion: 2
-        x: 64
-        y: 320
+        x: 32
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -256,8 +256,8 @@ TextureImporter:
       name: Player 2_11
       rect:
         serializedVersion: 2
-        x: 96
-        y: 320
+        x: 64
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -269,8 +269,8 @@ TextureImporter:
       name: Player 2_12
       rect:
         serializedVersion: 2
-        x: 128
-        y: 320
+        x: 96
+        y: 160
         width: 32
         height: 32
       alignment: 0
@@ -283,7 +283,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 288
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -296,7 +296,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 288
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -309,7 +309,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 288
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -322,7 +322,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 288
+        y: 128
         width: 32
         height: 32
       alignment: 0
@@ -335,7 +335,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 256
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -348,7 +348,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 256
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -360,8 +360,8 @@ TextureImporter:
       name: Player 2_19
       rect:
         serializedVersion: 2
-        x: 0
-        y: 224
+        x: 64
+        y: 96
         width: 32
         height: 32
       alignment: 0
@@ -373,8 +373,8 @@ TextureImporter:
       name: Player 2_20
       rect:
         serializedVersion: 2
-        x: 32
-        y: 224
+        x: 0
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -386,8 +386,8 @@ TextureImporter:
       name: Player 2_21
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
+        x: 32
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -399,8 +399,8 @@ TextureImporter:
       name: Player 2_22
       rect:
         serializedVersion: 2
-        x: 32
-        y: 192
+        x: 64
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -412,8 +412,8 @@ TextureImporter:
       name: Player 2_23
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
+        x: 96
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -425,8 +425,8 @@ TextureImporter:
       name: Player 2_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 160
+        x: 128
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -438,8 +438,8 @@ TextureImporter:
       name: Player 2_25
       rect:
         serializedVersion: 2
-        x: 32
-        y: 160
+        x: 160
+        y: 64
         width: 32
         height: 32
       alignment: 0
@@ -451,8 +451,8 @@ TextureImporter:
       name: Player 2_26
       rect:
         serializedVersion: 2
-        x: 64
-        y: 160
+        x: 0
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -464,8 +464,8 @@ TextureImporter:
       name: Player 2_27
       rect:
         serializedVersion: 2
-        x: 96
-        y: 160
+        x: 32
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -477,8 +477,8 @@ TextureImporter:
       name: Player 2_28
       rect:
         serializedVersion: 2
-        x: 128
-        y: 160
+        x: 64
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -490,8 +490,8 @@ TextureImporter:
       name: Player 2_29
       rect:
         serializedVersion: 2
-        x: 160
-        y: 160
+        x: 96
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -503,8 +503,8 @@ TextureImporter:
       name: Player 2_30
       rect:
         serializedVersion: 2
-        x: 0
-        y: 128
+        x: 128
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -516,8 +516,8 @@ TextureImporter:
       name: Player 2_31
       rect:
         serializedVersion: 2
-        x: 32
-        y: 128
+        x: 160
+        y: 32
         width: 32
         height: 32
       alignment: 0
@@ -530,7 +530,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 96
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -543,7 +543,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 96
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -555,8 +555,8 @@ TextureImporter:
       name: Player 2_34
       rect:
         serializedVersion: 2
-        x: 0
-        y: 64
+        x: 64
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -568,8 +568,8 @@ TextureImporter:
       name: Player 2_35
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
+        x: 96
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -581,8 +581,8 @@ TextureImporter:
       name: Player 2_36
       rect:
         serializedVersion: 2
-        x: 0
-        y: 32
+        x: 128
+        y: 0
         width: 32
         height: 32
       alignment: 0
@@ -594,33 +594,7 @@ TextureImporter:
       name: Player 2_37
       rect:
         serializedVersion: 2
-        x: 32
-        y: 32
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player 2_38
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Player 2_39
-      rect:
-        serializedVersion: 2
-        x: 32
+        x: 160
         y: 0
         width: 32
         height: 32
