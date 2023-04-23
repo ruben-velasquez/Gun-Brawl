@@ -9,11 +9,19 @@ namespace TilemapEditor
         private static Transform[] tiles;
 
         static TilemapEditor() {
+            if (GameObject.FindGameObjectWithTag("Map") == null) {
+                return;
+            }
             EditorApplication.hierarchyWindowChanged += Refresh;
         }
         
         [MenuItem("/Tilemap Editor/Refresh &O")]
         public static void Refresh() {
+            if (GameObject.FindGameObjectWithTag("Map") == null)
+            {
+                return;
+            }
+            
             FindTiles();
             FixPositions();
         }

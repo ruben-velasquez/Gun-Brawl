@@ -60,6 +60,7 @@ namespace Fighter
         private void OnClimbEnd() {
             rb.gravityScale = 2;
             climbing = false;
+            animator.pause = false;
         }
     }
 }

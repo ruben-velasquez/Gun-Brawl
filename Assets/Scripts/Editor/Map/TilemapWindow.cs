@@ -15,6 +15,10 @@ namespace TilemapEditor
         }
 
         private void OnGUI() {
+            if(GameObject.FindGameObjectWithTag("Map") == null) {
+                GUILayout.Label("No se ha encontrado el Objeto Map");
+                return;
+            }
             GUILayout.Label("Aquí podrás crear el escenario, pon un tile en el siguiente cuadro y haz click en el botón para ponerlo");
 
             GUILayout.Space(10);

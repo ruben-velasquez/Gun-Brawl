@@ -12,6 +12,7 @@ using UnityEngine;
 namespace InputController {
     [System.Serializable]
     public abstract class IInputController : MonoBehaviour {
+        public new string name;
         public abstract int MoveAxis();
         public abstract int HorizontalAxis();
         public abstract bool IsPunching();
