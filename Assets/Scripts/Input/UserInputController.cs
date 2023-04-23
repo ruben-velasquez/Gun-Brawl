@@ -21,6 +21,19 @@ namespace InputController {
 
             return axis;
         }
+        
+        public override int HorizontalAxis() {
+            int axis = 0;
+
+            if(IsDown()) {
+                axis -= 1;
+            }
+            if(IsUp()) {
+                axis += 1;
+            }
+
+            return axis;
+        }
 
         public override bool IsUp() {
             return Input.GetKey(inputUser.up);

@@ -18,6 +18,7 @@ namespace Animation
         public SpriteRenderer spr;
         [HideInInspector]
         public bool running;
+        public bool pause;
 
         private float startTime;
         private Coroutine currentCoroutine;
@@ -124,6 +125,11 @@ namespace Animation
                 }
 
                 spr.sprite = frame.sprite; // Asignamos el sprite del frame
+
+                for (int i = 0; pause; i++)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
 
                 yield return new WaitForSeconds(frame.time); // Esperamos a que pase el tiempo indicado
             }

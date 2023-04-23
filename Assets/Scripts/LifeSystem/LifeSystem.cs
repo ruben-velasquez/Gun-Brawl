@@ -21,12 +21,15 @@ namespace Fighter {
         {
             currentLife -= damage; // Se le resta la vida
 
-            // Se comprueba si la vida actual es menor
-            // A la vida máxima para definir si murió
-            if (currentLife < maxLife)
+            // Se comprueba si la vida actual es menor o igual
+            // A 0 para definir si murió
+            if (currentLife <= 0)
             {
-                alive = false;
-                OnDie();
+                currentLife = 0;
+                if(alive) {
+                    alive = false;
+                    OnDie();
+                }
             } 
             OnHurt();
         }

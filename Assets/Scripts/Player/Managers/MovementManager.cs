@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Fighter {
-    public class MovementManager : FighterMovement {
+    public class MovementManager : FighterClimb {
         // Variables públicas
         [Space]
         [Header("Movement Manager")]
@@ -20,11 +20,26 @@ namespace Fighter {
                 Jump();
             }
 
-            else if(!inputController.IsFollowingJump() && rb.velocity.y > 0) {
+            else if(!onClimbExitJump && !inputController.IsFollowingJump() && rb.velocity.y > 0) {
                 FollowJump();
             }
 
-            Move(inputController.MoveAxis());
+            if(hasNearStair) {
+                CheckClimbState(inputController.HorizontalAxis());
+            } else if(climbing) {
+                ExitClimb(true);
+            }
+            
+            if(climbing && grounded) {
+                ExitClimb(false);
+                
+            }
+
+            if(climbing && Input.GetKeyDown(KeyCode.U)) {
+                ExitClimb(true);
+            }
+
+            if(!climbing) Move(inputController.MoveAxis());
         }
 
         public void EnanbleMovement() {

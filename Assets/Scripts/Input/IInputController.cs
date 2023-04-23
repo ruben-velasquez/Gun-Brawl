@@ -13,6 +13,7 @@ namespace InputController {
     [System.Serializable]
     public abstract class IInputController : MonoBehaviour {
         public abstract int MoveAxis();
+        public abstract int HorizontalAxis();
         public abstract bool IsPunching();
         public abstract bool IsJumping();
         public abstract bool IsFollowingJump();

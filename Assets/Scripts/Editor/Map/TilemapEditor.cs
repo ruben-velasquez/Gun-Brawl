@@ -38,6 +38,9 @@ namespace TilemapEditor
                 );
 
 
+                if(tile.gameObject.name.StartsWith("_")) continue;
+
+
                 foreach (Vector3 position in positions)
                 {
                     if(tile.position == position) {

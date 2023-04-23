@@ -23,6 +23,8 @@ namespace Fighter
         public GBAnimation attackDownAnim; // Animación del ataque hacia abajo
         [HideInInspector]
         public GBAnimation punchAnimation; // Animación del ataque hacia abajo
+        [HideInInspector]
+        public GBAnimation climbAnimation; // Animación del ataque hacia abajo
         private GBAnimation animationRequest;
 
         public override void Start()
@@ -40,6 +42,7 @@ namespace Fighter
             walkingAnimation = animator.GetAnimation("Walk");
             jumpingAnimation = animator.GetAnimation("Jump");
             punchAnimation = animator.GetAnimation("Punch");
+            climbAnimation = animator.GetAnimation("Climb");
         }
 
         public virtual void OnAnimationStart() {
@@ -61,13 +64,5 @@ namespace Fighter
                 animationRequest = null;
             }
         }
-
-        // Estados:
-        // Idle (Prioridad: 0)
-        // Walking (Prioridad: 1)
-        // Jumping (Prioridad: 2)
-        // Attacking (Prioridad: 3)
-        // Hurted (Prioridad: 4)
-        // Died (Prioridad: 5)
     }
 }

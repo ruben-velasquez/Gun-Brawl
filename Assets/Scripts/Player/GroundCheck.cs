@@ -17,13 +17,15 @@ namespace Fighter {
         private float coyoteTime = 0.5f; // Variable pública que define el tiempo para poder saltar    
         [HideInInspector]
         public float jumpTime; // Variable privada que almacena el tiempo restante para poder saltar
+        [SerializeField]
+        private float platformCheckOffset = 1.3f;
 
         public virtual void Update()
         {
             // Lanza un rayo desde el centro del objeto hacia abajo solo en la capa "Ground" con la longitud definida
             RaycastHit2D hitLeft = Physics2D.Raycast((Vector2)transform.position - raycastDistance, Vector2.down, checkLength, groundLayer);
             RaycastHit2D hitCenter = Physics2D.Raycast(transform.position, Vector2.down, checkLength, groundLayer);
-            RaycastHit2D hitRight = Physics2D.Raycast((Vector2)transform.position - raycastDistance, Vector2.down, checkLength, groundLayer);
+            RaycastHit2D hitRight = Physics2D.Raycast((Vector2)transform.position + raycastDistance, Vector2.down, checkLength, groundLayer);
 
             // Vista previa de los rayos
             Debug.DrawLine(transform.position, ((Vector2)transform.position - raycastDistance) + (Vector2.down * checkLength));
@@ -33,8 +35,14 @@ namespace Fighter {
             // Si el rayo colisiona con algo, el objeto está en el suelo y se le asigna el tiempo para poder saltar
             if (hitCenter.collider != null || hitLeft.collider != null || hitRight.collider != null)
             {
-                grounded = true;
-                jumpTime = coyoteTime;
+                if(hitCenter.collider && hitCenter.collider.CompareTag("Platform") && hitCenter.collider.transform.position.y - transform.position.y > platformCheckOffset) {
+                    grounded = false;
+                    jumpTime -= Time.deltaTime;
+                }
+                else {
+                    grounded = true;
+                    jumpTime = coyoteTime;
+                }
             }
             else // Si no, el objeto está en el aire y se le resta el tiempo transcurrido al tiempo para poder saltar
             {
