@@ -1,17 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : GBSceneManager
 {
     [SerializeField]
     private GameObject playerPrefab; // Jugador de referencia
     private List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
     public List<GameObject> players; // Jugadores en juego
+    public List<GameObject> alivePlayers; // Jugadores en juego
 
     private void Start()
     {
-        // TODO: Agregar cantidad de jugadores desde la interfaz
-        playerInfo.Add(new PlayerInfo()); // Añadimos un solo jugador de testeo
+        
+    }
+
+    public int CreatePlayerInfo() {
+        playerInfo.Add(new PlayerInfo());
+        return playerInfo.Count - 1;
+    }
+
+    public void DeletePlayerInfo(int index) {
+        playerInfo.RemoveAt(index);
     }
 
     // Cambiar la información de un jugador
@@ -39,20 +48,29 @@ public class PlayerManager : MonoBehaviour
 
         foreach (PlayerInfo info in playerInfo)
         {
+            // Creamos el HUD
+            UI.FighterUI ui = CreateHUD();
+
             // Instanciamos el jugador y obtenemos su script
             Fighter.Fighter player = Instantiate(playerPrefab, spawns[index].transform.position, Quaternion.Euler(0,0,0)).GetComponent<Fighter.Fighter>();
 
             // Le ponemos su controlador
             player.inputController = info.controller;
 
+            // Le añadimos el HUD
+            player.ui = ui;
+
             // Evitamos que se mueva
             player.move = false;
+
+            Debug.Log(index + ": " + info.controller.name + " " + info.skin.name);
 
             // Le ponemos el animador que define su skin
             player.GetComponent<Animation.GBAnimator>().animationStack = info.skin.animator;
 
             // Lo añadimos a la lista
             players.Add(player.gameObject);
+            alivePlayers.Add(player.gameObject);
 
             index++;
         }
@@ -93,5 +111,9 @@ public class PlayerManager : MonoBehaviour
             player.GetComponent<Animation.GBAnimator>().pause = false;
             player.GetComponent<Rigidbody2D>().gravityScale = 2;
         }
+    }
+
+    public virtual void OnPlayerDie(GameObject player) {
+        alivePlayers.Remove(player);
     }
 }

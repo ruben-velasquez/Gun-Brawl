@@ -59,6 +59,7 @@ namespace Fighter {
         
         public virtual void OnDie() {
             // La lógica tras morir
+            GameManager.Instance.OnPlayerDie(gameObject);
         }
 
         private void UpdateUI() {

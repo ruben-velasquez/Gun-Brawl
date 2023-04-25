@@ -9,7 +9,30 @@ public class MatchManager : PlayerManager
     public void StartMatch() {
         if(onMatchStart != null)
             onMatchStart();
-            
+
         CreatePlayers();
+
+        EnablePlayerMove();
+    }
+
+    public void CheckMatch() {
+        if(alivePlayers.Count == 1) {
+            EndMatch();
+        }
+    }
+
+    public void EndMatch() {
+        if (onMatchEnd != null)
+            onMatchEnd();
+
+        DisablePlayerMove();
+
+        Debug.Log(alivePlayers[0].name + " ha ganado");
+    }
+
+    public override void OnPlayerDie(GameObject player) {
+        base.OnPlayerDie(player);
+
+        CheckMatch();
     }
 }

@@ -11,7 +11,8 @@ namespace UI {
         }
 
         public void UpdateLife(float fixedLife) {
-            life.UpdateLife(fixedLife);
+            if(life == null) Debug.Log("La lifebar sigue cargando");
+            else life.UpdateLife(fixedLife);
         }
 
         public void UpdateWeapon(Weapon.Weapon newWeapon) {
