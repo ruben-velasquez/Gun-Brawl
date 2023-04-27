@@ -8,6 +8,8 @@ public class PlayerManager : GBSceneManager
     private List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
     public List<GameObject> players; // Jugadores en juego
     public List<GameObject> alivePlayers; // Jugadores en juego
+    public List<GameObject> realPlayers; // Jugadores en juego
+    public List<GameObject> computerPlayers; // Jugadores en juego
 
     private void Start()
     {
@@ -63,7 +65,13 @@ public class PlayerManager : GBSceneManager
             // Evitamos que se mueva
             player.move = false;
 
-            Debug.Log(index + ": " + info.controller.name + " " + info.skin.name);
+            if(info.controller.name.StartsWith("Player")) {
+                ui.SetName("Player " + (realPlayers.Count + 1).ToString());
+                realPlayers.Add(player.gameObject);
+            } else {
+                ui.SetName("CPU " + (computerPlayers.Count + 1).ToString());
+                computerPlayers.Add(player.gameObject);
+            }
 
             // Le ponemos el animador que define su skin
             player.GetComponent<Animation.GBAnimator>().animationStack = info.skin.animator;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManager : MatchManager
+public class GameManager : PauseManager
 {
     private static GameManager instance;
 

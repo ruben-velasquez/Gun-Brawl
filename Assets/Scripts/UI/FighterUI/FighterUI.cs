@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UI {
     public class FighterUI : MonoBehaviour {
+        public new Text name;
         private FighterUILife life;
         private FighterUIWeapon weapon;
 
@@ -17,6 +19,10 @@ namespace UI {
 
         public void UpdateWeapon(Weapon.Weapon newWeapon) {
             weapon.UpdateWeapon(newWeapon);
+        }
+
+        public void SetName(string newName) {
+            name.text = newName;
         }
     }
 }
