@@ -12,6 +12,7 @@ using UnityEngine;
 namespace InputController {
     [System.Serializable]
     public abstract class IInputController : MonoBehaviour {
+        public int id;
         public new string name;
         public abstract int MoveAxis();
         public abstract int HorizontalAxis();

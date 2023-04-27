@@ -5,7 +5,7 @@ public class PlayerManager : GBSceneManager
 {
     [SerializeField]
     private GameObject playerPrefab; // Jugador de referencia
-    private List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
+    public List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
     public List<GameObject> players; // Jugadores en juego
     public List<GameObject> alivePlayers; // Jugadores en juego
     public List<GameObject> realPlayers; // Jugadores en juego

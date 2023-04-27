@@ -9,6 +9,36 @@ public class MatchPlayers : MonoBehaviour
     [SerializeField]
     private InputController.IInputController defaultController;
 
+    private void Start() {
+        if(GameManager.Instance.playerInfo.Capacity != 0) {
+            int index = 0;
+            foreach (PlayerInfo info in GameManager.Instance.playerInfo)
+            {
+                GameObject box = CreatePlayer(index);
+
+                UI.SkinSelector skinSelector = box.GetComponentInChildren<UI.SkinSelector>();
+                skinSelector.value = info.skin.id;
+                skinSelector.UpdateSkin();
+
+                UI.ControllerSelector controllerSelector = box.GetComponentInChildren<UI.ControllerSelector>();
+                controllerSelector.value = info.controller.id;
+                controllerSelector.UpdateController();
+
+                index++;
+            }
+        }
+    }
+
+    public GameObject CreatePlayer(int index) {
+        GameObject box = Instantiate(playerBox, transform);
+        box.transform.SetSiblingIndex(box.transform.GetSiblingIndex() - 1);
+
+        box.GetComponentInChildren<UI.SkinSelector>().id = index;
+        box.GetComponentInChildren<UI.ControllerSelector>().id = index;
+
+        return box;
+    }
+    
     public void CreatePlayer() {
         GameObject box = Instantiate(playerBox, transform);
         box.transform.SetSiblingIndex(box.transform.GetSiblingIndex() - 1);
