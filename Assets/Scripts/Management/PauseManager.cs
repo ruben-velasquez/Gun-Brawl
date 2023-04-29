@@ -27,8 +27,14 @@ public class PauseManager : MatchManager
         ResumePlayers();
     }
 
-    private void ResetPauseEvents() {
+    public void ResetPauseEvents() {
         onPause = null;
         onResume = null;
+    }
+
+    public override void ClearMatchInfo()
+    {
+        base.ClearMatchInfo();
+        ResetPauseEvents();
     }
 }

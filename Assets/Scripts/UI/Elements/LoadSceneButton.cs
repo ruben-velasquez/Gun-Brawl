@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class LoadSceneButton : MonoBehaviour {
     [SerializeField]
     private string sceneName;
+    [SerializeField]
+    private bool endMatch;
     private Button button;
 
     private void Start() {
@@ -14,6 +16,7 @@ public class LoadSceneButton : MonoBehaviour {
 
     public void LoadScene()
     {
+        if(endMatch) GameManager.Instance.ClearMatchInfo();
         GameManager.Instance.LoadScene(sceneName);
     }
 }

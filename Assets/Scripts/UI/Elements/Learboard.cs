@@ -34,7 +34,7 @@ public class Learboard : MonoBehaviour
         playerLearboard.SetKills(player.kills);
         playerLearboard.SetName(player.ui.name.text);
 
-        if(player.gameObject.name == GameManager.Instance.alivePlayers[0].name) {
+        if(player.ui.name.text == GameManager.Instance.alivePlayers[0].GetComponent<Fighter.UIManager>().ui.name.text) {
             playerLearboard.SetNameSkin(winnerImage);
         }
 

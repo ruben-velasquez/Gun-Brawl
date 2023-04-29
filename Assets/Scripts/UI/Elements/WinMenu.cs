@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WinMenu : MatchEndMenu
 {
     private CanvasGroup canvasGroup;
     public RectTransform heroText;
+    public string heroTextContent;
     public RectTransform boxes;
     public RectTransform buttons;
 
@@ -26,6 +28,8 @@ public class WinMenu : MatchEndMenu
 
     public override void Show() {
         if(canvasGroup == null) return;
+
+        heroText.GetComponent<Text>().text = GameManager.Instance.alivePlayers[0].GetComponent<Fighter.UIManager>().ui.name.text + heroTextContent;
 
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;

@@ -59,10 +59,16 @@ namespace Fighter
                 foreach (RaycastHit2D hit in hits)
                 {
                     Transform player = hit.transform;
+                    LifeSystem playerLife = player.GetComponent<LifeSystem>();
 
                     if(player == transform) continue;
 
-                    player.GetComponent<LifeSystem>().Hurt(damage);
+                    if (playerLife.currentLife == 1)
+                    {
+                        kills++;
+                    }
+
+                    playerLife.Hurt(damage);
                 }
             }
         }
