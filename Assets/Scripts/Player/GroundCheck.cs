@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace Fighter {
-    public class GroundCheck : LifeSystem
+    public class GroundCheck : FighterStatistics
     {
         [Space]
         [Header("Ground Check")]

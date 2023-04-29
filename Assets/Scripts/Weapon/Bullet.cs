@@ -43,7 +43,11 @@ namespace Weapon
 
         private void OnTriggerEnter2D(Collider2D col) {
             if(col.CompareTag("Player") && col.transform != parent) {
-                col.GetComponent<Fighter.LifeSystem>().Hurt(damage);
+                Fighter.LifeSystem colLife = col.GetComponent<Fighter.LifeSystem>();
+                if(colLife.currentLife == 1) {
+                    parent.GetComponent<Fighter.FighterStatistics>().kills++;
+                }
+                colLife.Hurt(damage);
                 Destroy();
             }
             else if(col.gameObject.CompareTag("Map")) {

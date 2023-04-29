@@ -10,6 +10,8 @@ public class MatchManager : PlayerManager
         if(onMatchStart != null)
             onMatchStart();
 
+        onMatchStart = null;
+
         CreatePlayers();
 
         EnablePlayerMove();
@@ -24,6 +26,8 @@ public class MatchManager : PlayerManager
     public void EndMatch() {
         if (onMatchEnd != null)
             onMatchEnd();
+
+        onMatchEnd = null;
 
         DisablePlayerMove();
 

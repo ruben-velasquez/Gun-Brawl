@@ -7,6 +7,11 @@ namespace Fighter {
 
         public virtual void Start() {
             rb = GetComponent<Rigidbody2D>();
+            GameManager.Instance.onMatchEnd += OnMatchEnd;
+        }
+
+        public virtual void OnMatchEnd() {
+
         }
     }
 }

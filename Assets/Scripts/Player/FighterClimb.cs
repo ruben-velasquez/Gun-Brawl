@@ -62,6 +62,13 @@ namespace Fighter
             climbing = false;
             animator.pause = false;
         }
+
+        public override void OnMatchEnd()
+        {
+            base.OnMatchEnd();
+
+            climbAnimation.onAnimationStart -= OnClimbStart;
+        }
     }
 }
     

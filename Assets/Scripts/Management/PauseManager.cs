@@ -7,6 +7,10 @@ public class PauseManager : MatchManager
     public event Action onPause;
     public event Action onResume;
 
+    private void Awake() {
+        onMatchEnd += ResetPauseEvents;
+    }
+
     public void Pause() {
         if(onPause != null) onPause();
 
@@ -21,5 +25,10 @@ public class PauseManager : MatchManager
         paused = false;
 
         ResumePlayers();
+    }
+
+    private void ResetPauseEvents() {
+        onPause = null;
+        onResume = null;
     }
 }

@@ -42,7 +42,11 @@ public class PlayerManager : GBSceneManager
 
     // Crea todos los jugadores en la escena usando la información de cada uno
     public List<GameObject> CreatePlayers() {
-        players = new List<GameObject>(); // Limpiamos la lista
+        // Limpiamos todas las listas
+        players = new List<GameObject>(); 
+        alivePlayers = new List<GameObject>(); 
+        realPlayers = new List<GameObject>(); 
+        computerPlayers = new List<GameObject>(); 
 
         GameObject[] spawns = GameObject.FindGameObjectsWithTag("Player Spawn"); // Obtenemos los spawns
         

@@ -36,6 +36,8 @@ namespace Fighter
                 return;
             }
 
+            shoots++;
+
             lastAttack = Time.time;
 
             if (inputController.IsUp()) {
@@ -82,6 +84,15 @@ namespace Fighter
         }
 
         private void OnDestroy() {
+            attackHorAnim.onFrameAction -= AttackHorCallback;
+            attackUpAnim.onFrameAction -= AttackUpCallback;
+            attackDownAnim.onFrameAction -= AttackDownCallback;
+        }
+
+        public override void OnMatchEnd()
+        {
+            base.OnMatchEnd();
+
             attackHorAnim.onFrameAction -= AttackHorCallback;
             attackUpAnim.onFrameAction -= AttackUpCallback;
             attackDownAnim.onFrameAction -= AttackDownCallback;

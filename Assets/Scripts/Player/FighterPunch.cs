@@ -66,5 +66,12 @@ namespace Fighter
                 }
             }
         }
+
+        public override void OnMatchEnd()
+        {
+            base.OnMatchEnd();
+
+            punchAnimation.onFrameAction -= PunchHandler;
+        }
     }
 }
