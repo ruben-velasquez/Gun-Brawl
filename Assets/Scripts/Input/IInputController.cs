@@ -9,13 +9,15 @@ using UnityEngine;
 // en una clase abstracta.
 // 4/4/2023
 
-namespace InputController {
+namespace InputController
+{
     [System.Serializable]
-    public abstract class IInputController : MonoBehaviour {
+    public abstract class IInputController : MonoBehaviour
+    {
         public int id;
         public new string name;
         public abstract int MoveAxis();
-        public abstract int HorizontalAxis();
+        public abstract int VerticalAxis();
         public abstract bool IsPunching();
         public abstract bool IsJumping();
         public abstract bool IsFollowingJump();

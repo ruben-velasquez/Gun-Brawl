@@ -23,7 +23,7 @@ namespace Fighter
         }
 
         public void CheckClimbState(int input) {
-            if(input == 0 && !climbing) return;
+            if((input == 0 || input == -1) && !climbing) return;
             
             animator.Play(climbAnimation);
 

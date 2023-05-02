@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Fighter {
     public class Entity : MonoBehaviour {
+        public new string name;
         [HideInInspector]
         public Rigidbody2D rb;
 

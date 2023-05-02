@@ -5,6 +5,7 @@ public class WinMenu : MatchEndMenu
 {
     private CanvasGroup canvasGroup;
     public RectTransform heroText;
+    public Image underline;
     public string heroTextContent;
     public RectTransform boxes;
     public RectTransform buttons;
@@ -19,6 +20,7 @@ public class WinMenu : MatchEndMenu
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+        underline.fillAmount = 0;
 
         heroText.anchoredPosition = new Vector3(0f, -Screen.height / 2 + heroText.sizeDelta.y / 2);
         heroText.localScale = Vector3.zero;
@@ -29,7 +31,19 @@ public class WinMenu : MatchEndMenu
     public override void Show() {
         if(canvasGroup == null) return;
 
-        heroText.GetComponent<Text>().text = GameManager.Instance.alivePlayers[0].GetComponent<Fighter.UIManager>().ui.name.text + heroTextContent;
+        // Si el modo es Teams Mode
+        if(GameManager.Instance.gameMode.name == "Teams Mode") {
+            GameMode.TeamsMode mode = (GameMode.TeamsMode)GameManager.Instance.gameMode;
+
+            if(mode.winnerTeam == GameMode.TeamsMode.Teams.Red)
+                heroText.GetComponent<Text>().text = "The <color=#FF6F6FFF>Red Team</color>" + heroTextContent;
+            else if(mode.winnerTeam == GameMode.TeamsMode.Teams.Blue)
+                heroText.GetComponent<Text>().text = "The <color=#746FFFFF>Blue Team</color>" + heroTextContent;
+        }
+        // Si el modo es Normal
+        else if (GameManager.Instance.gameMode.name == "Normal Mode") {
+            heroText.GetComponent<Text>().text = GameManager.Instance.playersState.alivePlayers[0].GetComponent<Fighter.Entity>().name + heroTextContent;
+        }
 
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
@@ -52,6 +66,12 @@ public class WinMenu : MatchEndMenu
         LeanTween.move(boxes, new Vector3(0, 0, 0), 2f).setDelay(1f);
 
         LeanTween.move(buttons, new Vector3(-(buttons.sizeDelta.x / 2), 15f, 0), 1f).setDelay(1.5f);
+
+        LeanTween.value(underline.fillAmount, 1, 0.5f).setDelay(2.7f).setOnUpdate(ShowUpdate);
+    }
+
+    private void ShowUpdate(float value) {
+        underline.fillAmount = value;
     }
 
     public override void Hide() {

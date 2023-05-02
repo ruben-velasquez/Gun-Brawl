@@ -12,9 +12,22 @@ namespace UI
         public Button leftButton;
         public Text textContent;
         public Image imageContent;
+
+        public Image leftButtonImage;
+        public Image textContentImage;
+        public Image rightButtonImage;
+
         public Button rightButton;
         public int value;
         public int maxValue;
+
+        [System.Serializable]
+        public class SelectorView
+        {
+            public Sprite leftButton;
+            public Sprite rightButton;
+            public Sprite content;
+        }
 
         public virtual void Start() {
             leftButton.onClick.AddListener(LeftButtonPress);
@@ -40,6 +53,12 @@ namespace UI
         public void OnChange() {
             if(onChange != null)
                 onChange();
+        }
+
+        public void ChangeView(SelectorView view) {
+            leftButtonImage.sprite = view.leftButton;
+            rightButtonImage.sprite = view.rightButton;
+            textContentImage.sprite = view.content;
         }
     }
 }

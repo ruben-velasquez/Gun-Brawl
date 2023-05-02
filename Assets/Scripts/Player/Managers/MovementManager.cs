@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace Fighter {
-    public class MovementManager : FighterClimb {
+namespace Fighter
+{
+    public class MovementManager : FighterClimb
+    {
         // Variables públicas
         [Space]
         [Header("Movement Manager")]
@@ -10,46 +12,52 @@ namespace Fighter {
         [SerializeField]
         public bool move;
 
-        public override void Update() {
+        public override void Update()
+        {
             base.Update(); // Ejecutamos la lógica anterior
 
             // Si la variable move no está activa no ejecutamos nada
-            if(!move) {
+            if (!move)
+            {
                 rb.velocity = Vector2.zero;
                 return;
             }
 
-            if(inputController.IsJumping()) {
+            if (inputController.IsJumping())
+            {
                 Jump();
             }
 
-            else if(!onClimbExitJump && !inputController.IsFollowingJump() && rb.velocity.y > 0) {
+            else if (!onClimbExitJump && !inputController.IsFollowingJump() && rb.velocity.y > 0)
+            {
                 FollowJump();
             }
 
-            if(hasNearStair) {
-                CheckClimbState(inputController.HorizontalAxis());
-            } else if(climbing) {
+            if (hasNearStair)
+            {
+                CheckClimbState(inputController.VerticalAxis());
+            }
+            else if (climbing)
+            {
                 ExitClimb(true);
             }
-            
-            if(climbing && grounded) {
+
+            if (climbing && grounded)
+            {
                 ExitClimb(false);
-                
+
             }
 
-            if(climbing && Input.GetKeyDown(KeyCode.U)) {
-                ExitClimb(true);
-            }
-
-            if(!climbing) Move(inputController.MoveAxis());
+            if (!climbing) Move(inputController.MoveAxis());
         }
 
-        public void EnanbleMovement() {
+        public void EnanbleMovement()
+        {
             move = true;
         }
 
-        public void DisableMovement() {
+        public void DisableMovement()
+        {
             move = false;
         }
     }

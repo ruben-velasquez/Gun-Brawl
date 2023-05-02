@@ -6,10 +6,7 @@ public class PlayerManager : GBSceneManager
     [SerializeField]
     private GameObject playerPrefab; // Jugador de referencia
     public List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
-    public List<GameObject> players; // Jugadores en juego
-    public List<GameObject> alivePlayers; // Jugadores en juego
-    public List<GameObject> realPlayers; // Jugadores en juego
-    public List<GameObject> computerPlayers; // Jugadores en juego
+    public PlayersState playersState;
 
     private void Start()
     {
@@ -43,10 +40,10 @@ public class PlayerManager : GBSceneManager
     // Crea todos los jugadores en la escena usando la información de cada uno
     public List<GameObject> CreatePlayers() {
         // Limpiamos todas las listas
-        players = new List<GameObject>(); 
-        alivePlayers = new List<GameObject>(); 
-        realPlayers = new List<GameObject>(); 
-        computerPlayers = new List<GameObject>(); 
+        playersState.players = new List<GameObject>(); 
+        playersState.alivePlayers = new List<GameObject>(); 
+        playersState.realPlayers = new List<GameObject>(); 
+        playersState.computerPlayers = new List<GameObject>(); 
 
         GameObject[] spawns = GameObject.FindGameObjectsWithTag("Player Spawn"); // Obtenemos los spawns
         
@@ -70,29 +67,50 @@ public class PlayerManager : GBSceneManager
             player.move = false;
 
             if(info.controller.name.StartsWith("Player")) {
-                ui.SetName("Player " + (realPlayers.Count + 1).ToString());
-                realPlayers.Add(player.gameObject);
+                ui.SetName("Player " + (playersState.realPlayers.Count + 1).ToString());
+                playersState.realPlayers.Add(player.gameObject);
             } else {
-                ui.SetName("CPU " + (computerPlayers.Count + 1).ToString());
-                computerPlayers.Add(player.gameObject);
+                ui.SetName("CPU " + (playersState.computerPlayers.Count + 1).ToString());
+                playersState.computerPlayers.Add(player.gameObject);
             }
+
+            player.name = ui.name.text;
 
             // Le ponemos el animador que define su skin
             player.GetComponent<Animation.GBAnimator>().animationStack = info.skin.animator;
 
             // Lo añadimos a la lista
-            players.Add(player.gameObject);
-            alivePlayers.Add(player.gameObject);
+            playersState.players.Add(player.gameObject);
+            playersState.alivePlayers.Add(player.gameObject);
+
+            // Teams Mode -> Dependiendo del bando cambiamos el HUD
+            if (GameManager.Instance.gameMode.name == "Teams Mode")
+            {
+                if (index < (int)Mathf.Floor(playerInfo.Count / 2))
+                {
+                    SetHUDRedTeam(ui);
+                    CreateTag(player, GameMode.TeamsMode.Teams.Red);
+                }
+                else
+                {
+                    SetHUDBlueTeam(ui);
+                    CreateTag(player, GameMode.TeamsMode.Teams.Blue);
+                }
+            }
+            // Normal Mode -> Solo ponemos los tags a los jugadores si son locales
+            else if (GameManager.Instance.gameMode.name == "Normal Mode") {
+                CreateTag(player);
+            }
 
             index++;
         }
 
-        return players;
+        return playersState.players;
     }
 
     // Activa el movimiento de todos los jugadores
     public void EnablePlayerMove() {
-        foreach (GameObject player in players)
+        foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().move = true;
         }
@@ -100,7 +118,7 @@ public class PlayerManager : GBSceneManager
     
     // Desactiva el movimiento de todos lo jugadores
     public void DisablePlayerMove() {
-        foreach (GameObject player in players)
+        foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().move = false;
         }
@@ -108,7 +126,7 @@ public class PlayerManager : GBSceneManager
 
     // Congela a los jugadores
     public void PausePlayers() {
-        foreach (GameObject player in players)
+        foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().move = false;
             player.GetComponent<Animation.GBAnimator>().pause = true;
@@ -117,7 +135,7 @@ public class PlayerManager : GBSceneManager
     }
     
     public void ResumePlayers() {
-        foreach (GameObject player in players)
+        foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().move = true;
             player.GetComponent<Animation.GBAnimator>().pause = false;
@@ -126,6 +144,6 @@ public class PlayerManager : GBSceneManager
     }
 
     public virtual void OnPlayerDie(GameObject player) {
-        alivePlayers.Remove(player);
+        playersState.alivePlayers.Remove(player);
     }
 }

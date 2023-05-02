@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 406439687d7968d42829ec5d5f9dbf63
-timeCreated: 1682297671
+timeCreated: 1682880454
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -12,6 +12,20 @@ TextureImporter:
     21300010: Player Box_2
     21300012: Player Box_4
     21300014: Player Box_6
+    21300016: Player Box_7
+    21300018: Player Box_8
+    21300020: Player Box_10
+    21300022: Player Box_11
+    21300024: Player Box_12
+    21300026: Player Box_13
+    21300028: Player Box_14
+    21300030: Player Box_15
+    21300032: Player Box_16
+    21300034: Player Box_17
+    21300036: Player Box_18
+    21300038: Player Box_19
+    21300040: Player Box_20
+    21300042: Player Box_21
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -176,6 +190,188 @@ TextureImporter:
         y: 39
         width: 3
         height: 3
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_7
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 26
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 0, z: 2, w: 2}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_8
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 16
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_10
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 16
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_11
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 16
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_12
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 6
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_13
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 6
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_14
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 6
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_15
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 26
+        width: 28
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 2, y: 0, z: 2, w: 2}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_16
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 16
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_17
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 16
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_18
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 16
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_19
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 6
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_20
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 6
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_21
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 6
+        width: 5
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

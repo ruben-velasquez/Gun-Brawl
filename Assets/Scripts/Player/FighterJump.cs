@@ -20,6 +20,7 @@ namespace Fighter
                 jumpTime = 0; // Reiniciamos
                 LastJump = Time.time;
                 animator.Play(jumpingAnimation);
+                rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
         }

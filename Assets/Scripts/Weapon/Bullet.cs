@@ -43,6 +43,13 @@ namespace Weapon
 
         private void OnTriggerEnter2D(Collider2D col) {
             if(col.CompareTag("Player") && col.transform != parent) {
+                // Teams Mode
+                if(GameManager.Instance.gameMode.name == "Teams Mode") {
+                    GameMode.TeamsMode mode = (GameMode.TeamsMode)GameManager.Instance.gameMode;
+
+                    if(mode.AreEqualTeam(parent.gameObject, col.gameObject)) return;
+                }
+
                 Fighter.LifeSystem colLife = col.GetComponent<Fighter.LifeSystem>();
                 if(colLife.currentLife == 1) {
                     parent.GetComponent<Fighter.FighterStatistics>().kills++;

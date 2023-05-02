@@ -2,12 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI {
-    public class FighterUI : MonoBehaviour {
+    public class FighterUI : PlayerUI {
         public new Text name;
         private FighterUILife life;
         private FighterUIWeapon weapon;
 
-        private void Start() {
+
+
+        public override void Start() {
+            base.Start();
             life = GetComponentInChildren<FighterUILife>();
             weapon = GetComponentInChildren<FighterUIWeapon>();
         }

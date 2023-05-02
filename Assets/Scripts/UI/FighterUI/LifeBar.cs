@@ -10,7 +10,11 @@ namespace UI {
         }
 
         public void UpdateLife(float newFixedLife) {
-            img.fillAmount = newFixedLife;
+            LeanTween.value(img.fillAmount, newFixedLife, 0.25f).setOnUpdate(UpdateLifeValue);
+        }
+
+        private void UpdateLifeValue(float value) {
+            img.fillAmount = value;
         }
     }
 }

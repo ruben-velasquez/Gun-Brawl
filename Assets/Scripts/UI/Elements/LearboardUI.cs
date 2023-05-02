@@ -14,6 +14,12 @@ public class LearboardUI : MonoBehaviour
     [SerializeField]
     private new Text name;
 
+    // Interfaz
+    [SerializeField]
+    private Image shootsGraphic;
+    [SerializeField]
+    private Image killsGraphic;
+
     public void SetShoots(int shoots) {
         shootsText.text = shoots.ToString();
     }
@@ -32,5 +38,10 @@ public class LearboardUI : MonoBehaviour
 
     public void SetNameSkin(Sprite image) {
         nameSkin.sprite = image;
+    }
+
+    public void SetGraphics(LearboardUIStyle style) {
+        shootsGraphic.sprite = style.shootsGraphic;
+        killsGraphic.sprite = style.killsGraphic;
     }
 }

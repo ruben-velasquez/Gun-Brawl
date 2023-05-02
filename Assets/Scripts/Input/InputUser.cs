@@ -1,6 +1,8 @@
 using UnityEngine;
+using System.Runtime.InteropServices;
 
 namespace InputController {
+
     [System.Serializable]
     public class InputUser
     {

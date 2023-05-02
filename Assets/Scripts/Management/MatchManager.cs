@@ -1,10 +1,12 @@
 using UnityEngine;
 using System;
 
-public class MatchManager : PlayerManager
-{
+public class MatchManager : PlayerManager {
+    [SerializeField]
+    public GameMode.GameMode gameMode;
     public event Action onMatchStart;
     public event Action onMatchEnd;
+    public event Action<GameMode.GameMode> onGameModeChange;
     public bool matchEnd;
 
     public void StartMatch() {
@@ -15,13 +17,17 @@ public class MatchManager : PlayerManager
 
         onMatchStart = null;
 
+        onGameModeChange = null;
+
         CreatePlayers();
 
         EnablePlayerMove();
+        
+        gameMode.StartMatch();
     }
 
     public void CheckMatch() {
-        if(alivePlayers.Count == 1) {
+        if(gameMode.CheckMatch()) {
             EndMatch();
         }
     }
@@ -35,14 +41,14 @@ public class MatchManager : PlayerManager
 
         DisablePlayerMove();
 
-        Debug.Log(alivePlayers[0].name + " ha ganado");
+        Debug.Log(playersState.alivePlayers[0].name + " ha ganado");
     }
 
     public virtual void ClearMatchInfo() {
         onMatchEnd = null;
         matchEnd = true;
 
-        foreach (GameObject player in players)
+        foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().OnMatchEnd();
         }
@@ -52,5 +58,12 @@ public class MatchManager : PlayerManager
         base.OnPlayerDie(player);
 
         CheckMatch();
+    }
+
+    public virtual void ChangeGameMode(GameMode.GameMode newGameMode) {
+        if(onGameModeChange != null) 
+            onGameModeChange(newGameMode);
+
+        gameMode = newGameMode;
     }
 }

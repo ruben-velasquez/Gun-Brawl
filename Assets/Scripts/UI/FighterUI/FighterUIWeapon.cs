@@ -12,6 +12,6 @@ namespace UI
 
         public void UpdateWeapon(Weapon.Weapon newWeapon) {
             weaponName.text = newWeapon.name;
-        } 
+        }
     }
 }
