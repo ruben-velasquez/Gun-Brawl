@@ -11,9 +11,23 @@ public class GamePadManager : PauseManager
 
     public List<GamePadState> currentState; // Estado actual de los mandos
     public List<GamePadState> prevState; // Estado anterior de los mandos
+    public InputController.InputControllerList controllerList; // Lista de controladores (Tanto mando como teclado)
 
     public void Start() {
         onMatchStart += CheckGamePads;
+        onMatchStart += controllerList.ClearEvents;
+
+        // Desactivamos todos los controladores que pueden estár erroneamente en uso
+        foreach (InputController.IInputController controller in controllerList.controllers)
+        {
+            controller.asignedController = false;
+        }
+    }
+
+    public override void ChangeGameMode(GameMode.GameMode newGameMode)
+    {
+        base.ChangeGameMode(newGameMode);
+        controllerList.GetControllers(); // Actualiza todos los controladores
     }
 
     // Verifica y almacena los mandos presentes
@@ -52,18 +66,22 @@ public class GamePadManager : PauseManager
         return currentState[indexNumber];
     }
 
+    // Devuelve el estado actualizado de un mando (Si no está conectado usa el primer mando que lo esté)
     public GamePadState GetGamePadState(PlayerIndex index)
     {
-        if (!isConnectedGamePads) return new GamePadState();
+        if (!isConnectedGamePads) return GamePad.GetState(index); // Si no hay mandos conectados devolvemos su estado vacío
 
-        for (int i = 0; i < connectedGamePads.Count; i++)
+        // Recorremos todos los mandos conectados para comprobar si es el que se pide
+        for (int i = 0; i < connectedGamePads.Count; i++) 
         {
+            // Si se encuentra el mando conectado devolvemos su estado actualizado
             if (connectedGamePads[i] == index)
             {
                 return CheckGamePadButtons(connectedGamePads[i]);
             }
         }
 
+        // Si no se encontró ese mando conectado devolvemos el primer mando conectado
         return GetFirstGamePadConnected();
     }
 

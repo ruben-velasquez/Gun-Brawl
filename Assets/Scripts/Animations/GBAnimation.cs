@@ -15,7 +15,7 @@ namespace Animation
         public List<Frame> frames = new List<Frame>(); // Los frames de la animación
         public event Action<Transform> onAnimationStart; // Evento que se ejecuta cuando empieza la animación
         public event Action<Transform> onAnimationEnd; // Evento que se ejecuta cuando termina la animación
-        public event Action<Transform> onFrameAction; // Evento que se ejecuta cuando se encuentra un "Frame Action"
+        public event Action<Transform> onFrameAction; // Evento que se ejecuta cuando hay un "Frame Action"
         public event Action<Transform> onLoop; // Evento que se ejecuta cuando se repite una animación que se ejecuta en bucle
         public int priority = 1;
 

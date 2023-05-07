@@ -6,9 +6,14 @@ namespace InputController
     [System.Serializable]
     public class UserInputController : IInputController
     {
-        public bool useController;
+        public bool controllBased = false; // ¿Depende del control al que está referenciado?
+        public bool useController; // True -> Modo Mando | False -> Modo Teclado
         [SerializeField]
         public InputUser inputUser; // Los controles -> Modo Teclado
+        [Space]
+        [SerializeField]
+        public ControllerUser controllerUser; // Los controles -> Modo Mando
+        [Space]
         [SerializeField]
         public PlayerIndex prefferedController; // Indice del mando preferido -> Modo mando
 
@@ -49,52 +54,52 @@ namespace InputController
 
         public override bool IsUp()
         {
-            if (useController) return Input.GetKey(inputUser.up) || ControllerState().DPad.Up == ButtonState.Pressed;
+            if (useController) return Input.GetKey(inputUser.up) || GamePadHandler.GetButton(ControllerState(), controllerUser.up);
             return Input.GetKey(inputUser.up);
         }
         public override bool IsDown()
         {
-            if (useController) return Input.GetKey(inputUser.down) || ControllerState().DPad.Down == ButtonState.Pressed;
+            if (useController) return Input.GetKey(inputUser.down) || GamePadHandler.GetButton(ControllerState(), controllerUser.down);
             return Input.GetKey(inputUser.down);
         }
         public bool IsMovingLeft()
         {
-            if (useController) return Input.GetKey(inputUser.left) || ControllerState().DPad.Left == ButtonState.Pressed;
+            if (useController) return Input.GetKey(inputUser.left) || GamePadHandler.GetButton(ControllerState(), controllerUser.left);
             return Input.GetKey(inputUser.left);
         }
 
         public bool IsMovingRight()
         {
-            if (useController) return Input.GetKey(inputUser.right) || ControllerState().DPad.Right == ButtonState.Pressed;
+            if (useController) return Input.GetKey(inputUser.right) ||  GamePadHandler.GetButton(ControllerState(), controllerUser.right);
             return Input.GetKey(inputUser.right);
         }
 
         public override bool IsFollowingJump()
         {
-            if (useController) return Input.GetKey(inputUser.jump) || ControllerState().Buttons.A == ButtonState.Pressed;
+            if (useController) return Input.GetKey(inputUser.jump) || GamePadHandler.GetButton(ControllerState(), controllerUser.jump);
             return Input.GetKey(inputUser.jump);
         }
         public override bool IsJumping()
         {
-            if (useController) return Input.GetKeyDown(inputUser.jump) || ControllerState().Buttons.A == ButtonState.Pressed;
+            if (useController) return Input.GetKeyDown(inputUser.jump) || GamePadHandler.GetButton(ControllerState(), controllerUser.jump);
             return Input.GetKeyDown(inputUser.jump);
         }
 
         public override bool IsShooting()
         {
-            if (useController) return Input.GetKeyDown(inputUser.shoot) || ControllerState().Buttons.B == ButtonState.Pressed;
+            if (useController) return Input.GetKeyDown(inputUser.shoot) || GamePadHandler.GetButton(ControllerState(), controllerUser.shoot);
             return Input.GetKeyDown(inputUser.shoot);
         }
 
         public override bool IsPunching()
         {
-            if (useController) return Input.GetKeyDown(inputUser.punch) || ControllerState().Buttons.X == ButtonState.Pressed;
+            if (useController) return Input.GetKeyDown(inputUser.punch) || GamePadHandler.GetButton(ControllerState(), controllerUser.punch);
             return Input.GetKeyDown(inputUser.punch);
         }
 
         public override bool IsInteracting()
         {
-            if (useController) return Input.GetKeyDown(inputUser.punch) || ControllerState().Buttons.Y == ButtonState.Pressed;
+            if (useController) return Input.GetKeyDown(inputUser.punch) || GamePadHandler.GetButton(ControllerState(), controllerUser.interact);
             return Input.GetKeyDown(inputUser.punch);
         }
 

@@ -1,9 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class MatchPlayers : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerBox;
+    [SerializeField]
+    private List<GameObject> playerBoxes;
     [SerializeField]
     private GameObject addButton;
     [SerializeField]
@@ -184,6 +187,8 @@ public class MatchPlayers : MonoBehaviour
     public GameObject CreatePlayer(int index)
     {
         GameObject box = Instantiate(playerBox, transform);
+        playerBoxes.Add(box);
+
         box.transform.SetSiblingIndex(box.transform.GetSiblingIndex() - 1);
 
         box.GetComponentInChildren<UI.SkinSelector>().id = index;
@@ -215,6 +220,8 @@ public class MatchPlayers : MonoBehaviour
         }
 
         GameObject box = Instantiate(playerBox, transform);
+        playerBoxes.Add(box);
+
         box.transform.SetSiblingIndex(box.transform.GetSiblingIndex() - 1);
 
         int index = GameManager.Instance.CreatePlayerInfo();
@@ -258,8 +265,9 @@ public class MatchPlayers : MonoBehaviour
 
         UI.ControllerSelector controllerSelector = box.GetComponentInChildren<UI.ControllerSelector>();
 
-        if (!info.controller) controllerSelector.value = defaultController.id;
-        else controllerSelector.value = info.controller.id;
+        if (!info.controller) controllerSelector.SetValue(defaultController.id);
+        else controllerSelector.id = info.controller.id;
+
         controllerSelector.UpdateController();
 
         if (GameManager.Instance.playerInfo.Count >= 3)
@@ -284,14 +292,16 @@ public class MatchPlayers : MonoBehaviour
 
         UI.SkinSelector skinSelector = box.GetComponentInChildren<UI.SkinSelector>();
 
-        if (!info.skin) skinSelector.value = defaultSkin.id;
+        if (!info.skin) skinSelector.SetValue(defaultSkin.id);
         else skinSelector.value = info.skin.id;
+
         skinSelector.UpdateSkin();
 
         UI.ControllerSelector controllerSelector = box.GetComponentInChildren<UI.ControllerSelector>();
 
-        if (!info.controller) controllerSelector.value = defaultController.id;
+        if (!info.controller) controllerSelector.SetValue(defaultController.id);
         else controllerSelector.value = info.controller.id;
+
         controllerSelector.UpdateController();
 
         if (teams == GameMode.TeamsMode.Teams.Red)
@@ -330,6 +340,7 @@ public class MatchPlayers : MonoBehaviour
 
         int index = box.GetComponentInChildren<UI.SkinSelector>().id;
         GameManager.Instance.DeletePlayerInfo(index);
+        playerBoxes.Remove(box);
         DestroyImmediate(box);
 
         UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();

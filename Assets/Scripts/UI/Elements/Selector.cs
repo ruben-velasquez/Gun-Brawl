@@ -7,6 +7,7 @@ namespace UI
     public class Selector : MonoBehaviour
     {
         public event Action onChange;
+        public event Action beforeChange;
 
         public int id;
         public Button leftButton;
@@ -35,6 +36,8 @@ namespace UI
         }
 
         public void LeftButtonPress() {
+            BeforeChange();
+
             value -= 1;
 
             if(value < 0) value = maxValue;
@@ -43,6 +46,8 @@ namespace UI
         }
         
         public void RightButtonPress() {
+            BeforeChange();
+
             value += 1;
 
             if(value > maxValue) value = 0;
@@ -50,9 +55,25 @@ namespace UI
             OnChange();
         }
 
+        public void SetValue(int newValue) {
+            BeforeChange();
+
+            value = newValue;
+
+            if (value > maxValue) value = 0;
+            if (value < 0) value = maxValue;
+
+            OnChange();
+        }
+
         public void OnChange() {
             if(onChange != null)
                 onChange();
+        }
+
+        public void BeforeChange() {
+            if(beforeChange != null)
+                beforeChange();
         }
 
         public void ChangeView(SelectorView view) {

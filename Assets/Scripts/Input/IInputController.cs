@@ -16,6 +16,8 @@ namespace InputController
     {
         public int id;
         public new string name;
+        public bool repeatController;
+        public bool asignedController = false;
         public abstract int MoveAxis();
         public abstract int VerticalAxis();
         public abstract bool IsPunching();
