@@ -9,7 +9,7 @@ public class MatchManager : PlayerManager {
     public event Action<GameMode.GameMode> onGameModeChange;
     public bool matchEnd;
 
-    public void StartMatch() {
+    public virtual void StartMatch() {
         if(onMatchStart != null)
             onMatchStart();
 
@@ -32,7 +32,7 @@ public class MatchManager : PlayerManager {
         }
     }
 
-    public void EndMatch() {
+    public virtual void EndMatch() {
         if (onMatchEnd != null)
             onMatchEnd();
 

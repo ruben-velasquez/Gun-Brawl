@@ -26,6 +26,7 @@ namespace InputController
 
             for (int i = 0; i < controllers.Count; i++)
             {
+                if(controllers[i] == null) continue;
                 if (controllers[i].name.StartsWith("Player"))
                 {
                     UserInputController controller = (UserInputController)controllers[i];

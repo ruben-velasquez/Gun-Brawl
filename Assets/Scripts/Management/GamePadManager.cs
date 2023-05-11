@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using XInputDotNetPure;
+using System;
+using UnityEngine;
 
 public class GamePadManager : PauseManager
 {
@@ -12,16 +14,26 @@ public class GamePadManager : PauseManager
     public List<GamePadState> currentState; // Estado actual de los mandos
     public List<GamePadState> prevState; // Estado anterior de los mandos
     public InputController.InputControllerList controllerList; // Lista de controladores (Tanto mando como teclado)
+    public event Action onCheckControllers; // Evento que se llama después de actualizar la lista de mandos conectados
 
     public void Start() {
-        onMatchStart += CheckGamePads;
-        onMatchStart += controllerList.ClearEvents;
+        onMatchStart += ClearEvents; // Cuando la partida empiece limpiamos los eventos que puedan dar errores
+        onMatchStart += CheckGamePads; // Comprobamos los mandos
 
         // Desactivamos todos los controladores que pueden estár erroneamente en uso
         foreach (InputController.IInputController controller in controllerList.controllers)
         {
+            if(controller == null) continue;
             controller.asignedController = false;
         }
+    }
+
+    public override void StartMatch()
+    {
+        base.StartMatch();
+
+        ClearEvents();
+        CheckGamePads();
     }
 
     public override void ChangeGameMode(GameMode.GameMode newGameMode)
@@ -52,6 +64,9 @@ public class GamePadManager : PauseManager
                 isConnectedGamePads = true;
             }
         }
+
+        if(onCheckControllers != null)
+            onCheckControllers();
     }
 
     // Almacena el estado de un mando
@@ -88,5 +103,11 @@ public class GamePadManager : PauseManager
     public GamePadState GetFirstGamePadConnected()
     {
         return CheckGamePadButtons(connectedGamePads[0]);
+    }
+
+    private void ClearEvents() {
+        onCheckControllers = null;
+        controllerList.ClearEvents();
+        Debug.Log("Llamado ClearEvents en GamePadManager");
     }
 }

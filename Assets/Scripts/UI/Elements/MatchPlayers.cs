@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class MatchPlayers : MonoBehaviour
 {
@@ -259,14 +260,17 @@ public class MatchPlayers : MonoBehaviour
 
         UI.SkinSelector skinSelector = box.GetComponentInChildren<UI.SkinSelector>();
 
-        if (!info.skin) skinSelector.value = defaultSkin.id;
+        if (info.skin == null) skinSelector.SetValue(defaultSkin.id);
         else skinSelector.value = info.skin.id;
+
         skinSelector.UpdateSkin();
 
         UI.ControllerSelector controllerSelector = box.GetComponentInChildren<UI.ControllerSelector>();
 
-        if (!info.controller) controllerSelector.SetValue(defaultController.id);
-        else controllerSelector.id = info.controller.id;
+        if (info.controller == null) {
+            controllerSelector.SetValue(defaultController.id);
+        }
+        else controllerSelector.value = info.controller.id;
 
         controllerSelector.UpdateController();
 
@@ -292,14 +296,14 @@ public class MatchPlayers : MonoBehaviour
 
         UI.SkinSelector skinSelector = box.GetComponentInChildren<UI.SkinSelector>();
 
-        if (!info.skin) skinSelector.SetValue(defaultSkin.id);
+        if (info.skin == null) skinSelector.SetValue(defaultSkin.id);
         else skinSelector.value = info.skin.id;
 
         skinSelector.UpdateSkin();
 
         UI.ControllerSelector controllerSelector = box.GetComponentInChildren<UI.ControllerSelector>();
 
-        if (!info.controller) controllerSelector.SetValue(defaultController.id);
+        if (info.controller == null) controllerSelector.SetValue(defaultController.id);
         else controllerSelector.value = info.controller.id;
 
         controllerSelector.UpdateController();
@@ -339,6 +343,9 @@ public class MatchPlayers : MonoBehaviour
         }
 
         int index = box.GetComponentInChildren<UI.SkinSelector>().id;
+        UI.ControllerSelector boxController = box.GetComponentInChildren<UI.ControllerSelector>();
+        boxController.controllerList.controllers[boxController.value].asignedController = false;
+        boxController.controllerList.onChangeControllers -= boxController.UpdateController;
         GameManager.Instance.DeletePlayerInfo(index);
         playerBoxes.Remove(box);
         DestroyImmediate(box);
