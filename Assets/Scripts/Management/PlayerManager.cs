@@ -8,7 +8,7 @@ public class PlayerManager : GBSceneManager
     public List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
     public PlayersState playersState;
 
-    private void Start()
+    public virtual void Start()
     {
         
     }
@@ -67,7 +67,7 @@ public class PlayerManager : GBSceneManager
             player.move = false;
 
             if(info.controller.name.StartsWith("Player")) {
-                ui.SetName("Player " + (playersState.realPlayers.Count + 1).ToString());
+                ui.SetName(info.controller.name);
                 playersState.realPlayers.Add(player.gameObject);
             } else {
                 ui.SetName("CPU " + (playersState.computerPlayers.Count + 1).ToString());

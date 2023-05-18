@@ -18,11 +18,23 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private GameObject redTeamPlayer2Tag;
     [SerializeField]
+    private GameObject redTeamPlayer3Tag;
+    [SerializeField]
+    private GameObject redTeamPlayer4Tag;
+    [SerializeField]
     private GameObject redTeamCPUTag;
     [SerializeField]
     private GameObject blueTeamPlayer1Tag;
     [SerializeField]
     private GameObject blueTeamPlayer2Tag;
+    [SerializeField]
+    private GameObject blueTeamPlayer3Tag;
+    [SerializeField]
+    private GameObject blueTeamPlayer4Tag;
+    [SerializeField]
+    private GameObject yellowTeamPlayer3Tag;
+    [SerializeField]
+    private GameObject greenTeamPlayer4Tag;
     [SerializeField]
     private GameObject blueTeamCPUTag;
 
@@ -48,9 +60,17 @@ public class HUDManager : MonoBehaviour
         {
             Instantiate(redTeamPlayer1Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
         }
-        if (player.name == "Player 2")
+        else if (player.name == "Player 2")
         {
             Instantiate(blueTeamPlayer2Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
+        }
+        else if (player.name == "Player 3")
+        {
+            Instantiate(yellowTeamPlayer3Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
+        }
+        else if (player.name == "Player 4")
+        {
+            Instantiate(greenTeamPlayer4Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
         }
     }
 
@@ -64,6 +84,12 @@ public class HUDManager : MonoBehaviour
             else if(player.name == "Player 2") {
                 Instantiate(redTeamPlayer2Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
             } 
+            else if(player.name == "Player 3") {
+                Instantiate(redTeamPlayer3Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
+            } 
+            else if(player.name == "Player 4") {
+                Instantiate(redTeamPlayer4Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
+            } 
             else if(player.name.StartsWith("CPU")) {
                 Instantiate(redTeamCPUTag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
             } 
@@ -76,6 +102,14 @@ public class HUDManager : MonoBehaviour
             else if (player.name == "Player 2")
             {
                 Instantiate(blueTeamPlayer2Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
+            }
+            else if (player.name == "Player 3")
+            {
+                Instantiate(blueTeamPlayer3Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
+            }
+            else if (player.name == "Player 4")
+            {
+                Instantiate(blueTeamPlayer4Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
             }
             else if (player.name.StartsWith("CPU"))
             {

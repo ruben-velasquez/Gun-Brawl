@@ -7,10 +7,7 @@ namespace UI {
         private FighterUILife life;
         private FighterUIWeapon weapon;
 
-
-
-        public override void Start() {
-            base.Start();
+        public void Awake() {
             life = GetComponentInChildren<FighterUILife>();
             weapon = GetComponentInChildren<FighterUIWeapon>();
         }

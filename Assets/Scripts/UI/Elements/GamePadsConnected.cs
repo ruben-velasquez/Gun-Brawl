@@ -49,14 +49,12 @@ public class GamePadsConnected : MonoBehaviour
     }
 
     public void Hide() {
-        Debug.Log("Llamado Hide en GamePadsConnected");
         if (this == null) return;
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0;
     }
 
     public void Show() {
-        Debug.Log("Llamado Show en GamePadsConnected");
         if (this == null) return;
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1;

@@ -16,7 +16,9 @@ public class GamePadManager : PauseManager
     public InputController.InputControllerList controllerList; // Lista de controladores (Tanto mando como teclado)
     public event Action onCheckControllers; // Evento que se llama después de actualizar la lista de mandos conectados
 
-    public void Start() {
+    public override void Start() {
+        base.Start();
+
         onMatchStart += ClearEvents; // Cuando la partida empiece limpiamos los eventos que puedan dar errores
         onMatchStart += CheckGamePads; // Comprobamos los mandos
 
@@ -97,12 +99,21 @@ public class GamePadManager : PauseManager
         }
 
         // Si no se encontró ese mando conectado devolvemos el primer mando conectado
-        return GetFirstGamePadConnected();
+        return GetFirstGamePadConnected(index);
     }
 
     public GamePadState GetFirstGamePadConnected()
     {
         return CheckGamePadButtons(connectedGamePads[0]);
+    }
+    
+    public GamePadState GetFirstGamePadConnected(PlayerIndex index) {
+        int gamePadIndex = (int)index;
+
+        if(gamePadIndex > connectedGamePads.Count - 1)
+            gamePadIndex = connectedGamePads.Count - 1;
+
+        return CheckGamePadButtons(connectedGamePads[gamePadIndex]);
     }
 
     private void ClearEvents() {

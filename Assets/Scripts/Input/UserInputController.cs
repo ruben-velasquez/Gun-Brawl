@@ -7,12 +7,12 @@ namespace InputController
     public class UserInputController : IInputController
     {
         public bool controllBased = false; // ¿Depende del control al que está referenciado?
-        public bool useController; // True -> Modo Mando | False -> Modo Teclado
+        public bool useGamePad; // True -> Modo Mando | False -> Modo Teclado
         [SerializeField]
-        public InputUser inputUser; // Los controles -> Modo Teclado
+        public InputUser keyboardUser; // Los controles -> Modo Teclado
         [Space]
         [SerializeField]
-        public ControllerUser controllerUser; // Los controles -> Modo Mando
+        public ControllerUser gamePadUser; // Los controles -> Modo Mando
         [Space]
         [SerializeField]
         public PlayerIndex prefferedController; // Indice del mando preferido -> Modo mando
@@ -54,53 +54,53 @@ namespace InputController
 
         public override bool IsUp()
         {
-            if (useController) return Input.GetKey(inputUser.up) || GamePadHandler.GetButton(ControllerState(), controllerUser.up);
-            return Input.GetKey(inputUser.up);
+            if (useGamePad) return Input.GetKey(keyboardUser.up) || GamePadHandler.GetButton(ControllerState(), gamePadUser.up);
+            return Input.GetKey(keyboardUser.up);
         }
         public override bool IsDown()
         {
-            if (useController) return Input.GetKey(inputUser.down) || GamePadHandler.GetButton(ControllerState(), controllerUser.down);
-            return Input.GetKey(inputUser.down);
+            if (useGamePad) return Input.GetKey(keyboardUser.down) || GamePadHandler.GetButton(ControllerState(), gamePadUser.down);
+            return Input.GetKey(keyboardUser.down);
         }
         public bool IsMovingLeft()
         {
-            if (useController) return Input.GetKey(inputUser.left) || GamePadHandler.GetButton(ControllerState(), controllerUser.left);
-            return Input.GetKey(inputUser.left);
+            if (useGamePad) return Input.GetKey(keyboardUser.left) || GamePadHandler.GetButton(ControllerState(), gamePadUser.left);
+            return Input.GetKey(keyboardUser.left);
         }
 
         public bool IsMovingRight()
         {
-            if (useController) return Input.GetKey(inputUser.right) ||  GamePadHandler.GetButton(ControllerState(), controllerUser.right);
-            return Input.GetKey(inputUser.right);
+            if (useGamePad) return Input.GetKey(keyboardUser.right) || GamePadHandler.GetButton(ControllerState(), gamePadUser.right);
+            return Input.GetKey(keyboardUser.right);
         }
 
         public override bool IsFollowingJump()
         {
-            if (useController) return Input.GetKey(inputUser.jump) || GamePadHandler.GetButton(ControllerState(), controllerUser.jump);
-            return Input.GetKey(inputUser.jump);
+            if (useGamePad) return Input.GetKey(keyboardUser.jump) || GamePadHandler.GetButton(ControllerState(), gamePadUser.jump);
+            return Input.GetKey(keyboardUser.jump);
         }
         public override bool IsJumping()
         {
-            if (useController) return Input.GetKeyDown(inputUser.jump) || GamePadHandler.GetButton(ControllerState(), controllerUser.jump);
-            return Input.GetKeyDown(inputUser.jump);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.jump) || GamePadHandler.GetButton(ControllerState(), gamePadUser.jump);
+            return Input.GetKeyDown(keyboardUser.jump);
         }
 
         public override bool IsShooting()
         {
-            if (useController) return Input.GetKeyDown(inputUser.shoot) || GamePadHandler.GetButton(ControllerState(), controllerUser.shoot);
-            return Input.GetKeyDown(inputUser.shoot);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.shoot) || GamePadHandler.GetButton(ControllerState(), gamePadUser.shoot);
+            return Input.GetKeyDown(keyboardUser.shoot);
         }
 
         public override bool IsPunching()
         {
-            if (useController) return Input.GetKeyDown(inputUser.punch) || GamePadHandler.GetButton(ControllerState(), controllerUser.punch);
-            return Input.GetKeyDown(inputUser.punch);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.punch) || GamePadHandler.GetButton(ControllerState(), gamePadUser.punch);
+            return Input.GetKeyDown(keyboardUser.punch);
         }
 
         public override bool IsInteracting()
         {
-            if (useController) return Input.GetKeyDown(inputUser.punch) || GamePadHandler.GetButton(ControllerState(), controllerUser.interact);
-            return Input.GetKeyDown(inputUser.punch);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.punch) || GamePadHandler.GetButton(ControllerState(), gamePadUser.interact);
+            return Input.GetKeyDown(keyboardUser.punch);
         }
 
         // Controller Handler
@@ -112,42 +112,12 @@ namespace InputController
 
         // Modificar controles
 
-        public void ChangeUp(KeyCode key)
-        {
-            inputUser.up = key;
+        public void ChangeKey(InputAction action, KeyCode key) {
+            keyboardUser.ChangeKey(action, key);
         }
-        public void ChangeDown(KeyCode key)
-        {
-            inputUser.down = key;
-        }
-        public void ChangeLeft(KeyCode key)
-        {
-            inputUser.left = key;
-        }
-
-        public void ChangeRight(KeyCode key)
-        {
-            inputUser.right = key;
-        }
-
-        public void ChangeJump(KeyCode key)
-        {
-            inputUser.jump = key;
-        }
-
-        public void ChangeShoot(KeyCode key)
-        {
-            inputUser.shoot = key;
-        }
-
-        public void ChangePunch(KeyCode key)
-        {
-            inputUser.punch = key;
-        }
-
-        public void ChangeInteract(KeyCode key)
-        {
-            inputUser.interact = key;
+        
+        public void ChangeButton(InputAction action, GamePadHandler.ControllerButton key) {
+            gamePadUser.ChangeKey(action, key);
         }
     }
 }

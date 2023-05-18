@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Nota: Esta clase podría ser perfectamente una interfaz
@@ -27,5 +28,26 @@ namespace InputController
         public abstract bool IsInteracting();
         public abstract bool IsUp();
         public abstract bool IsDown();
+
+        public override bool Equals(object other)
+        {
+            if(other == null || GetType() != other.GetType()) {
+                return false;
+            }
+
+            IInputController obj = (IInputController)other;
+
+            return obj.name == name;
+        }
+
+        public override string ToString()
+        {
+            return name;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

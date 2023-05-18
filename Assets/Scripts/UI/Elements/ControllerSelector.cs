@@ -19,18 +19,36 @@ namespace UI
 
             maxValue = controllerList.controllers.Count - 1;
 
+            if (value > maxValue || value < 0)
+            {
+                value = 0;
+            }
+
             onChange += AfterUpdateController;
             beforeChange += BeforeUpdateController;
 
-            controllerList.onChangeControllers += UpdateController;
+            controllerList.onChangeControllers += OnChangeControllers;
 
             controllerList.controllers[value].asignedController = true;
+        }
+
+        public void OnChangeControllers()
+        {
+            maxValue = controllerList.controllers.Count - 1;
+
+            // Si el controlador referenciado ya no existe cambiamos
+            if (value > maxValue || value < 0)
+            {
+                value = 0;
+            }
+
+            UpdateController();
         }
 
         public void BeforeUpdateController()
         {
             maxValue = controllerList.controllers.Count - 1;
-                
+
             if (!controllerList.controllers[value].repeatController)
             {
                 controllerList.controllers[value].asignedController = false;
@@ -39,7 +57,8 @@ namespace UI
             beforeValueChange = value;
         }
 
-        public void AfterUpdateController() {
+        public void AfterUpdateController()
+        {
             // Si el controlador referenciado ya no existe cambiamos
             if (value > maxValue || value < 0)
             {
@@ -66,9 +85,11 @@ namespace UI
         // Solo actualizamos la vista, sin comprobar errores o inconsistencias
         public void UpdateController()
         {
-            if(controllerList.controllers[value].name.StartsWith("Player")) {
+            if (controllerList.controllers[value].name.StartsWith("Player"))
+            {
                 imageContent.enabled = true;
-                if(((InputController.UserInputController)controllerList.controllers[value]).useController) {
+                if (((InputController.UserInputController)controllerList.controllers[value]).useGamePad)
+                {
                     imageContent.sprite = controllerInputSprite;
                 }
                 else

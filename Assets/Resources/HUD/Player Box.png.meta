@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 406439687d7968d42829ec5d5f9dbf63
-timeCreated: 1683428588
+timeCreated: 1683937167
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -33,6 +33,7 @@ TextureImporter:
     21300052: Player Box_26
     21300054: Player Box_27
     21300056: Player Box_28
+    21300058: Player Box_29
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -458,7 +459,7 @@ TextureImporter:
         width: 8
         height: 8
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -469,6 +470,19 @@ TextureImporter:
         x: 116
         y: 15
         width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Player Box_29
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 7
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}

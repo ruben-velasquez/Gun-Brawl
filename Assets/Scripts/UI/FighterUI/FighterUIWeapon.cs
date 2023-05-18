@@ -11,6 +11,7 @@ namespace UI
         }
 
         public void UpdateWeapon(Weapon.Weapon newWeapon) {
+            weaponName = GetComponent<Text>();
             weaponName.text = newWeapon.name;
         }
     }

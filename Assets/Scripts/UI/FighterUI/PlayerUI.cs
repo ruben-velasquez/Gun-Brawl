@@ -8,16 +8,23 @@ namespace UI {
         [SerializeField]
         private Image lifeGraphic;
 
-        public virtual void Start()
-        {
-            
-        }
-
         public void SetGraphic(Sprite sprite) {
-            graphic = GetComponent<Image>();
+            if(graphic == null)
+                graphic = GetComponent<Image>();
+
+            if(sprite == null) {
+                Debug.Log("No existe el sprite que se está intentando poner al HUD del Jugador");
+                return;
+            }
+
             graphic.sprite = sprite;
         }
         public void SetLifeGraphic(Sprite sprite) {
+            if(sprite == null) {
+                Debug.Log("No existe el sprite que se está intentando poner a la barra de vida del Jugador");
+                return;
+            }
+
             lifeGraphic.sprite = sprite;
         }
     }

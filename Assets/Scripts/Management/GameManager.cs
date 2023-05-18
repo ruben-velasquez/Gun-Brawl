@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManager : GamePadManager
+public class GameManager : InputProfilesManager
 {
     private static GameManager instance;
 

@@ -13,8 +13,6 @@ namespace Fighter {
 
         public override void Start() {
             base.Start();
-
-            UpdateUI();
         }
 
         public void Hurt(int damage)
