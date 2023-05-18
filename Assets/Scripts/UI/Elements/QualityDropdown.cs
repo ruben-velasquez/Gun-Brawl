@@ -41,5 +41,6 @@ public class QualityDropdown : MonoBehaviour
     private void OnValueChange()
     {
         QualitySettings.SetQualityLevel(dropdown.value);
+        GameManager.Instance.SaveScreenConfiguration();
     }
 }

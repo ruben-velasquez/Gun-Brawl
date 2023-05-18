@@ -14,5 +14,6 @@ public class FullScreenCheckbox : MonoBehaviour {
     
     private void OnValueChange() {
         Screen.fullScreen = toggle.isOn;
+        GameManager.Instance.SaveScreenConfiguration();
     }
 }

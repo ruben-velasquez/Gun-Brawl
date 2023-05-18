@@ -28,7 +28,6 @@ public class ResolutionDropdown : MonoBehaviour
             dropdown.value = options.IndexOf(currentRes);
         } else {
             dropdown.value = 0;
-            SetResolution(Screen.resolutions[0]);
         }
 
         dropdown.onValueChanged.AddListener(delegate { OnValueChange(); });
@@ -45,6 +44,7 @@ public class ResolutionDropdown : MonoBehaviour
     private void OnValueChange() {
         Resolution resolution = Screen.resolutions[dropdown.value];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen, resolution.refreshRate);
+        GameManager.Instance.SaveScreenConfiguration();
     }
 
     private void SetResolution(Resolution resolution) {
