@@ -58,7 +58,15 @@ public class PlayerManager : GBSceneManager
             Fighter.Fighter player = Instantiate(playerPrefab, spawns[index].transform.position, Quaternion.Euler(0,0,0)).GetComponent<Fighter.Fighter>();
 
             // Le ponemos su controlador
-            player.inputController = info.controller;
+            if (info.controller.name.StartsWith("Player")) {
+                player.inputController = info.controller;
+            } else {
+                // Suponiendo que es un CPU le asignamos un controlador independiente
+                InputController.ComputerController controller = player.gameObject.AddComponent<InputController.ComputerController>();
+                // Lo asignamos
+                player.inputController = controller;
+                controller.options = ((InputController.ComputerController)info.controller).options;
+            }
 
             // Le añadimos el HUD
             player.ui = ui;
@@ -66,6 +74,7 @@ public class PlayerManager : GBSceneManager
             // Evitamos que se mueva
             player.move = false;
 
+            // Establecemos el nombre que aparecerá en la HUD
             if(info.controller.name.StartsWith("Player")) {
                 ui.SetName(info.controller.name);
                 playersState.realPlayers.Add(player.gameObject);
