@@ -58,7 +58,7 @@ namespace InputController
 
             foreach (GameObject player in GameManager.Instance.playersState.alivePlayers)
             {
-                if (GameManager.Instance.gameMode.name == "Teams" && ((GameMode.TeamsMode)GameManager.Instance.gameMode).AreEqualTeam(gameObject, player))
+                if (GameManager.Instance.gameMode.name == "Teams Mode" && ((GameMode.TeamsMode)GameManager.Instance.gameMode).AreEqualTeam(gameObject, player))
                     continue;
 
                 if (player.transform != transform)
