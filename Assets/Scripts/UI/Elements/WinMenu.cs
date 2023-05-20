@@ -71,7 +71,8 @@ public class WinMenu : MatchEndMenu
     }
 
     private void ShowUpdate(float value) {
-        underline.fillAmount = value;
+        if(underline != null)
+            underline.fillAmount = value;
     }
 
     public override void Hide() {

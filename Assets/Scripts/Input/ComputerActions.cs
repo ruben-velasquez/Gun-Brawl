@@ -6,6 +6,7 @@ public class ComputerActions
     public bool left = false;
     public bool right = false;
     public bool jump = false;
+    public bool followjump = true;
     public bool punch = false;
     public bool shoot = false;
     public bool interact = false;

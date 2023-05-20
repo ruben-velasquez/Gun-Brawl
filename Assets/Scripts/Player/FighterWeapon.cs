@@ -7,7 +7,7 @@ namespace Fighter
         [Space]
         [Header("Weapon")]
         [SerializeField]
-        private Weapon.Weapon weapon; // Arma cualquiera
+        public Weapon.Weapon weapon; // Arma cualquiera
         private float lastAttack = 0;
 
         public override void Start()

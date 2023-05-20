@@ -38,7 +38,7 @@ namespace InputController {
 
         public override bool IsFollowingJump()
         {
-            return actions.jump;
+            return actions.jump || actions.followjump;
         }
 
         public override bool IsInteracting()
