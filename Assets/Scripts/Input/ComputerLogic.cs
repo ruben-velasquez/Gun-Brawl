@@ -28,10 +28,6 @@ namespace InputController
                 StartCoroutine(GoAway());
             }
 
-        }
-
-        public void FixedUpdate()
-        {
             actions.Reset(); // Reseteamos las acciones
 
             if (GameManager.Instance.matchEnd || enemyPlayers.Count == 0) return;
@@ -50,6 +46,7 @@ namespace InputController
             {
                 actions.jump = true;
             }
+
         }
 
         private void CheckPlayers()
