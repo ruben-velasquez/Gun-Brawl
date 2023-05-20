@@ -49,7 +49,7 @@ public class ComputerOptions
 
     // La distancia Y máxima que debe haber entre los
     // jugadores para que se puedan disparar (Sin contar
-    // la velocidad Y que tengan)
+    // la velocidad Y que tengan) (Disparo Horizontal)
     public float maxYDistanceToShoot = 0.5f;
 
     // Disparar deja en peligro a los jugadores
@@ -58,6 +58,10 @@ public class ComputerOptions
     // Probabilidad de que dispare
     [Range(0f, 100f)]
     public float shootProbability = 50;
+
+    // La distancia X máxima que debe haber entre los
+    // jugadores para que se puedan disparar (Disparo Vertical)
+    public float maxXDistanceToShoot = 0.25f;
 
     [Space]
     [Header("Bullets Check Options")]
@@ -71,7 +75,7 @@ public class ComputerOptions
     // La distancia Y minima que debe haber entre
     // los jugadores para buscar una escalera
     // y intentar subir
-    public float minYDistancToClimb;
+    public float minYDistanceToClimb;
 
     // Tamaño de la comprobación de escaleras cercanas
     public float stairCheckRadius;

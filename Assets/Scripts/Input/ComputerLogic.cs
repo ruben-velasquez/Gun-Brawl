@@ -36,7 +36,8 @@ namespace InputController
 
             if (GameManager.Instance.matchEnd || enemyPlayers.Count == 0) return;
 
-            if(fighter.climbing) {
+            if (fighter.climbing)
+            {
                 actions.up = true;
             }
 
@@ -45,7 +46,8 @@ namespace InputController
                 FollowPlayer(targetPlayer);
             }
 
-            if(CheckBullets()) {
+            if (CheckBullets())
+            {
                 actions.jump = true;
             }
         }
@@ -56,14 +58,15 @@ namespace InputController
 
             foreach (GameObject player in GameManager.Instance.playersState.alivePlayers)
             {
-                if(GameManager.Instance.gameMode.name == "Teams" && ((GameMode.TeamsMode)GameManager.Instance.gameMode).AreEqualTeam(gameObject, player))
+                if (GameManager.Instance.gameMode.name == "Teams" && ((GameMode.TeamsMode)GameManager.Instance.gameMode).AreEqualTeam(gameObject, player))
                     continue;
-                
-                if (player.transform != transform) {
-                    if(targetPlayer == null) 
+
+                if (player.transform != transform)
+                {
+                    if (targetPlayer == null)
                         targetPlayer = player.transform;
 
-                    else if(Vector3.Distance(transform.position, targetPlayer.position) > 
+                    else if (Vector3.Distance(transform.position, targetPlayer.position) >
                             Vector3.Distance(transform.position, player.transform.position))
                         targetPlayer = player.transform;
 
@@ -84,7 +87,7 @@ namespace InputController
             Transform stair = GetNearStair();
 
             // Si es necesario buscamos una escalera y la subimos
-            if (yDistance >= options.minYDistancToClimb && stair != null)
+            if (yDistance >= options.minYDistanceToClimb && stair != null)
             {
                 float destitationX = stair.position.x;
 
@@ -149,8 +152,19 @@ namespace InputController
                 return true;
             }
 
-            // Verificamos si podemos Disparar al jugador
-            if (xDistance <= GetAttackDistance())
+            // Verificamos si podemos Disparar verticalmente al jugador
+            else if (yDistance >= options.minYDistanceToClimb && xDistance <= options.maxXDistanceToShoot)
+            {
+                actions.shoot = true;
+
+                if(player.position.y - transform.position.y > 0) actions.up = true;
+                else actions.down = true;
+
+                return true;
+            }
+
+            // Verificamos si podemos Disparar horizontalmente al jugador
+            else if (xDistance <= GetAttackDistance())
             {
                 if (fighter.facingRight != enemyAtRight) return false;
 
@@ -210,17 +224,20 @@ namespace InputController
             goAway = false;
         }
 
-        private bool CheckBullets() {
+        private bool CheckBullets()
+        {
             RaycastHit2D[] nearBullets = Physics2D.CircleCastAll(transform.position, options.bulletCheckRadius, Vector2.one, Mathf.Infinity, LayerMask.GetMask("Bullet"));
-            
+
             foreach (RaycastHit2D hit in nearBullets)
             {
                 Weapon.Bullet bullet = hit.transform.GetComponent<Weapon.Bullet>();
 
-                if(transform.position.x - bullet.transform.position.x > 0 && bullet.direction == Vector3.right) {
+                if (transform.position.x - bullet.transform.position.x > 0 && bullet.direction == Vector3.right)
+                {
                     return true;
                 }
-                else if(transform.position.x - bullet.transform.position.x < 0 && bullet.direction == Vector3.left) {
+                else if (transform.position.x - bullet.transform.position.x < 0 && bullet.direction == Vector3.left)
+                {
                     return true;
                 }
             }
@@ -228,7 +245,8 @@ namespace InputController
             return false;
         }
 
-        private Transform GetNearStair() {
+        private Transform GetNearStair()
+        {
             RaycastHit2D nearStair = Physics2D.CircleCast(transform.position, options.stairCheckRadius, Vector2.one, Mathf.Infinity, LayerMask.GetMask("Stair"));
 
             return nearStair.transform;
