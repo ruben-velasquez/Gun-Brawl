@@ -40,8 +40,6 @@ public class MatchManager : PlayerManager {
         matchEnd = true;
 
         DisablePlayerMove();
-
-        Debug.Log(playersState.alivePlayers[0].name + " ha ganado");
     }
 
     public virtual void ClearMatchInfo() {

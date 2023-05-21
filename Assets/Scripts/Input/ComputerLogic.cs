@@ -212,8 +212,6 @@ namespace InputController
         {
             if (goAway) yield break;
 
-            Debug.Log("Go Away");
-
             goAway = true;
 
             yield return new WaitForSeconds(options.goAwayDuration);

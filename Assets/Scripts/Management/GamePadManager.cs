@@ -119,6 +119,5 @@ public class GamePadManager : PauseManager
     private void ClearEvents() {
         onCheckControllers = null;
         controllerList.ClearEvents();
-        Debug.Log("Llamado ClearEvents en GamePadManager");
     }
 }
