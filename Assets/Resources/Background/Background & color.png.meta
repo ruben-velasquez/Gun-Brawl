@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: ef456c1299d334a48b603e7739897c98
-timeCreated: 1684616770
+timeCreated: 1684794108
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -8,6 +8,7 @@ TextureImporter:
     21300002: Background & color_1
     21300004: Background & color_2
     21300006: Background & color_3
+    21300008: Background & color_4
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -122,6 +123,19 @@ TextureImporter:
         height: 168
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Background & color_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 316
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

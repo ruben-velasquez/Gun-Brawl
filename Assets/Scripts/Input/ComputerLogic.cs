@@ -7,6 +7,8 @@ namespace InputController
     public abstract class ComputerLogic : IInputController
     {
         private bool goAway;
+        [SerializeField]
+        private bool canShootPlayer;
         public Fighter.Fighter fighter;
         public ComputerActions actions = new ComputerActions();
         public ComputerOptions options;
@@ -21,14 +23,19 @@ namespace InputController
 
         private void Update()
         {
+            actions.Reset(); // Reseteamos las acciones
+            
+            if(!fighter.alive) return;
+
             CheckPlayers(); // Obtenemos los jugadores
+
+
+            canShootPlayer = CanShootPlayer();
 
             if (Random.Range(1, 100) == 100 - options.goAwayProbability)
             {
                 StartCoroutine(GoAway());
             }
-
-            actions.Reset(); // Reseteamos las acciones
 
             if (GameManager.Instance.matchEnd || enemyPlayers.Count == 0) return;
 
@@ -47,6 +54,15 @@ namespace InputController
                 actions.jump = true;
             }
 
+            if (ObjectInFront() && IsGoingInTheSameDirection())
+            {
+                if (CanJumpObjectInFront())
+                    actions.jump = true;
+                else if (fighter.facingRight)
+                    actions.right = false;
+                else
+                    actions.left = false;
+            }
         }
 
         private void CheckPlayers()
@@ -60,12 +76,14 @@ namespace InputController
 
                 if (player.transform != transform)
                 {
-                    if (targetPlayer == null)
+                    if (targetPlayer == null || !GameManager.Instance.playersState.alivePlayers.Contains(targetPlayer.gameObject)) {
                         targetPlayer = player.transform;
+                    }
 
                     else if (Vector3.Distance(transform.position, targetPlayer.position) >
-                            Vector3.Distance(transform.position, player.transform.position))
+                            Vector3.Distance(transform.position, player.transform.position)) {
                         targetPlayer = player.transform;
+                    }
 
                     players.Add(player.transform);
                 }
@@ -123,10 +141,19 @@ namespace InputController
                 {
                     actions.jump = true;
 
-                    if (xDistance <= options.anticipatePunchDistance)
-                        actions.punch = true;
-                    else
-                        actions.shoot = true;
+                    if(!goAway) {
+                        bool enemyAtRight = player.position.x - transform.position.x > 0;
+
+                        FaceAt(enemyAtRight);
+
+                        if (xDistance <= options.anticipatePunchDistance) {
+
+                            actions.punch = true;
+                        }
+                        else if(canShootPlayer) {
+                            actions.shoot = true;
+                        }
+                    }
                 }
             }
         }
@@ -142,29 +169,26 @@ namespace InputController
             if (xDistance <= options.maxXDistanceToPunch
             && yDistance <= options.maxYDistanceToPunch)
             {
-                if (fighter.facingRight != enemyAtRight) return false;
-
+                FaceAt(enemyAtRight);
                 actions.punch = true;
 
                 return true;
             }
 
             // Verificamos si podemos Disparar verticalmente al jugador
-            else if (yDistance >= options.minYDistanceToClimb && xDistance <= options.maxXDistanceToShoot)
+            else if (yDistance >= options.minYDistanceToClimb && xDistance <= options.maxXDistanceToShoot && canShootPlayer)
             {
                 actions.shoot = true;
 
-                if(player.position.y - transform.position.y > 0) actions.up = true;
+                if (player.position.y - transform.position.y > 0) actions.up = true;
                 else actions.down = true;
 
                 return true;
             }
 
             // Verificamos si podemos Disparar horizontalmente al jugador
-            else if (xDistance <= GetAttackDistance())
+            else if (xDistance <= GetAttackDistance() && canShootPlayer)
             {
-                if (fighter.facingRight != enemyAtRight) return false;
-
                 if (yDistance > options.maxYDistanceToShoot && JumpNeeded(player))
                 {
                     actions.jump = true;
@@ -174,11 +198,11 @@ namespace InputController
                     return false;
                 }
 
-                if (actions.jump || Random.Range(1, 100) < 100 - options.shootProbability)
-
+                if (actions.jump || Random.Range(1, 100) < 100 - options.shootProbability){
+                    FaceAt(enemyAtRight);
                     actions.shoot = true;
-
-                return true;
+                    return true;
+                }
             }
 
             return false;
@@ -197,8 +221,8 @@ namespace InputController
 
         private void FaceAt(bool right)
         {
-            if (right) actions.right = true;
-            else actions.left = true;
+            if (right && !fighter.facingRight) actions.right = true;
+            else if (!right && fighter.facingRight) actions.left = true;
         }
 
         private bool JumpNeeded(Transform player)
@@ -245,6 +269,92 @@ namespace InputController
             RaycastHit2D nearStair = Physics2D.CircleCast(transform.position, options.stairCheckRadius, Vector2.one, Mathf.Infinity, LayerMask.GetMask("Stair"));
 
             return nearStair.transform;
+        }
+
+        private bool ObjectInFront()
+        {
+            Vector2 endPos;
+
+            if (fighter.facingRight)
+            {
+                endPos = (Vector2)transform.position + (Vector2.right * options.collisionCheckLenght);
+            }
+            else
+            {
+                endPos = (Vector2)transform.position - (Vector2.right * options.collisionCheckLenght);
+            }
+
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, endPos, LayerMask.GetMask("Ground"));
+
+            if (options.viewCollisionCheck)
+            {
+                Debug.DrawLine(transform.position, endPos);
+            }
+
+            return hit.collider != null;
+        }
+
+        private bool CanJumpObjectInFront()
+        {
+            Vector2 startPos;
+            Vector2 endPos;
+
+            if (fighter.facingRight)
+            {
+                startPos = (Vector2)transform.position + options.canJumpCheckOffset;
+                endPos = ((Vector2)transform.position + options.canJumpCheckOffset) + (Vector2.right * options.collisionCheckLenght);
+            }
+            else
+            {
+                startPos = (Vector2)transform.position + options.canJumpCheckOffset;
+                endPos = ((Vector2)transform.position + options.canJumpCheckOffset) - (Vector2.right * options.collisionCheckLenght);
+            }
+
+            RaycastHit2D hit = Physics2D.Linecast(startPos, endPos, LayerMask.GetMask("Ground"));
+
+            if (options.viewCollisionCheck)
+            {
+                if(hit.collider == null)
+                    Debug.DrawLine(startPos, endPos, Color.green);
+                else
+                    Debug.DrawLine(startPos, endPos, Color.red);
+            }
+
+            return hit.collider == null;
+        }
+
+        private bool IsGoingInTheSameDirection()
+        {
+            return (fighter.facingRight && actions.right) || (!fighter.facingRight && actions.left);
+        }
+
+        private bool CanShootPlayer()
+        {
+            Vector2 startPos = (Vector2)transform.position + options.shootCheckOffset;
+
+            RaycastHit2D[] hits = Physics2D.LinecastAll(startPos, targetPlayer.position, LayerMask.GetMask("Ground"));
+
+            
+
+            foreach (RaycastHit2D hit in hits)
+            {
+                if (hit.collider != null && hit.collider.CompareTag("Map"))
+                {
+                    if (options.viewShootCheck)
+                    {
+                        Debug.DrawLine(startPos, targetPlayer.position, Color.red);
+                    }
+
+                    return false;
+                }
+            }
+
+            if (options.viewShootCheck)
+            {
+                Debug.DrawLine(startPos, targetPlayer.position, Color.green);
+            }
+
+            return true;
         }
     }
 }

@@ -79,4 +79,30 @@ public class ComputerOptions
 
     // Tamaño de la comprobación de escaleras cercanas
     public float stairCheckRadius;
+
+    [Space]
+    [Header("Collision Check Options")]
+
+    // La distancia del rayo que se lanza para detectar una
+    // collision con alguna pared o objeto
+    public float collisionCheckLenght;
+
+    // El offset que define donde comprobar si se puede
+    // si se puede saltar sobre ese objeto
+    public Vector2 canJumpCheckOffset;
+
+    // ? DEV TOOL
+    // Define si representar los rayos lanzados en el juego
+    public bool viewCollisionCheck;
+
+    [Space]
+    [Header("Shoot Check Options")]
+
+    // Offset desde el cual se lanzara un rayo hacia el jugador
+    // para verificar si se le puede disparar
+    public Vector2 shootCheckOffset;
+
+    // ? DEV TOOL
+    // Define si representar los rayos lanzados en el juego
+    public bool viewShootCheck;
 }
