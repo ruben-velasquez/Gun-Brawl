@@ -68,6 +68,13 @@ public class ComputerOptions
 
     // Tamaño de la comprobación de balas cercanas
     public float bulletCheckRadius;
+    // La distancia Y máxima que debe haber entre la bala y el jugador
+    // para considerarla una amenaza
+    public float maxYBulletDistanceToJump;
+
+    // ? DEV TOOL
+    // Define si representar el circulo de la comprobación lanzados en el juego
+    public bool viewBulletCheck;
 
     [Space]
     [Header("Stair Climbing Options")]

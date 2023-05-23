@@ -266,9 +266,25 @@ namespace InputController
         {
             RaycastHit2D[] nearBullets = Physics2D.CircleCastAll(transform.position, options.bulletCheckRadius, Vector2.one, Mathf.Infinity, LayerMask.GetMask("Bullet"));
 
+            if(options.viewBulletCheck) {
+                Debug.DrawLine(transform.position, transform.position + (Vector3.right * options.bulletCheckRadius), Color.blue);
+                Debug.DrawLine(transform.position, transform.position + (Vector3.left * options.bulletCheckRadius), Color.blue);
+                Debug.DrawLine(transform.position, transform.position + (Vector3.up * options.bulletCheckRadius), Color.blue);
+                Debug.DrawLine(transform.position, transform.position + (Vector3.down * options.bulletCheckRadius), Color.blue);
+
+                Debug.DrawLine(transform.position + (Vector3.right * options.bulletCheckRadius), transform.position + (Vector3.up * options.bulletCheckRadius), Color.blue);
+                Debug.DrawLine(transform.position + (Vector3.left * options.bulletCheckRadius), transform.position + (Vector3.up * options.bulletCheckRadius), Color.blue);
+                
+                Debug.DrawLine(transform.position + (Vector3.right * options.bulletCheckRadius), transform.position + (Vector3.down * options.bulletCheckRadius), Color.blue);
+                Debug.DrawLine(transform.position + (Vector3.left * options.bulletCheckRadius), transform.position + (Vector3.down * options.bulletCheckRadius), Color.blue);
+            }
+
             foreach (RaycastHit2D hit in nearBullets)
             {
                 Weapon.Bullet bullet = hit.transform.GetComponent<Weapon.Bullet>();
+
+                if(Mathf.Abs(transform.position.y - bullet.transform.position.y) > options.maxYBulletDistanceToJump)
+                    continue;
 
                 if (transform.position.x - bullet.transform.position.x > 0 && bullet.direction == Vector3.right)
                 {
