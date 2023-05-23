@@ -6,7 +6,8 @@ namespace InputController
 {
     public abstract class ComputerLogic : IInputController
     {
-        private bool goAway;
+        private bool goAway = false;
+        private bool goAwayActive = true;
         [SerializeField]
         private bool canShootPlayer;
         public Fighter.Fighter fighter;
@@ -29,15 +30,15 @@ namespace InputController
 
             CheckPlayers(); // Obtenemos los jugadores
 
+            if (GameManager.Instance.matchEnd || enemyPlayers.Count == 0) return;
+
 
             canShootPlayer = CanShootPlayer();
 
-            if (Random.Range(1, 100) == 100 - options.goAwayProbability)
+            if (goAwayActive && Random.Range(1, 100) == 100 - options.goAwayProbability)
             {
                 StartCoroutine(GoAway());
             }
-
-            if (GameManager.Instance.matchEnd || enemyPlayers.Count == 0) return;
 
             if (fighter.climbing)
             {
@@ -124,10 +125,14 @@ namespace InputController
             // Si no se ha llegado a distancia minima seguimos al jugador
             else if (xDistance > options.followPlayerOffset)
             {
-                float destitationX = !goAway ? player.position.x : -player.position.x;
+                float destinationX = !goAway ? player.position.x : -player.position.x;
+                
+                if(goAway && Mathf.Abs(destinationX - transform.position.x) < options.followPlayerOffset) {
+                    return;
+                }
 
                 // Definimos si ir a la izquierda o a la derecha
-                if (transform.position.x - destitationX > 0)
+                if (transform.position.x - destinationX > 0)
                 {
                     actions.left = true;
                 }
@@ -139,25 +144,21 @@ namespace InputController
                 // Si está a una altura lo suficientemente alta como para no poder dispararle
                 // Pero lo suficientemente baja como para poder llegar ahí, saltamos
 
-                if (JumpNeeded(player))
+                if (JumpNeeded(player) && !goAway)
                 {
                     actions.jump = true;
+                    bool enemyAtRight = player.position.x - transform.position.x > 0;
 
-                    if (!goAway)
+                    FaceAt(enemyAtRight);
+
+                    if (xDistance <= options.anticipatePunchDistance)
                     {
-                        bool enemyAtRight = player.position.x - transform.position.x > 0;
 
-                        FaceAt(enemyAtRight);
-
-                        if (xDistance <= options.anticipatePunchDistance)
-                        {
-
-                            actions.punch = true;
-                        }
-                        else if (canShootPlayer)
-                        {
-                            actions.shoot = true;
-                        }
+                        actions.punch = true;
+                    }
+                    else if (canShootPlayer)
+                    {
+                        actions.shoot = true;
                     }
                 }
             }
@@ -247,13 +248,18 @@ namespace InputController
 
         private IEnumerator GoAway()
         {
-            if (goAway) yield break;
+            if (!goAwayActive) yield break;
 
             goAway = true;
+            goAwayActive = false;
 
             yield return new WaitForSeconds(options.goAwayDuration);
 
             goAway = false;
+
+            yield return new WaitForSeconds(options.goAwayDuration);
+
+            goAwayActive = true;
         }
 
         private bool CheckBullets()
