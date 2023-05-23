@@ -24,8 +24,8 @@ namespace InputController
         private void Update()
         {
             actions.Reset(); // Reseteamos las acciones
-            
-            if(!fighter.alive) return;
+
+            if (!fighter.alive) return;
 
             CheckPlayers(); // Obtenemos los jugadores
 
@@ -76,12 +76,14 @@ namespace InputController
 
                 if (player.transform != transform)
                 {
-                    if (targetPlayer == null || !GameManager.Instance.playersState.alivePlayers.Contains(targetPlayer.gameObject)) {
+                    if (targetPlayer == null || !GameManager.Instance.playersState.alivePlayers.Contains(targetPlayer.gameObject))
+                    {
                         targetPlayer = player.transform;
                     }
 
                     else if (Vector3.Distance(transform.position, targetPlayer.position) >
-                            Vector3.Distance(transform.position, player.transform.position)) {
+                            Vector3.Distance(transform.position, player.transform.position))
+                    {
                         targetPlayer = player.transform;
                     }
 
@@ -141,16 +143,19 @@ namespace InputController
                 {
                     actions.jump = true;
 
-                    if(!goAway) {
+                    if (!goAway)
+                    {
                         bool enemyAtRight = player.position.x - transform.position.x > 0;
 
                         FaceAt(enemyAtRight);
 
-                        if (xDistance <= options.anticipatePunchDistance) {
+                        if (xDistance <= options.anticipatePunchDistance)
+                        {
 
                             actions.punch = true;
                         }
-                        else if(canShootPlayer) {
+                        else if (canShootPlayer)
+                        {
                             actions.shoot = true;
                         }
                     }
@@ -164,6 +169,13 @@ namespace InputController
             float xDistance = Mathf.Abs(player.position.x - transform.position.x);
 
             bool enemyAtRight = player.position.x - transform.position.x > 0;
+
+            // Si los dos jugadores están lo suficientemente cerca como para no atacarse
+            // movemos al jugador
+            if (xDistance <= options.maxDistanceToTakeSpace) {
+                if(Random.Range(1, 100) > 50)
+                    actions.right = true;
+            }
 
             // Verificamos si podemos golpear al jugador
             if (xDistance <= options.maxXDistanceToPunch
@@ -198,7 +210,8 @@ namespace InputController
                     return false;
                 }
 
-                if (actions.jump || Random.Range(1, 100) < 100 - options.shootProbability){
+                if (actions.jump || Random.Range(1, 100) < 100 - options.shootProbability)
+                {
                     FaceAt(enemyAtRight);
                     actions.shoot = true;
                     return true;
@@ -314,7 +327,7 @@ namespace InputController
 
             if (options.viewCollisionCheck)
             {
-                if(hit.collider == null)
+                if (hit.collider == null)
                     Debug.DrawLine(startPos, endPos, Color.green);
                 else
                     Debug.DrawLine(startPos, endPos, Color.red);
@@ -334,7 +347,7 @@ namespace InputController
 
             RaycastHit2D[] hits = Physics2D.LinecastAll(startPos, targetPlayer.position, LayerMask.GetMask("Ground"));
 
-            
+
 
             foreach (RaycastHit2D hit in hits)
             {

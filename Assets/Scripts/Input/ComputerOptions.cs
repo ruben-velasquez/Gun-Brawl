@@ -105,4 +105,13 @@ public class ComputerOptions
     // ? DEV TOOL
     // Define si representar los rayos lanzados en el juego
     public bool viewShootCheck;
+
+    [Space]
+    [Header("Take Space options")]
+
+    // Cuando dos jugadores se acercan los suficiente, estos no
+    // se pueden atacar debido a su cercanía, esta es la distancia
+    // a partir de la cual se alejará un poco de el jugador enemigo
+    // para poder atacarlo
+    public float maxDistanceToTakeSpace = 0.2f;
 }
