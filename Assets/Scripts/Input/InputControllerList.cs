@@ -90,7 +90,7 @@ namespace InputController
 
             if (controllerObject == null)
             {
-                controllerObject = UnityEditor.PrefabUtility.CreatePrefab("Assets/Input Users/Player " + (userControllers.Count + 1) + ".prefab", baseController);
+                controllerObject = UnityEditor.PrefabUtility.SaveAsPrefabAsset(baseController, "Assets/Input Users/Player " + (userControllers.Count + 1) + ".prefab");
             }
 
             controllerObject.name = "Player " + (userControllers.Count + 1);
@@ -122,7 +122,7 @@ namespace InputController
 
             if (controllerObject == null)
             {
-                controllerObject = UnityEditor.PrefabUtility.CreatePrefab("Assets/Input Users/Player " + (userControllers.Count + 1) + ".prefab", baseController);
+                controllerObject = UnityEditor.PrefabUtility.SaveAsPrefabAsset(baseController, "Assets/Input Users/Player " + (userControllers.Count + 1) + ".prefab");
             }
 
             controllerObject.name = "Player " + (userControllers.Count + 1);
