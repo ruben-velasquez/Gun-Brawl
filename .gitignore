@@ -64,3 +64,10 @@ Plugins.meta
 Packages/
 UserSettings/
 Logs/
+
+# ======== #
+# Tilemaps #
+# ======== #
+
+Tilemaps/
+Tilemaps.meta
