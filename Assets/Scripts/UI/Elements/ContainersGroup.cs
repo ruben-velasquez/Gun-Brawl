@@ -36,14 +36,14 @@ namespace UI
 
             page = newPage;
 
-            float posX = 134 - (268 * page);
+            float posX = -(268 * page);
 
             LeanTween.alphaCanvas(containers[page], 1, 1f).setDelay(1.5f);
 
             containers[page].interactable = true;
             containers[page].blocksRaycasts = true;
 
-            LeanTween.move(rectTransform, new Vector3(posX, -84f, 0f), 0.5f).setEase(transition).setDelay(1f);
+            LeanTween.move(rectTransform, new Vector3(posX, 0f, 0f), 0.5f).setEase(transition).setDelay(1f);
         }
     }
 }
