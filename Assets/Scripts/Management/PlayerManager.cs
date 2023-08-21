@@ -46,6 +46,9 @@ public class PlayerManager : GBSceneManager
         playersState.computerPlayers = new List<GameObject>(); 
 
         GameObject[] spawns = GameObject.FindGameObjectsWithTag("Player Spawn"); // Obtenemos los spawns
+
+        if(spawns.Length == 0) Debug.LogError("There are no Spawns in the Scene");
+        else if(spawns.Length < 4) Debug.LogError("There are not enough Spawns in the Scene");
         
         int index = 0; // inicializamos el indice
 

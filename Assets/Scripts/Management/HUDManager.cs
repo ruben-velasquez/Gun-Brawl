@@ -77,6 +77,8 @@ public class HUDManager : MonoBehaviour
     public void CreateTag(Fighter.Fighter player, GameMode.TeamsMode.Teams team) {
         Transform tagParent = GameObject.FindGameObjectWithTag("Tags").transform;
 
+        if(tagParent == null) Debug.LogError("There are no Tag parent: Any GameObject has \"Tags\" tag");
+
         if(team == GameMode.TeamsMode.Teams.Red) {
             if(player.name == "Player 1") {
                 Instantiate(redTeamPlayer1Tag, tagParent).GetComponent<UI.PlayerTag>().player = player.gameObject;
