@@ -17,7 +17,7 @@ namespace Fighter
             base.Update(); // Ejecutamos la lógica anterior
 
             // Si la variable move no está activa no ejecutamos nada
-            if (!move)
+            if (!move || !alive)
             {
                 rb.velocity = Vector2.zero;
                 return;
@@ -51,7 +51,7 @@ namespace Fighter
             if (!climbing) Move(inputController.MoveAxis());
         }
 
-        public void EnanbleMovement()
+        public void EnableMovement()
         {
             move = true;
         }

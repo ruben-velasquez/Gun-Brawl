@@ -99,8 +99,8 @@ namespace InputController
 
         public override bool IsInteracting()
         {
-            if (useGamePad) return Input.GetKeyDown(keyboardUser.punch) || GamePadHandler.GetButton(ControllerState(), gamePadUser.interact);
-            return Input.GetKeyDown(keyboardUser.punch);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.interact) || GamePadHandler.GetButton(ControllerState(), gamePadUser.interact);
+            return Input.GetKeyDown(keyboardUser.interact);
         }
 
         // Controller Handler

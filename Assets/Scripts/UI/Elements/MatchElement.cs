@@ -9,8 +9,10 @@ public abstract class MatchElement : MonoBehaviour
 
     public virtual void Start() {
         rectTransform = GetComponent<RectTransform>();
-        GameManager.Instance.onResume += Show;
-        if(hideOnPause) GameManager.Instance.onPause += Hide;
+        if(hideOnPause) {
+            GameManager.Instance.onResume += Show;
+            GameManager.Instance.onPause += Hide;
+        }
         GameManager.Instance.onMatchEnd += Hide;
     }
 

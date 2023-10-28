@@ -33,8 +33,7 @@ public class MatchManager : PlayerManager {
     }
 
     public virtual void EndMatch() {
-        if (onMatchEnd != null)
-            onMatchEnd();
+        onMatchEnd?.Invoke();
 
         onMatchEnd = null;
         matchEnd = true;

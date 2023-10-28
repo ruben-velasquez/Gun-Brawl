@@ -10,9 +10,12 @@ namespace Fighter {
         private int maxLife = 5; // Vida máxima del peleador
         public int currentLife = 0; // Vida actual del peleador
         public bool alive = true; // Define si el jugador está vivo
+        private Animation.GBAnimation dieAnimation;
 
         public override void Start() {
             base.Start();
+            dieAnimation = animator.GetAnimation("Die");
+            dieAnimation.onAnimationEnd += AfterDieAnim;
         }
 
         public void Hurt(int damage)
@@ -58,6 +61,22 @@ namespace Fighter {
         public virtual void OnDie() {
             // La lógica tras morir
             GameManager.Instance.OnPlayerDie(gameObject);
+            animator.Play(dieAnimation);
+        }
+
+        private void AfterDieAnim(Transform p) {
+            if(p == transform) {
+                dieAnimation.onAnimationEnd -= AfterDieAnim;
+                gameObject.SetActive(false);
+            }
+        }
+
+        public override void OnMatchEnd() {
+            base.OnMatchEnd();
+
+            if(alive) {
+                dieAnimation.onAnimationEnd -= AfterDieAnim;
+            }
         }
 
         private void UpdateUI() {

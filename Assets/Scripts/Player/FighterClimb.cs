@@ -44,6 +44,8 @@ namespace Fighter
             rb.AddForce(Vector2.up * exitClimbJumpForce, ForceMode2D.Impulse);
             onClimbExitJump = true;
 
+            animator.Play(jumpingAnimation);
+
             yield return new WaitForSeconds(climbExitJumpTime);
 
             onClimbExitJump = false;

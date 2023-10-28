@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Fighter
 {
-    public class Fighter : FighterAnimator
+    public class Fighter : ItemCheck
     {
         
     }

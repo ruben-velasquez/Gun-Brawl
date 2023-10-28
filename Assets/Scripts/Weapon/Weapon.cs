@@ -10,6 +10,8 @@ namespace Weapon
         public Vector3 horizontalOffset; // Offset horizontal del ataque
         public Vector3 upOffset; // Offset vetical hacia arriba del ataque
         public Vector3 downOffset; // Offset vetical hacia abajo del ataque
+        public int rating; // Calidad del arma
+        public Animator itemAnimator; // La animación del item
 
         public abstract void AttackHorizontal(Transform player, bool isFacingRight); // Función que maneja el ataque horizontal
         public abstract void AttackUp(Transform player, bool isFacingRight); // Función que maneja el ataque vertical

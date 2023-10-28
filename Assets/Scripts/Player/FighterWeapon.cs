@@ -52,21 +52,22 @@ namespace Fighter
 
         private void AttackHorCallback(Transform t) {
             if(t == transform) {
-                weapon.AttackHorizontal(transform, facingRight); // Llamamos al metodo atacar del arma
+                weapon.AttackHorizontal(transform, facingRight); // Llamamos al método atacar del arma
             }
         }
         private void AttackUpCallback(Transform t) {
             if(t == transform) {
-                weapon.AttackUp(transform, facingRight); // Llamamos al metodo atacar del arma
+                weapon.AttackUp(transform, facingRight); // Llamamos al método atacar del arma
             }
         }
         private void AttackDownCallback(Transform t) {
             if(t == transform) {
-                weapon.AttackDown(transform, facingRight); // Llamamos al metodo atacar del arma
+                weapon.AttackDown(transform, facingRight); // Llamamos al método atacar del arma
             }
         }
 
         public void ChangeWeapon(Weapon.Weapon newWeapon) {
+            UnsubscribeAnimations();
             weapon = newWeapon;
             UpdateWeapon();
         }
@@ -74,6 +75,7 @@ namespace Fighter
         private void UpdateWeapon() {
             if(weapon == null) return;
             ui.UpdateWeapon(weapon);
+
             attackHorAnim = animator.GetAnimation(weapon.GetAnimationName(Direction.Horizontal));
             attackUpAnim = animator.GetAnimation(weapon.GetAnimationName(Direction.Up));
             attackDownAnim = animator.GetAnimation(weapon.GetAnimationName(Direction.Down));
@@ -84,6 +86,10 @@ namespace Fighter
         }
 
         private void OnDestroy() {
+            UnsubscribeAnimations();
+        }
+
+        private void UnsubscribeAnimations() {
             attackHorAnim.onFrameAction -= AttackHorCallback;
             attackUpAnim.onFrameAction -= AttackUpCallback;
             attackDownAnim.onFrameAction -= AttackDownCallback;
@@ -93,9 +99,7 @@ namespace Fighter
         {
             base.OnMatchEnd();
 
-            attackHorAnim.onFrameAction -= AttackHorCallback;
-            attackUpAnim.onFrameAction -= AttackUpCallback;
-            attackDownAnim.onFrameAction -= AttackDownCallback;
+            UnsubscribeAnimations();;
         }
     }
 }

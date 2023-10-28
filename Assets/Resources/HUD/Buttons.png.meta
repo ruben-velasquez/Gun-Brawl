@@ -131,8 +131,8 @@ TextureImporter:
         width: 58
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 0, z: 17, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -152,8 +152,8 @@ TextureImporter:
         width: 58
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 0, z: 17, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -173,8 +173,8 @@ TextureImporter:
         width: 58
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 0, z: 17, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -194,8 +194,8 @@ TextureImporter:
         width: 58
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 0, z: 17, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -215,8 +215,8 @@ TextureImporter:
         width: 58
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 0, z: 17, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -236,8 +236,8 @@ TextureImporter:
         width: 58
         height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 17, y: 0, z: 17, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -251,7 +251,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6e572c53c6f72a0449e994de5ad5ad79
     internalID: 0
     vertices: []
     indices: 

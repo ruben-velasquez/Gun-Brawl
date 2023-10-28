@@ -14,10 +14,9 @@ namespace Fighter
         public void Jump()
         {
             // Si el luchador está en el suelo, le aplica una fuerza hacia arriba
-            if (grounded || jumpTime > 0) // Si se está en el suelo o el tiempo del coyote time es mayor a 0
+            if (grounded) // Si se está en el suelo o el tiempo del coyote time es mayor a 0
             {
                 grounded = false; // El luchador ya no está en el suelo
-                jumpTime = 0; // Reiniciamos
                 LastJump = Time.time;
                 animator.Play(jumpingAnimation);
                 rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -26,7 +25,7 @@ namespace Fighter
         }
 
 
-        // Esta función se ejecuta cuando no se está presionando el boton de saltar
+        // Esta función se ejecuta cuando no se está presionando el botón de saltar
         // Pero aún así el jugador sigue teniendo un impulso hacia arriba
         public void FollowJump() {
             if (Time.time - LastJump > minJumpDuration) {

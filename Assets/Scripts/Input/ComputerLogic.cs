@@ -64,6 +64,14 @@ namespace InputController
                 else
                     actions.left = false;
             }
+
+            CheckItems(); // Verificamos los items
+        }
+
+        private void CheckItems() {
+            if(fighter.itemStay && fighter.item.ShouldUseItem(fighter)) {
+                actions.interact = true;
+            }
         }
 
         private void CheckPlayers()

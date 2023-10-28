@@ -35,6 +35,8 @@ public class PlayerManager : GBSceneManager
     // Cambiar el controlador de un jugador
     public void SetPlayerController(int index, InputController.IInputController newController) {
         playerInfo[index].controller = newController;
+
+        CheckControllersUsage();
     }
 
     // Crea todos los jugadores en la escena usando la información de cada uno
@@ -157,5 +159,19 @@ public class PlayerManager : GBSceneManager
 
     public virtual void OnPlayerDie(GameObject player) {
         playersState.alivePlayers.Remove(player);
+    }
+
+    public void CheckControllersUsage() {
+        // Obtenemos la lista de controladores
+        InputController.InputControllerList controllerList = GetComponent<GamePadManager>().controllerList;
+
+        foreach (InputController.IInputController controller in controllerList.controllers) {
+            controller.asignedController = false;
+        }
+
+        // Recorremos cada PlayerInfo
+        foreach (PlayerInfo info in playerInfo) {
+            info.controller.asignedController = true;
+        }
     }
 }

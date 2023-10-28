@@ -12,11 +12,6 @@ namespace Fighter {
         private float checkLength = 0.75f; // Variable pública que define la longitud del chequeo
         [SerializeField]
         private Vector2 raycastDistance = new Vector2(0.2f, 0);
-        
-        [SerializeField]
-        private float coyoteTime = 0.5f; // Variable pública que define el tiempo para poder saltar    
-        [HideInInspector]
-        public float jumpTime; // Variable privada que almacena el tiempo restante para poder saltar
         [SerializeField]
         private float platformCheckOffset = 1.3f;
 
@@ -37,17 +32,14 @@ namespace Fighter {
             {
                 if(hitCenter.collider && hitCenter.collider.CompareTag("Platform") && hitCenter.collider.transform.position.y - transform.position.y > platformCheckOffset) {
                     grounded = false;
-                    jumpTime -= Time.deltaTime;
                 }
                 else {
                     grounded = true;
-                    jumpTime = coyoteTime;
                 }
             }
-            else // Si no, el objeto está en el aire y se le resta el tiempo transcurrido al tiempo para poder saltar
+            else
             {
                 grounded = false;
-                jumpTime -= Time.deltaTime;
             }
         }
     }
