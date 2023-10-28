@@ -5,7 +5,11 @@ namespace Fighter {
         public bool itemStay;
         public Items.Item item;
 
-        public void OnTriggerStay2D(Collider2D other) {
+        public void OnTriggerEnter2D(Collider2D other) => CheckItem(other);
+
+        public void OnTriggerStay2D(Collider2D other) => CheckItem(other);
+
+        private void CheckItem(Collider2D other) {
             if (other.CompareTag("Item")) {
                 Items.Item item = other.GetComponent<Items.Item>();
 
