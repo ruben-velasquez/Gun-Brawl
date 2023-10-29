@@ -6,6 +6,7 @@ namespace Items {
         [SerializeField]
         private List<Item> items;
         public static ItemFactory Instance;
+        public float deSpawnTime = 5f;
         
         public void Awake() {
             if(Instance == null) {
