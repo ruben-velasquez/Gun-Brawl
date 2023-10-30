@@ -327,7 +327,7 @@ namespace InputController
                 endPos = (Vector2)transform.position - (Vector2.right * options.collisionCheckLenght);
             }
 
-            RaycastHit2D hit = Physics2D.Linecast(transform.position, endPos, LayerMask.GetMask("Ground"));
+            RaycastHit2D hit = Physics2D.Linecast(transform.position, endPos, LayerMask.GetMask("Ground", "GroundDamageable"));
 
             if (options.viewCollisionCheck)
             {
