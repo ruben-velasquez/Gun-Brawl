@@ -54,21 +54,28 @@ namespace Fighter
                 transform.position + attackOffset : 
                 transform.position - attackOffset;
 
-                RaycastHit2D[] hits = Physics2D.CircleCastAll(position, attackRadius, new Vector3(0,0,0), attackRadius, LayerMask.GetMask("Player"));
+                RaycastHit2D[] hits = Physics2D.CircleCastAll(position, attackRadius, new Vector3(0,0,0), attackRadius, LayerMask.GetMask("Player", "GroundDamageable"));
                 
-                foreach (RaycastHit2D hit in hits)
-                {
-                    Transform player = hit.transform;
-                    LifeSystem playerLife = player.GetComponent<LifeSystem>();
+                foreach (RaycastHit2D hit in hits) {
+                    Transform entity = hit.transform;
 
-                    if(player == transform) continue;
-
-                    if (playerLife.currentLife == 1)
+                    // Check if the entity is a player
+                    LifeSystem playerLife = entity.GetComponent<LifeSystem>();
+                    if (playerLife != null)
                     {
-                        kills++;
+                        if(entity == transform) continue;
+
+                        if (playerLife.currentLife == 1)
+                        {
+                            kills++;
+                        }
+
+                        playerLife.Hurt(damage);
                     }
 
-                    playerLife.Hurt(damage);
+                    // Check if the entity is damageable
+                    Damageable damageableEntity = entity.GetComponent<Damageable>();
+                    damageableEntity?.Hurt(damage);
                 }
             }
         }

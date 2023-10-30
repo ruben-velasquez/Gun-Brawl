@@ -65,7 +65,7 @@ namespace Fighter {
         }
 
         private void AfterDieAnim(Transform p) {
-            if(p == transform) {
+            if(p != null && p == transform) {
                 dieAnimation.onAnimationEnd -= AfterDieAnim;
                 gameObject.SetActive(false);
             }

@@ -60,6 +60,11 @@ namespace Weapon
             else if(col.gameObject.CompareTag("Map")) {
                 Destroy();
             }
+            else if(col.gameObject.CompareTag("Damageable")) {
+                Damageable damageableEntity = col.GetComponent<Damageable>();
+                damageableEntity?.Hurt(damage);
+                Destroy();
+            }
         }
 
         private void Destroy() {
