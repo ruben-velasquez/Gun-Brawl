@@ -27,6 +27,14 @@ public class ManualFriction : MonoBehaviour
             isOnGround = true;
         }
     }
+    
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!isOnGround && (collision.gameObject.CompareTag("Map") || collision.gameObject.CompareTag("Platform")))
+        {
+            isOnGround = true;
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
