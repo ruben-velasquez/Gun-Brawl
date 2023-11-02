@@ -16,7 +16,7 @@ namespace Fighter
             else if (animator.running && animator.currentAnimation.name == jumpingAnimation.name) {
                 animator.Stop(true);
             }
-            else if (walking && !GameManager.Instance.matchEnd)
+            else if (walking && !gameManager.matchEnd)
                 animator.Play(walkingAnimation);
             else
                 animator.Play(idleAnimation);
