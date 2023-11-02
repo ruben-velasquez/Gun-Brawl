@@ -60,12 +60,12 @@ namespace Fighter {
         
         public virtual void OnDie() {
             // La lógica tras morir
-            GameManager.Instance.OnPlayerDie(gameObject);
+            gameManager.OnPlayerDie(gameObject);
             animator.Play(dieAnimation);
         }
 
         private void AfterDieAnim(Transform p) {
-            if(p != null && p == transform) {
+            if(this != null && p != null && p == transform) {
                 dieAnimation.onAnimationEnd -= AfterDieAnim;
                 gameObject.SetActive(false);
             }
