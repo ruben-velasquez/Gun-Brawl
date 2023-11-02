@@ -126,7 +126,7 @@ public class PlayerManager : GBSceneManager
     public void EnablePlayerMove() {
         foreach (GameObject player in playersState.players)
         {
-            player.GetComponent<Fighter.Fighter>().move = true;
+            player.GetComponent<Fighter.Fighter>().EnableMovement();
         }
     }
     
@@ -134,7 +134,7 @@ public class PlayerManager : GBSceneManager
     public void DisablePlayerMove() {
         foreach (GameObject player in playersState.players)
         {
-            player.GetComponent<Fighter.Fighter>().move = false;
+            player.GetComponent<Fighter.Fighter>().DisableMovement();
         }
     }
 
@@ -142,7 +142,7 @@ public class PlayerManager : GBSceneManager
     public void PausePlayers() {
         foreach (GameObject player in playersState.players)
         {
-            player.GetComponent<Fighter.Fighter>().move = false;
+            player.GetComponent<Fighter.Fighter>().DisableMovement();
             player.GetComponent<Animation.GBAnimator>().pause = true;
             player.GetComponent<Rigidbody2D>().gravityScale = 0;
         }
@@ -151,7 +151,7 @@ public class PlayerManager : GBSceneManager
     public void ResumePlayers() {
         foreach (GameObject player in playersState.players)
         {
-            player.GetComponent<Fighter.Fighter>().move = true;
+            player.GetComponent<Fighter.Fighter>().EnableMovement();
             player.GetComponent<Animation.GBAnimator>().pause = false;
             player.GetComponent<Rigidbody2D>().gravityScale = 2;
         }
