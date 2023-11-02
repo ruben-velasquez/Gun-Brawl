@@ -11,6 +11,12 @@ public class PauseManager : MatchManager
         onMatchEnd += ResetPauseEvents;
     }
 
+    public override void StartMatch()
+    {
+        paused = false;
+        base.StartMatch();
+    }
+
     public void Pause() {
         if(onPause != null) onPause();
 
