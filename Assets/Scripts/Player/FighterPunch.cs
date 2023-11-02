@@ -59,6 +59,12 @@ namespace Fighter
                 foreach (RaycastHit2D hit in hits) {
                     Transform entity = hit.transform;
 
+                    MovementManager playerMovement = entity.GetComponent<MovementManager>();
+
+                    // Aplica el empujón
+                    Vector2 knockbackDirection = (entity.transform.position - transform.position).normalized;
+                    playerMovement?.Knockback(knockbackDirection);
+
                     // Check if the entity is a player
                     LifeSystem playerLife = entity.GetComponent<LifeSystem>();
                     if (playerLife != null)
