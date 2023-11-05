@@ -128,11 +128,11 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 128
-        width: 130
+        width: 146
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -147,13 +147,13 @@ TextureImporter:
       name: Buttons Images_1
       rect:
         serializedVersion: 2
-        x: 130
+        x: 146
         y: 128
-        width: 130
+        width: 146
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -170,11 +170,11 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 130
+        width: 146
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 0, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -189,13 +189,13 @@ TextureImporter:
       name: Buttons Images_3
       rect:
         serializedVersion: 2
-        x: 130
+        x: 146
         y: 64
-        width: 130
+        width: 146
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -212,11 +212,11 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 130
+        width: 146
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -231,13 +231,13 @@ TextureImporter:
       name: Buttons Images_5
       rect:
         serializedVersion: 2
-        x: 130
+        x: 146
         y: 0
-        width: 130
+        width: 146
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 1, z: 1, w: 1}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -251,7 +251,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2d3a92c2a220f364282555eb6f3aaa7f
     internalID: 0
     vertices: []
     indices: 
