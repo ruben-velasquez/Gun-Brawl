@@ -14,8 +14,6 @@ public class MatchPlayers : MonoBehaviour
     private Skin defaultSkin;
     [SerializeField]
     private InputController.IInputController defaultController;
-    [SerializeField]
-    private int maxPlayers = 4;
 
     // Estilos del modo de juego -> Teams Mode
     public UI.Selector.SelectorView redTeamSkinSelector;
@@ -36,7 +34,7 @@ public class MatchPlayers : MonoBehaviour
         if (GameManager.Instance.gameMode.name == "Teams Mode")
         {
             // - Establecemos un minimo de 4 jugadores
-            for (int i = 0; i < 4 - GameManager.Instance.playerInfo.Count; i++)
+            for (int i = 0; i < GameManager.Instance.gameMode.minPlayers - GameManager.Instance.playerInfo.Count; i++)
             {
                 GameManager.Instance.CreatePlayerInfo();
             }
@@ -58,7 +56,7 @@ public class MatchPlayers : MonoBehaviour
         else if (GameManager.Instance.gameMode.name == "Normal Mode")
         {
             // - Establecemos un minimo de 2 jugadores
-            for (int i = 0; i < 2 - GameManager.Instance.playerInfo.Count; i++)
+            for (int i = 0; i < GameManager.Instance.gameMode.minPlayers - GameManager.Instance.playerInfo.Count; i++)
             {
                 GameManager.Instance.CreatePlayerInfo();
             }
@@ -72,21 +70,20 @@ public class MatchPlayers : MonoBehaviour
             }
 
             // - Evitamos que se borren jugadores si hay 2
-            if (GameManager.Instance.playerInfo.Count == 2)
-            {
-                foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-                {
-                    button.Disable();
-                }
-            }
+            UpdateDeleteButtons();
+
+
+
+
+
 
         }
 
         // Evitamos que se creen más jugadores de lo necesario
-        if (GameManager.Instance.playerInfo.Count >= maxPlayers)
-        {
-            addButton.SetActive(false);
-        }
+        UpdateDeleteButtons();
+
+
+
     }
 
     private void OnGameModeChange(GameMode.GameMode gameMode)
@@ -97,10 +94,9 @@ public class MatchPlayers : MonoBehaviour
 
             UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
             UI.ControllerSelector[] controllersSelectors;
-            UI.DeleteBoxButton[] deleteBoxButtons;
 
             // - Minimo 4 jugadores
-            for (int i = 0; i < 4 - skinSelectors.Length; i++)
+            for (int i = 0; i < gameMode.minPlayers - skinSelectors.Length; i++)
             {
                 CreatePlayer();
             }
@@ -109,7 +105,6 @@ public class MatchPlayers : MonoBehaviour
 
             skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
             controllersSelectors = GetComponentsInChildren<UI.ControllerSelector>();
-            deleteBoxButtons = GetComponentsInChildren<UI.DeleteBoxButton>();
 
             int index = 0;
 
@@ -138,31 +133,22 @@ public class MatchPlayers : MonoBehaviour
             }
 
             // - Evitamos que se borren jugadores
-            if (deleteBoxButtons != null)
-                foreach (UI.DeleteBoxButton deleteBoxButton in deleteBoxButtons)
-                {
-                    if (deleteBoxButton != null)
-                        deleteBoxButton.Disable();
-                }
-
-            addButton.SetActive(false);
+            UpdateDeleteButtons(gameMode);
         }
         // Normal Mode
         else if (gameMode.name == "Normal Mode")
         {
             UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
             UI.ControllerSelector[] controllersSelectors;
-            UI.DeleteBoxButton[] deleteBoxButtons;
 
-            // - Minimo 4 jugadores
-            for (int i = 0; i < 2 - skinSelectors.Length; i++)
+            // - Minimo 2 jugadores
+            for (int i = 0; i < gameMode.minPlayers - skinSelectors.Length; i++)
             {
                 CreatePlayer();
             }
 
             skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
             controllersSelectors = GetComponentsInChildren<UI.ControllerSelector>();
-            deleteBoxButtons = GetComponentsInChildren<UI.DeleteBoxButton>();
 
             foreach (UI.SkinSelector skinSelector in skinSelectors)
             {
@@ -173,15 +159,8 @@ public class MatchPlayers : MonoBehaviour
             {
                 controllerSelector.ChangeView(normalControllerSelector);
             }
-            foreach (UI.DeleteBoxButton deleteBoxButton in deleteBoxButtons)
-            {
-                if (GameManager.Instance.playerInfo.Count > 2)
-                    deleteBoxButton.Enable();
-                else
-                    deleteBoxButton.Disable();
 
-            }
-
+            UpdateDeleteButtons(gameMode);
         }
     }
 
@@ -195,27 +174,14 @@ public class MatchPlayers : MonoBehaviour
         box.GetComponentInChildren<UI.SkinSelector>().id = index;
         box.GetComponentInChildren<UI.ControllerSelector>().id = index;
 
-        if (GameManager.Instance.playerInfo.Count >= 3)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Enable();
-            }
-        }
-        else if (GameManager.Instance.playerInfo.Count <= 2)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Disable();
-            }
-        }
+        UpdateDeleteButtons();
 
         return box;
     }
 
     public void CreatePlayer()
     {
-        if (GameManager.Instance.playerInfo.Count >= maxPlayers)
+        if (GameManager.Instance.playerInfo.Count >= GameManager.Instance.gameMode.maxPlayers)
         {
             return;
         }
@@ -233,25 +199,7 @@ public class MatchPlayers : MonoBehaviour
         GameManager.Instance.SetPlayerSkin(index, defaultSkin);
         GameManager.Instance.SetPlayerController(index, defaultController);
 
-        if (GameManager.Instance.playerInfo.Count >= maxPlayers)
-        {
-            addButton.SetActive(false);
-        }
-
-        if (GameManager.Instance.playerInfo.Count >= 3)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Enable();
-            }
-        }
-        else if (GameManager.Instance.playerInfo.Count <= 2)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Disable();
-            }
-        }
+        UpdateDeleteButtons();
     }
 
     public void CreatePlayer(PlayerInfo info, int atIndex)
@@ -274,20 +222,7 @@ public class MatchPlayers : MonoBehaviour
 
         controllerSelector.UpdateController();
 
-        if (GameManager.Instance.playerInfo.Count >= 3)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Enable();
-            }
-        }
-        else if (GameManager.Instance.playerInfo.Count <= 2)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Disable();
-            }
-        }
+        UpdateDeleteButtons();
     }
 
     public void CreatePlayer(PlayerInfo info, int atIndex, GameMode.TeamsMode.Teams teams)
@@ -319,25 +254,12 @@ public class MatchPlayers : MonoBehaviour
             controllerSelector.ChangeView(blueTeamControllerSelector);
         }
 
-        if (GameManager.Instance.playerInfo.Count >= 3)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Enable();
-            }
-        }
-        else if (GameManager.Instance.playerInfo.Count <= 2)
-        {
-            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
-            {
-                button.Disable();
-            }
-        }
+        UpdateDeleteButtons();
     }
 
     public void DeletePlayer(GameObject box)
     {
-        if (GameManager.Instance.playerInfo.Count == 1)
+        if (GameManager.Instance.playerInfo.Count == 1 || GameManager.Instance.playerInfo.Count <= GameManager.Instance.gameMode.minPlayers)
         {
             return;
         }
@@ -364,7 +286,21 @@ public class MatchPlayers : MonoBehaviour
             if (controllerSelector.id > 0) controllerSelector.id -= 1;
         }
 
-        if (GameManager.Instance.playerInfo.Count <= 2)
+        UpdateDeleteButtons();
+    }
+
+    private void UpdateDeleteButtons(GameMode.GameMode gameMode = null)
+    {
+        if(!gameMode) gameMode = GameManager.Instance.gameMode;
+
+        if (GameManager.Instance.playerInfo.Count > gameMode.minPlayers)
+        {
+            foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
+            {
+                button.Enable();
+            }
+        }
+        else
         {
             foreach (UI.DeleteBoxButton button in GetComponentsInChildren<UI.DeleteBoxButton>())
             {
@@ -372,6 +308,9 @@ public class MatchPlayers : MonoBehaviour
             }
         }
 
-        addButton.SetActive(true);
+        if(GameManager.Instance.playerInfo.Count < gameMode.maxPlayers)
+            addButton.SetActive(true);
+        else 
+            addButton.SetActive(false);
     }
 }

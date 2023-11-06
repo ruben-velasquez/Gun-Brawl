@@ -171,7 +171,8 @@ public class PlayerManager : GBSceneManager
 
         // Recorremos cada PlayerInfo
         foreach (PlayerInfo info in playerInfo) {
-            info.controller.asignedController = true;
+            if (info.controller != null)
+                info.controller.asignedController = true;
         }
     }
 }

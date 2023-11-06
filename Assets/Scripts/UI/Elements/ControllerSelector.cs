@@ -85,6 +85,11 @@ namespace UI
         // Solo actualizamos la vista, sin comprobar errores o inconsistencias
         public void UpdateController()
         {
+            if (imageContent == null)
+            {
+                return;
+            }
+
             if (controllerList.controllers[value].name.StartsWith("Player"))
             {
                 imageContent.enabled = true;
