@@ -88,79 +88,47 @@ public class MatchPlayers : MonoBehaviour
 
     private void OnGameModeChange(GameMode.GameMode gameMode)
     {
-        // Teams Mode
+        CreatePlayersAndSelectors(gameMode);
+
+        UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
+        UI.ControllerSelector[] controllersSelectors = GetComponentsInChildren<UI.ControllerSelector>();
+
         if (gameMode.name == "Teams Mode")
         {
-
-            UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
-            UI.ControllerSelector[] controllersSelectors;
-
-            // - Minimo 4 jugadores
-            for (int i = 0; i < gameMode.minPlayers - skinSelectors.Length; i++)
-            {
-                CreatePlayer();
-            }
-
-            // - Modificamos las cajas dependiendo del bando del jugador
-
-            skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
-            controllersSelectors = GetComponentsInChildren<UI.ControllerSelector>();
-
-            int index = 0;
-
-            // -- Modificamos el skin selector
-            foreach (UI.SkinSelector skinSelector in skinSelectors)
-            {
-                if (index < (int)Mathf.Floor(GameManager.Instance.playerInfo.Count / 2))
-                    skinSelector.ChangeView(redTeamSkinSelector);
-                else
-                    skinSelector.ChangeView(blueTeamSkinSelector);
-
-                index++;
-            }
-
-            index = 0;
-
-            // -- Modificamos el controller selector
-            foreach (UI.ControllerSelector controllerSelector in controllersSelectors)
-            {
-                if (index < (int)Mathf.Floor(GameManager.Instance.playerInfo.Count / 2))
-                    controllerSelector.ChangeView(redTeamControllerSelector);
-                else
-                    controllerSelector.ChangeView(blueTeamControllerSelector);
-
-                index++;
-            }
-
-            // - Evitamos que se borren jugadores
-            UpdateDeleteButtons(gameMode);
+            UpdateSelectors(skinSelectors, redTeamSkinSelector, blueTeamSkinSelector);
+            UpdateSelectors(controllersSelectors, redTeamControllerSelector, blueTeamControllerSelector);
         }
-        // Normal Mode
         else if (gameMode.name == "Normal Mode")
         {
-            UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
-            UI.ControllerSelector[] controllersSelectors;
+            UpdateSelectors(skinSelectors, normalSkinSelector, normalSkinSelector);
+            UpdateSelectors(controllersSelectors, normalControllerSelector, normalControllerSelector);
+        }
 
-            // - Minimo 2 jugadores
-            for (int i = 0; i < gameMode.minPlayers - skinSelectors.Length; i++)
-            {
-                CreatePlayer();
-            }
+        UpdateDeleteButtons(gameMode);
+    }
 
-            skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
-            controllersSelectors = GetComponentsInChildren<UI.ControllerSelector>();
+    private void CreatePlayersAndSelectors(GameMode.GameMode gameMode)
+    {
+        UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
 
-            foreach (UI.SkinSelector skinSelector in skinSelectors)
-            {
-                skinSelector.ChangeView(normalSkinSelector);
-            }
+        // - Minimo de jugadores
+        for (int i = 0; i < gameMode.minPlayers - skinSelectors.Length; i++)
+        {
+            CreatePlayer();
+        }
+    }
 
-            foreach (UI.ControllerSelector controllerSelector in controllersSelectors)
-            {
-                controllerSelector.ChangeView(normalControllerSelector);
-            }
+    private void UpdateSelectors(UI.Selector[] selectors, UI.Selector.SelectorView view1, UI.Selector.SelectorView view2)
+    {
+        int index = 0;
+        foreach (UI.Selector selector in selectors)
+        {
+            if (index < (int)Mathf.Floor(GameManager.Instance.playerInfo.Count / 2))
+                selector.ChangeView(view1);
+            else
+                selector.ChangeView(view2);
 
-            UpdateDeleteButtons(gameMode);
+            index++;
         }
     }
 
