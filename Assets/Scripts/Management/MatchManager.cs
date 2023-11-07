@@ -21,7 +21,7 @@ public class MatchManager : PlayerManager {
 
         CreatePlayers();
 
-        EnablePlayerMove();
+        StartCoroutine(StartGame());
         
         gameMode.StartMatch();
     }

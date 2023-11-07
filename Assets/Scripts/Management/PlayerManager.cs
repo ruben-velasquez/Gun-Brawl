@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class PlayerManager : GBSceneManager
@@ -120,6 +121,12 @@ public class PlayerManager : GBSceneManager
         }
 
         return playersState.players;
+    }
+
+    public IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(3); // Espera 3 segundos antes de iniciar la partida
+        EnablePlayerMove(); // Inicia la partida
     }
 
     // Activa el movimiento de todos los jugadores
