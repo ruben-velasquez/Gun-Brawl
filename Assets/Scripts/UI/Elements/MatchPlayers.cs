@@ -90,6 +90,8 @@ public class MatchPlayers : MonoBehaviour
     {
         CreatePlayersAndSelectors(gameMode);
 
+        Debug.Log(gameMode.name);
+
         UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
         UI.ControllerSelector[] controllersSelectors = GetComponentsInChildren<UI.ControllerSelector>();
 
@@ -111,10 +113,20 @@ public class MatchPlayers : MonoBehaviour
     {
         UI.SkinSelector[] skinSelectors = GetComponentsInChildren<UI.SkinSelector>();
 
-        // - Minimo de jugadores
+        // - Mínimo de jugadores
         for (int i = 0; i < gameMode.minPlayers - skinSelectors.Length; i++)
         {
             CreatePlayer();
+        }
+
+        // - Máximo de jugadores
+        int excessPlayers = skinSelectors.Length - gameMode.maxPlayers;
+        for (int i = 0; i < excessPlayers; i++)
+        {
+            // Get the last player box
+            GameObject lastPlayerBox = playerBoxes[playerBoxes.Count - 1];
+            // Delete the last player
+            DeletePlayer(lastPlayerBox);
         }
     }
 
@@ -149,11 +161,6 @@ public class MatchPlayers : MonoBehaviour
 
     public void CreatePlayer()
     {
-        if (GameManager.Instance.playerInfo.Count >= GameManager.Instance.gameMode.maxPlayers)
-        {
-            return;
-        }
-
         GameObject box = Instantiate(playerBox, transform);
         playerBoxes.Add(box);
 
@@ -227,7 +234,7 @@ public class MatchPlayers : MonoBehaviour
 
     public void DeletePlayer(GameObject box)
     {
-        if (GameManager.Instance.playerInfo.Count == 1 || GameManager.Instance.playerInfo.Count <= GameManager.Instance.gameMode.minPlayers)
+        if (GameManager.Instance.playerInfo.Count == 1)
         {
             return;
         }
