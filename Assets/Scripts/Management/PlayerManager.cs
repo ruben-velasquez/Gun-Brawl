@@ -112,8 +112,8 @@ public class PlayerManager : GBSceneManager
                     CreateTag(player, GameMode.TeamsMode.Teams.Blue);
                 }
             }
-            // Normal Mode -> Solo ponemos los tags a los jugadores si son locales
-            else if (GameManager.Instance.gameMode.name == "Normal Mode") {
+            // Otros modos -> Solo ponemos los tags a los jugadores si son locales
+            else {
                 CreateTag(player);
             }
 

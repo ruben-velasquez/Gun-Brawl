@@ -28,16 +28,14 @@ public class MatchPlayers : MonoBehaviour
     {
         GameManager.Instance.onGameModeChange += OnGameModeChange;
 
-        // TODO: Encapsular comportamiento de cada Modo de juego
+        for (int i = 0; i < GameManager.Instance.gameMode.minPlayers - GameManager.Instance.playerInfo.Count; i++)
+        {
+            GameManager.Instance.CreatePlayerInfo();
+        }
 
         // Teams Mode
         if (GameManager.Instance.gameMode.name == "Teams Mode")
         {
-            // - Establecemos un minimo de 4 jugadores
-            for (int i = 0; i < GameManager.Instance.gameMode.minPlayers - GameManager.Instance.playerInfo.Count; i++)
-            {
-                GameManager.Instance.CreatePlayerInfo();
-            }
 
             int index = 0;
 
@@ -52,15 +50,8 @@ public class MatchPlayers : MonoBehaviour
                 index++;
             }
         }
-        // Normal Mode
-        else if (GameManager.Instance.gameMode.name == "Normal Mode")
+        else
         {
-            // - Establecemos un minimo de 2 jugadores
-            for (int i = 0; i < GameManager.Instance.gameMode.minPlayers - GameManager.Instance.playerInfo.Count; i++)
-            {
-                GameManager.Instance.CreatePlayerInfo();
-            }
-
             int index = 0;
             foreach (PlayerInfo info in GameManager.Instance.playerInfo)
             {
@@ -68,22 +59,10 @@ public class MatchPlayers : MonoBehaviour
 
                 index++;
             }
-
-            // - Evitamos que se borren jugadores si hay 2
-            UpdateDeleteButtons();
-
-
-
-
-
-
         }
 
         // Evitamos que se creen más jugadores de lo necesario
         UpdateDeleteButtons();
-
-
-
     }
 
     private void OnGameModeChange(GameMode.GameMode gameMode)
@@ -100,7 +79,7 @@ public class MatchPlayers : MonoBehaviour
             UpdateSelectors(skinSelectors, redTeamSkinSelector, blueTeamSkinSelector);
             UpdateSelectors(controllersSelectors, redTeamControllerSelector, blueTeamControllerSelector);
         }
-        else if (gameMode.name == "Normal Mode")
+        else
         {
             UpdateSelectors(skinSelectors, normalSkinSelector, normalSkinSelector);
             UpdateSelectors(controllersSelectors, normalControllerSelector, normalControllerSelector);
