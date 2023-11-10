@@ -1448,10 +1448,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Warehouse tilemap_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e50e1eee3981f16409358001f928b91c
+      internalID: 1746432338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Warehouse tilemap_1
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 634d25ba0b9c08b4fb190b9eea22ac3f
+      internalID: -1056543397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Warehouse tilemap_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71fea932b44f830478c23668fdbc0c84
+      internalID: 614387940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Warehouse tilemap_3
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3633d5b643d9384f8de96a21d343900
+      internalID: 601702840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: facf125ce3cf45a49bc3dc9e3a13483e
     internalID: 0
     vertices: []
     indices: 
@@ -1514,6 +1598,11 @@ TextureImporter:
       Platform_Floor_2: 21300038
       Platform_Floor_3: 21300040
       Stair: 21300034
+      Warehouse tilemap_0: 1746432338
+      Warehouse tilemap_1: -1056543397
+      Warehouse tilemap_2: 614387940
+      Warehouse tilemap_3: 601702840
+      Warehouse tilemap_4: 1005878993
       small_box: 21300006
   spritePackingTag: 
   pSDRemoveMatte: 0
