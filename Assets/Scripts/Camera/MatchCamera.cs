@@ -29,6 +29,8 @@ public class MatchCamera : MonoBehaviour
 
     void LateUpdate()
     {
+        if(GameManager.Instance == null) return;
+        
         players = PlayerUtility.GetPlayerTransforms();
 
         float maxDistance = GetMaxDistance();
@@ -93,5 +95,27 @@ public class MatchCamera : MonoBehaviour
         float x = initialMaxOffset.x - ((_camera.orthographicSize - 5) * 1.6f);
 
         return new Vector2(x, y);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        _camera = Camera.main;
+        
+        // Obtener los offsets
+        Vector2 minOffset = GetMinOffset();
+        Vector2 maxOffset = GetMaxOffset();
+
+        // Calcular las esquinas del rectángulo
+        Vector3 topLeft = new Vector3(minOffset.x, maxOffset.y, 0);
+        Vector3 topRight = new Vector3(maxOffset.x, maxOffset.y, 0);
+        Vector3 bottomRight = new Vector3(maxOffset.x, minOffset.y, 0);
+        Vector3 bottomLeft = new Vector3(minOffset.x, minOffset.y, 0);
+
+        // Dibujar el rectángulo
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(topLeft, topRight);
+        Gizmos.DrawLine(topRight, bottomRight);
+        Gizmos.DrawLine(bottomRight, bottomLeft);
+        Gizmos.DrawLine(bottomLeft, topLeft);
     }
 }
