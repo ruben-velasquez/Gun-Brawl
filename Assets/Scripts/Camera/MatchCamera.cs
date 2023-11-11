@@ -40,7 +40,7 @@ public class MatchCamera : MonoBehaviour
         _camera.orthographicSize = Mathf.Clamp(desiredSize, minSize, maxSize);
 
         Vector3 centerPoint = GetCenterPoint();
-        Vector3 newPos = new Vector3(centerPoint.x, centerPoint.y, transform.position.x);
+        Vector3 newPos = new Vector3(centerPoint.x, centerPoint.y, transform.position.z);
 
         newPos = Vector3.SmoothDamp(transform.position, newPos, ref velocity, smoothTime, maxSpeed);
     
@@ -54,6 +54,7 @@ public class MatchCamera : MonoBehaviour
     }
 
     Vector3 GetCenterPoint() {
+        if(players.Count == 0) return Vector3.zero;
         if(players.Count == 1) return players[0].position;
 
         Bounds bounds = new Bounds(players[0].position, Vector3.zero);
