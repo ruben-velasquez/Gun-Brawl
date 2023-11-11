@@ -51,7 +51,7 @@ namespace Weapon
                 }
 
                 Fighter.LifeSystem colLife = col.GetComponent<Fighter.LifeSystem>();
-                if(colLife.currentLife == 1) {
+                if(colLife.currentLife > 0 && colLife.currentLife - damage <= 0) {
                     parent.GetComponent<Fighter.FighterStatistics>().kills++;
                 }
                 colLife.Hurt(damage);

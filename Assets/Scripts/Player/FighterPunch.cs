@@ -71,7 +71,7 @@ namespace Fighter
                     {
                         if(entity == transform) continue;
 
-                        if (playerLife.currentLife == 1)
+                        if (playerLife.currentLife > 0 && playerLife.currentLife - damage <= 0)
                         {
                             kills++;
                         }
