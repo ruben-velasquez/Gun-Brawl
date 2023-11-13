@@ -17,6 +17,8 @@ public class MatchCamera : MonoBehaviour
     private float minSize;
     [SerializeField]
     private float maxSize;
+    [SerializeField]
+    private float zoomVelocity;
 
     private Vector3 velocity;
     private Camera _camera;
@@ -37,7 +39,9 @@ public class MatchCamera : MonoBehaviour
 
         float desiredSize = (maxDistance / 2) + padding;
 
-        _camera.orthographicSize = Mathf.Clamp(desiredSize, minSize, maxSize);
+        float smoothSize = Mathf.SmoothDamp(_camera.orthographicSize, desiredSize, ref zoomVelocity, smoothTime);
+        
+        _camera.orthographicSize = Mathf.Clamp(smoothSize, minSize, maxSize);
 
         Vector3 centerPoint = GetCenterPoint();
         Vector3 newPos = new Vector3(centerPoint.x, centerPoint.y, transform.position.z);
