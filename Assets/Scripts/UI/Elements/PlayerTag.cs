@@ -14,6 +14,7 @@ namespace UI
         private void Start() {
             rectTransform = GetComponent<RectTransform>();
             playerLife = player.GetComponent<Fighter.LifeSystem>();
+            rectTransform.position = Camera.main.WorldToScreenPoint(player.transform.position + offset);
         }
 
         private void LateUpdate() {
