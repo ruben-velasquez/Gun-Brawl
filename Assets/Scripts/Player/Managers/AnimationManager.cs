@@ -43,6 +43,8 @@ namespace Fighter
             jumpingAnimation = animator.GetAnimation("Jump");
             punchAnimation = animator.GetAnimation("Punch");
             climbAnimation = animator.GetAnimation("Climb");
+
+            animator.Play(idleAnimation);
         }
 
         public virtual void OnAnimationStart() {
