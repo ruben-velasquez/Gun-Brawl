@@ -7,13 +7,15 @@ namespace Items {
         private float timer = 0f; // Temporizador para contar el tiempo transcurrido
         private ItemFactory itemFactory; // Referencia al ItemFactory
         private Item currentItem; // Item actualmente generado
+        private GameManager gameManager; // Instancia del GameManager
 
         private void Start() {
             itemFactory = ItemFactory.Instance; // Obtener la instancia del ItemFactory
+            gameManager = GameManager.Instance; // Obtener la instancia del GameManager
         }
 
         private void Update() {
-            timer += Time.deltaTime; // Incrementar el temporizador
+            timer += gameManager.paused ? 0f : Time.deltaTime; // Incrementar el temporizador
 
             if (timer >= spawnInterval) { // Si ha pasado el intervalo de tiempo
                 
