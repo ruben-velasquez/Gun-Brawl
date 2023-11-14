@@ -15,6 +15,8 @@ public class MatchManager : PlayerManager {
 
         matchEnd = false;
 
+        startedMatch = false;
+
         onMatchStart = null;
 
         onGameModeChange = null;

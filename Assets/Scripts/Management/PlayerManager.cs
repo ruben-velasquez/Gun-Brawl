@@ -8,6 +8,7 @@ public class PlayerManager : GBSceneManager
     private GameObject playerPrefab; // Jugador de referencia
     public List<PlayerInfo> playerInfo = new List<PlayerInfo>(); // Información de los jugadores
     public PlayersState playersState;
+    protected bool startedMatch = false;
 
     public virtual void Start()
     {
@@ -125,7 +126,19 @@ public class PlayerManager : GBSceneManager
 
     public IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(3); // Espera 3 segundos antes de iniciar la partida
+        int _time = 3;
+
+        while (_time > 0) {
+            // Agrega una comprobación aquí para ver si el juego está pausado
+            if(GameManager.Instance.paused) {
+                // Si el juego está pausado, espera hasta que se reanude antes de continuar
+                yield return new WaitUntil(() => !GameManager.Instance.paused);
+            }
+            yield return new WaitForSeconds(1f);
+            _time--;
+        }
+
+        startedMatch = true;
         EnablePlayerMove(); // Inicia la partida
     }
 
@@ -147,6 +160,8 @@ public class PlayerManager : GBSceneManager
 
     // Congela a los jugadores
     public void PausePlayers() {
+        if(!startedMatch) return;
+
         foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().DisableMovement();
@@ -156,6 +171,8 @@ public class PlayerManager : GBSceneManager
     }
     
     public void ResumePlayers() {
+        if(!startedMatch) return;
+
         foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().EnableMovement();
