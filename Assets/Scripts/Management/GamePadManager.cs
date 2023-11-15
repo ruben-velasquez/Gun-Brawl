@@ -3,6 +3,8 @@ using XInputDotNetPure;
 using System;
 using UnityEngine;
 
+// TODO: Use the New Input System instead of XInput
+
 public class GamePadManager : PauseManager
 {
     public bool isConnectedGamePads; // ¿Hay Mandos conectados?

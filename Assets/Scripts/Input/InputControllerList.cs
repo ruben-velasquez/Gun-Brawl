@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+// TODO: Use the New Input System instead of XInput
+
 namespace InputController
 {
 

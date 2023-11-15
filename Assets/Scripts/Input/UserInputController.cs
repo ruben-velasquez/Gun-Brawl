@@ -1,6 +1,8 @@
 using UnityEngine;
 using XInputDotNetPure;
 
+// TODO: Use the New Input System instead of XInput
+
 namespace InputController
 {
     [System.Serializable]
