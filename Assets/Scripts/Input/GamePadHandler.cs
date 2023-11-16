@@ -1,71 +1,58 @@
-using UnityEngine;
-using XInputDotNetPure;
-
-// TODO: Use the New Input System instead of XInput
+using UnityEngine.InputSystem;
+using System.Collections.Generic;
+using System;
 
 public static class GamePadHandler
 {
-    public static bool GetButton(GamePadState state, ControllerButton button) {
-        switch (button)
+    private static Dictionary<ControllerButton, Func<Gamepad, bool>> buttonMap = new Dictionary<ControllerButton, Func<Gamepad, bool>>
+    {
+        { ControllerButton.A, (gamepad) => gamepad.aButton.isPressed },
+        { ControllerButton.B, (gamepad) => gamepad.bButton.isPressed },
+        { ControllerButton.X, (gamepad) => gamepad.xButton.isPressed },
+        { ControllerButton.Y, (gamepad) => gamepad.yButton.isPressed },
+        { ControllerButton.DpadLeft, (gamepad) => gamepad.dpad.left.wasPressedThisFrame },
+        { ControllerButton.DpadRight, (gamepad) => gamepad.dpad.right.wasPressedThisFrame },
+        { ControllerButton.DpadUp, (gamepad) => gamepad.dpad.up.wasPressedThisFrame },
+        { ControllerButton.DpadDown, (gamepad) => gamepad.dpad.down.wasPressedThisFrame },
+        { ControllerButton.LThumbStickUp, (gamepad) => gamepad.leftStick.up.wasPressedThisFrame },
+        { ControllerButton.LThumbStickDown, (gamepad) => gamepad.leftStick.down.wasPressedThisFrame },
+        { ControllerButton.LThumbStickRight, (gamepad) => gamepad.leftStick.right.wasPressedThisFrame },
+        { ControllerButton.LThumbStickLeft, (gamepad) => gamepad.leftStick.left.wasPressedThisFrame },
+        { ControllerButton.RThumbStickUp, (gamepad) => gamepad.rightStick.up.wasPressedThisFrame },
+        { ControllerButton.RThumbStickDown, (gamepad) => gamepad.rightStick.down.wasPressedThisFrame },
+        { ControllerButton.RThumbStickRight, (gamepad) => gamepad.rightStick.right.wasPressedThisFrame },
+        { ControllerButton.RThumbStickLeft, (gamepad) => gamepad.rightStick.left.wasPressedThisFrame },
+    };
+
+    public static bool GetButton(Gamepad gamepad, ControllerButton button)
+    {
+        if (buttonMap.TryGetValue(button, out var buttonFunc))
         {
-            case ControllerButton.A:
-                return state.Buttons.A == ButtonState.Pressed;
-            case ControllerButton.B:
-                return state.Buttons.B == ButtonState.Pressed;
-            case ControllerButton.X:
-                return state.Buttons.X == ButtonState.Pressed;
-            case ControllerButton.Y:
-                return state.Buttons.Y == ButtonState.Pressed;
-            case ControllerButton.DpadLeft:
-                return state.DPad.Left == ButtonState.Pressed;
-            case ControllerButton.DpadRight:
-                return state.DPad.Right == ButtonState.Pressed;
-            case ControllerButton.DpadUp:
-                return state.DPad.Up == ButtonState.Pressed;
-            case ControllerButton.DpadDown:
-                return state.DPad.Down == ButtonState.Pressed;
-            case ControllerButton.LThumbStickUp:
-                return state.ThumbSticks.Left.Y > 0;
-            case ControllerButton.LThumbStickDown:
-                return state.ThumbSticks.Left.Y < 0;
-            case ControllerButton.LThumbStickRight:
-                return state.ThumbSticks.Left.X > 0;
-            case ControllerButton.LThumbStickLeft:
-                return state.ThumbSticks.Left.X < 0;
-            case ControllerButton.RThumbStickUp:
-                return state.ThumbSticks.Right.Y > 0;
-            case ControllerButton.RThumbStickDown:
-                return state.ThumbSticks.Right.Y < 0;
-            case ControllerButton.RThumbStickRight:
-                return state.ThumbSticks.Right.X > 0;
-            case ControllerButton.RThumbStickLeft:
-                return state.ThumbSticks.Right.X < 0;
+            return buttonFunc(gamepad);
         }
 
         return false;
     }
-    
-    public static ControllerButton GetAnyButton() {
-        foreach (PlayerIndex index in GameManager.Instance.connectedGamePads)
-        {
-            GamePadState state = GamePad.GetState(index);
 
-            if(state.Buttons.A == ButtonState.Pressed) return ControllerButton.A;
-            if(state.Buttons.B == ButtonState.Pressed) return ControllerButton.B;
-            if(state.Buttons.X == ButtonState.Pressed) return ControllerButton.X;
-            if(state.Buttons.Y == ButtonState.Pressed) return ControllerButton.Y;
-            if(state.DPad.Left == ButtonState.Pressed) return ControllerButton.DpadLeft;
-            if(state.DPad.Right == ButtonState.Pressed) return ControllerButton.DpadRight;
-            if(state.DPad.Up == ButtonState.Pressed) return ControllerButton.DpadUp;
-            if(state.DPad.Down == ButtonState.Pressed) return ControllerButton.DpadDown;
-            if(state.ThumbSticks.Left.Y > 0) return ControllerButton.LThumbStickUp;
-            if(state.ThumbSticks.Left.Y < 0) return ControllerButton.LThumbStickDown;
-            if(state.ThumbSticks.Left.X > 0) return ControllerButton.LThumbStickRight;
-            if(state.ThumbSticks.Left.X < 0) return ControllerButton.LThumbStickLeft;
-            if(state.ThumbSticks.Right.Y > 0) return ControllerButton.RThumbStickUp;
-            if(state.ThumbSticks.Right.Y < 0) return ControllerButton.RThumbStickDown;
-            if(state.ThumbSticks.Right.X > 0) return ControllerButton.RThumbStickRight;
-            if(state.ThumbSticks.Right.X < 0) return ControllerButton.RThumbStickLeft;
+    public static ControllerButton GetAnyButton() {
+        foreach (Gamepad gamepad in Gamepad.all)
+        {
+            if(gamepad.aButton.wasPressedThisFrame) return ControllerButton.A;
+            if(gamepad.bButton.wasPressedThisFrame) return ControllerButton.B;
+            if(gamepad.xButton.wasPressedThisFrame) return ControllerButton.X;
+            if(gamepad.yButton.wasPressedThisFrame) return ControllerButton.Y;
+            if(gamepad.dpad.left.wasPressedThisFrame) return ControllerButton.DpadLeft;
+            if(gamepad.dpad.right.wasPressedThisFrame) return ControllerButton.DpadRight;
+            if(gamepad.dpad.up.wasPressedThisFrame) return ControllerButton.DpadUp;
+            if(gamepad.dpad.down.wasPressedThisFrame) return ControllerButton.DpadDown;
+            if(gamepad.leftStick.up.wasPressedThisFrame) return ControllerButton.LThumbStickUp;
+            if(gamepad.leftStick.down.wasPressedThisFrame) return ControllerButton.LThumbStickDown;
+            if(gamepad.leftStick.right.wasPressedThisFrame) return ControllerButton.LThumbStickRight;
+            if(gamepad.leftStick.left.wasPressedThisFrame) return ControllerButton.LThumbStickLeft;
+            if(gamepad.rightStick.up.wasPressedThisFrame) return ControllerButton.RThumbStickUp;
+            if(gamepad.rightStick.down.wasPressedThisFrame) return ControllerButton.RThumbStickDown;
+            if(gamepad.rightStick.right.wasPressedThisFrame) return ControllerButton.RThumbStickRight;
+            if(gamepad.rightStick.left.wasPressedThisFrame) return ControllerButton.RThumbStickLeft;
         }
 
         return ControllerButton.None;

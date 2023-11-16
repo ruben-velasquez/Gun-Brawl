@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System;
-
-// TODO: Use the New Input System instead of XInput
 
 namespace InputController
 {
@@ -33,8 +32,7 @@ namespace InputController
                     UserInputController controller = (UserInputController)controllers[i];
 
                     // Si algún controlador que depende de su mando no tiene el mando conectado lo eliminamos
-                    if (controller.controllBased && !GameManager.Instance.connectedGamePads.Contains(controller.prefferedController) &&
-                        userControllers.Count > GameManager.Instance.connectedGamePads.Count)
+                    if (controller.controllBased && userControllers.Count > Gamepad.all.Count)
                     {
                         DeleteController(controller);
 
@@ -48,14 +46,14 @@ namespace InputController
             {
                 userControllers[i].name = "Player " + (i + 1).ToString();
                 userControllers[i].gameObject.name = "Player " + (i + 1).ToString();
-                ((UserInputController)userControllers[i]).prefferedController = (XInputDotNetPure.PlayerIndex)i;
+                ((UserInputController)userControllers[i]).prefferedController = i;
             }
 
-            for (int i = 0; i < GameManager.Instance.connectedGamePads.Count; i++)
+            for (int i = 0; i < Gamepad.all.Count; i++)
             {
                 // Si hay más mandos disponibles que controladores
                 // Creamos más controladores para esos mandos
-                if (userControllers.Count < GameManager.Instance.connectedGamePads.Count)
+                if (userControllers.Count < Gamepad.all.Count)
                 {
                     CreateController(true, true);
                 }
@@ -92,7 +90,9 @@ namespace InputController
 
             if (controllerObject == null)
             {
-                controllerObject = UnityEditor.PrefabUtility.SaveAsPrefabAsset(baseController, "Assets/Input Users/Player " + (userControllers.Count + 1) + ".prefab");
+                GameObject newBaseController = GameObject.Instantiate(baseController);
+                controllerObject = UnityEditor.PrefabUtility.SaveAsPrefabAsset(newBaseController, "Assets/Input Users/Player " + (userControllers.Count + 1) + ".prefab");
+                DestroyImmediate(newBaseController);
             }
 
             controllerObject.name = "Player " + (userControllers.Count + 1);
@@ -105,7 +105,7 @@ namespace InputController
 #endif
             newController.name = "Player " + (userControllers.Count + 1);
             newController.id = controllers.Count;
-            ((UserInputController)newController).prefferedController = (XInputDotNetPure.PlayerIndex)userControllers.Count;
+            ((UserInputController)newController).prefferedController = userControllers.Count - 1;
             ((UserInputController)newController).useGamePad = UseGamePad;
             ((UserInputController)newController).controllBased = controllerBased;
 
@@ -137,7 +137,7 @@ namespace InputController
 #endif
             newController.name = "Player " + (userControllers.Count + 1);
             newController.id = controllers.Count;
-            ((UserInputController)newController).prefferedController = (XInputDotNetPure.PlayerIndex)userControllers.Count;
+            ((UserInputController)newController).prefferedController = userControllers.Count - 1;
             ((UserInputController)newController).useGamePad = controller.useGamePad;
             ((UserInputController)newController).controllBased = false;
             ((UserInputController)newController).keyboardUser = controller.keyboardUser;

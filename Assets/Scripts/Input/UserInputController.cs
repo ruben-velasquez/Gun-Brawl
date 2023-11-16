@@ -1,7 +1,5 @@
 using UnityEngine;
-using XInputDotNetPure;
-
-// TODO: Use the New Input System instead of XInput
+using UnityEngine.InputSystem;
 
 namespace InputController
 {
@@ -17,7 +15,7 @@ namespace InputController
         public ControllerUser gamePadUser; // Los controles -> Modo Mando
         [Space]
         [SerializeField]
-        public PlayerIndex prefferedController; // Indice del mando preferido -> Modo mando
+        public int prefferedController; // Indice del mando preferido -> Modo mando
 
         // Modificar Obtener las interacciones
 
@@ -56,58 +54,58 @@ namespace InputController
 
         public override bool IsUp()
         {
-            if (useGamePad) return Input.GetKey(keyboardUser.up) || GamePadHandler.GetButton(ControllerState(), gamePadUser.up);
+            if (useGamePad) return Input.GetKey(keyboardUser.up) || GamePadHandler.GetButton(GamepadController(), gamePadUser.up);
             return Input.GetKey(keyboardUser.up);
         }
         public override bool IsDown()
         {
-            if (useGamePad) return Input.GetKey(keyboardUser.down) || GamePadHandler.GetButton(ControllerState(), gamePadUser.down);
+            if (useGamePad) return Input.GetKey(keyboardUser.down) || GamePadHandler.GetButton(GamepadController(), gamePadUser.down);
             return Input.GetKey(keyboardUser.down);
         }
         public bool IsMovingLeft()
         {
-            if (useGamePad) return Input.GetKey(keyboardUser.left) || GamePadHandler.GetButton(ControllerState(), gamePadUser.left);
+            if (useGamePad) return Input.GetKey(keyboardUser.left) || GamePadHandler.GetButton(GamepadController(), gamePadUser.left);
             return Input.GetKey(keyboardUser.left);
         }
 
         public bool IsMovingRight()
         {
-            if (useGamePad) return Input.GetKey(keyboardUser.right) || GamePadHandler.GetButton(ControllerState(), gamePadUser.right);
+            if (useGamePad) return Input.GetKey(keyboardUser.right) || GamePadHandler.GetButton(GamepadController(), gamePadUser.right);
             return Input.GetKey(keyboardUser.right);
         }
 
         public override bool IsFollowingJump()
         {
-            if (useGamePad) return Input.GetKey(keyboardUser.jump) || GamePadHandler.GetButton(ControllerState(), gamePadUser.jump);
+            if (useGamePad) return Input.GetKey(keyboardUser.jump) || GamePadHandler.GetButton(GamepadController(), gamePadUser.jump);
             return Input.GetKey(keyboardUser.jump);
         }
         public override bool IsJumping()
         {
-            if (useGamePad) return Input.GetKeyDown(keyboardUser.jump) || GamePadHandler.GetButton(ControllerState(), gamePadUser.jump);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.jump) || GamePadHandler.GetButton(GamepadController(), gamePadUser.jump);
             return Input.GetKeyDown(keyboardUser.jump);
         }
 
         public override bool IsShooting()
         {
-            if (useGamePad) return Input.GetKeyDown(keyboardUser.shoot) || GamePadHandler.GetButton(ControllerState(), gamePadUser.shoot);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.shoot) || GamePadHandler.GetButton(GamepadController(), gamePadUser.shoot);
             return Input.GetKeyDown(keyboardUser.shoot);
         }
 
         public override bool IsPunching()
         {
-            if (useGamePad) return Input.GetKey(keyboardUser.punch) || GamePadHandler.GetButton(ControllerState(), gamePadUser.punch);
+            if (useGamePad) return Input.GetKey(keyboardUser.punch) || GamePadHandler.GetButton(GamepadController(), gamePadUser.punch);
             return Input.GetKey(keyboardUser.punch);
         }
 
         public override bool IsInteracting()
         {
-            if (useGamePad) return Input.GetKeyDown(keyboardUser.interact) || GamePadHandler.GetButton(ControllerState(), gamePadUser.interact);
+            if (useGamePad) return Input.GetKeyDown(keyboardUser.interact) || GamePadHandler.GetButton(GamepadController(), gamePadUser.interact);
             return Input.GetKeyDown(keyboardUser.interact);
         }
 
         // Controller Handler
 
-        private GamePadState ControllerState()
+        private Gamepad GamepadController()
         {
             return GameManager.Instance.GetGamePadState(prefferedController);
         }

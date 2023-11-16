@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GamePadsConnected : MonoBehaviour
@@ -24,7 +25,7 @@ public class GamePadsConnected : MonoBehaviour
     }
 
     public void SetGamePadNumber() {
-        if(GameManager.Instance.connectedGamePads.Count == 0) {
+        if(Gamepad.all.Count == 0) {
             Hide();
             return;
         }
@@ -36,16 +37,16 @@ public class GamePadsConnected : MonoBehaviour
             Destroy(imagesContainer.transform.GetChild(i).gameObject);
         }
 
-        for (int i = 0; i < GameManager.Instance.connectedGamePads.Count; i++)
+        for (int i = 0; i < Gamepad.all.Count; i++)
         {
-            if(i + 1 == GameManager.Instance.connectedGamePads.Count) {
+            if(i + 1 == Gamepad.all.Count) {
                 Instantiate(gamepadImage, imagesContainer.transform);
             } else {
                 Instantiate(halfGamepadImage, imagesContainer.transform);
             }
         }
 
-        numOfGamePad.text = GameManager.Instance.connectedGamePads.Count.ToString();
+        numOfGamePad.text = Gamepad.all.Count.ToString();
     }
 
     public void Hide() {
