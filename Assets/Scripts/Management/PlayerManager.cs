@@ -64,6 +64,9 @@ public class PlayerManager : GBSceneManager
             // Instanciamos el jugador y obtenemos su script
             Fighter.Fighter player = Instantiate(playerPrefab, spawns[index].transform.position, Quaternion.Euler(0,0,0)).GetComponent<Fighter.Fighter>();
 
+            // Le ponemos el animador que define su skin
+            player.GetComponent<Animation.GBAnimator>().animationStack = info.skin.animator;
+            
             // Le ponemos su controlador
             if (info.controller.name.StartsWith("Player")) {
                 player.inputController = info.controller;
@@ -91,9 +94,6 @@ public class PlayerManager : GBSceneManager
             }
 
             player.name = ui.name.text;
-
-            // Le ponemos el animador que define su skin
-            player.GetComponent<Animation.GBAnimator>().animationStack = info.skin.animator;
 
             // Lo añadimos a la lista
             playersState.players.Add(player.gameObject);
