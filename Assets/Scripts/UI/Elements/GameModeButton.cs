@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class GameModeButton : MonoBehaviour, IPointerEnterHandler
+    public class GameModeButton : MonoBehaviour, IPointerEnterHandler, ISelectHandler
     {
         [SerializeField]
         private ContainersGroup containers;
@@ -20,6 +20,10 @@ namespace UI
         }
 
         public void OnPointerEnter(PointerEventData data) {
+            info.Set(gameMode);
+        }
+
+        public void OnSelect(BaseEventData data) {
             info.Set(gameMode);
         }
 
