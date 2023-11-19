@@ -22,6 +22,15 @@ public class PauseButton : Button
             GameManager.Instance.Pause();
     }
 
+    public override void OnSubmit(BaseEventData eventData) {
+        animator.SetTrigger("Press");
+
+        if(GameManager.Instance.paused)
+            GameManager.Instance.Resume();
+        else
+            GameManager.Instance.Pause();
+    }
+
     public void Animate() {
         animator.SetTrigger("Press");
     }

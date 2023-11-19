@@ -9,4 +9,9 @@ public class ResumeButton : Button
     {
         GameManager.Instance.Resume();
     }
+
+    public override void OnSubmit(BaseEventData eventData)
+    {
+        GameManager.Instance.Resume();
+    }
 }
