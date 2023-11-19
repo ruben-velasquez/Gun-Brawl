@@ -2,14 +2,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Tab : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class Tab : Selectable, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, ISubmitHandler
 {
     public TabsGroup tabsGroup;
     private Text text;
-    private RectTransform rect;
+    private readonly RectTransform rect;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+
         text = GetComponentInChildren<Text>();
     }
 
@@ -34,12 +36,29 @@ public class Tab : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IP
         tabsGroup.SelectTab(this);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnSubmit(BaseEventData eventData) {
+        SetColor(tabsGroup.selectedColor);
+        tabsGroup.SelectTab(this);
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData)
     {
         SetColor(tabsGroup.selectedColor);
     }
 
-    public void OnPointerExit(PointerEventData eventData)
+    public override void OnSelect(BaseEventData eventData)
+    {
+        SetColor(tabsGroup.selectedColor);
+    }
+
+    public override void OnPointerExit(PointerEventData eventData)
+    {
+        if(transform.GetSiblingIndex() != tabsGroup.selectedTab.transform.GetSiblingIndex()) {
+            SetColor(tabsGroup.deselectedColor);
+        }
+    }
+    
+    public override void OnDeselect(BaseEventData eventData)
     {
         if(transform.GetSiblingIndex() != tabsGroup.selectedTab.transform.GetSiblingIndex()) {
             SetColor(tabsGroup.deselectedColor);
