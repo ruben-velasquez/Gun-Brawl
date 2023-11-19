@@ -29,14 +29,14 @@ namespace UI
 
         public void GoTo(int newPage)
         {
-            LeanTween.alphaCanvas(containers[page], 0, 1f);
+            LeanTween.alphaCanvas(containers[page], 0, 0.3f);
 
             containers[page].interactable = false;
             containers[page].blocksRaycasts = false;
 
             page = newPage;
             
-            LeanTween.alphaCanvas(containers[page], 1, 1f).setDelay(1.5f);
+            LeanTween.alphaCanvas(containers[page], 1, 0.3f).setDelay(0.3f);
 
             containers[page].interactable = true;
             containers[page].blocksRaycasts = true;
