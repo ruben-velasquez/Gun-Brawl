@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Weapon
 {
@@ -16,12 +18,27 @@ namespace Weapon
         public float lifeTime; // Tiempo de vida total
 
         private Animation.GBAnimator animator;
+        private GameManager gameManager;
+
+        private void OnPause() {
+            rb2d.velocity = Vector2.zero;
+        }
+
+        private void OnResume() {
+            if(animator.currentAnimation?.name != "Destroy")
+                rb2d.velocity = direction * velocity;
+        }
         
 
         private void Start() {
+            gameManager = GameManager.Instance;
             rb2d = GetComponent <Rigidbody2D>();
             bx2d = GetComponent <BoxCollider2D>();
             animator = GetComponent <Animation.GBAnimator>();
+
+            gameManager.onPause += OnPause;
+            
+            gameManager.onResume += OnResume;
 
             animator.GetAnimation("Destroy").onAnimationStart += OnAnimationStart;
             animator.GetAnimation("Destroy").onAnimationEnd += OnAnimationEnd;
@@ -38,14 +55,14 @@ namespace Weapon
             // Le damos velocidad a la bala
             rb2d.velocity = direction * velocity;
 
-            Invoke("Destroy", lifeTime);
+            StartCoroutine(AwaitDestroy());
         }
 
         private void OnTriggerEnter2D(Collider2D col) {
             if(col.CompareTag("Player") && col.transform != parent) {
                 // Teams Mode
-                if(GameManager.Instance.gameMode.name == "Teams Mode") {
-                    GameMode.TeamsMode mode = (GameMode.TeamsMode)GameManager.Instance.gameMode;
+                if(gameManager.gameMode.name == "Teams Mode") {
+                    GameMode.TeamsMode mode = (GameMode.TeamsMode)gameManager.gameMode;
 
                     if(mode.AreEqualTeam(parent.gameObject, col.gameObject)) return;
                 }
@@ -68,6 +85,9 @@ namespace Weapon
         }
 
         private void Destroy() {
+            gameManager.onPause -= OnPause;
+            gameManager.onResume -= OnResume;
+
             animator.Play("Destroy");
         }
 
@@ -85,6 +105,21 @@ namespace Weapon
         private void OnDestroy() {
             animator.GetAnimation("Destroy").onAnimationStart -= OnAnimationStart;
             animator.GetAnimation("Destroy").onAnimationEnd -= OnAnimationEnd;
+        }
+
+        private IEnumerator AwaitDestroy() {
+            float time = lifeTime;
+
+            while (time > 0) {
+                if(gameManager.paused)
+                    yield return new WaitUntil(() => !gameManager.paused);
+
+                yield return new WaitForSeconds(0.1f);
+
+                time -= 0.1f;
+            }
+
+            Destroy();
         }
     }
 }
