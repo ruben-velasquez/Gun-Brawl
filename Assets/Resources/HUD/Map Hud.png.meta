@@ -109,11 +109,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 32
         width: 48
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -130,6 +130,27 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
+        y: 32
+        width: 48
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1bc4853afa741a419d5218ed85a4209
+      internalID: 1986391502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Map Hud_2
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
         width: 48
         height: 32
@@ -140,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c1bc4853afa741a419d5218ed85a4209
-      internalID: 1986391502
+      spriteID: 222379857a7f02d40a50be6272f6e6bc
+      internalID: -1478758110
       vertices: []
       indices: 
       edges: []
@@ -159,6 +180,7 @@ TextureImporter:
     nameFileIdTable:
       Map Hud_0: -1063408436
       Map Hud_1: 1986391502
+      Map Hud_2: -1478758110
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
