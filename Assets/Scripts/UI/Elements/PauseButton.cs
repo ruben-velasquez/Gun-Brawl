@@ -22,7 +22,7 @@ public class PauseButton : Button
     public void Update() {
         if(gameManager.matchEnd) return;
 
-        bool pauseButton = Input.GetKeyUp(KeyCode.P) || (Gamepad.current != null && Gamepad.current.startButton.isPressed);
+        bool pauseButton = Input.GetKeyUp(KeyCode.P) || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame);
 
         if(pauseButton) ChangePauseState();
     }
