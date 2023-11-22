@@ -7,11 +7,13 @@ public class ResumeButton : Button
 {
     public override void OnPointerClick(PointerEventData eventData)
     {
-        GameManager.Instance.Resume();
+        if(GameManager.Instance.paused == true)
+            GameManager.Instance.Resume();
     }
 
     public override void OnSubmit(BaseEventData eventData)
     {
-        GameManager.Instance.Resume();
+        if(GameManager.Instance.paused == true)
+            GameManager.Instance.Resume();
     }
 }
