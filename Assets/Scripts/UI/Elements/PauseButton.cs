@@ -1,38 +1,54 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 
 public class PauseButton : Button
 {
+    private GameManager gameManager;
+
     protected override void Start() {
+        gameManager = GameManager.Instance;
+
         base.Start();
 
-        GameManager.Instance.onPause += Animate;
-        GameManager.Instance.onResume += Animate;
-        GameManager.Instance.onMatchEnd += OnMatchEnd;
+        Animate();
+
+        gameManager.onPause += Animate;
+        gameManager.onResume += Animate;
+        gameManager.onMatchEnd += OnMatchEnd;
+    }
+
+    public void Update() {
+        if(gameManager.matchEnd) return;
+
+        bool pauseButton = Input.GetKeyUp(KeyCode.P) || (Gamepad.current != null && Gamepad.current.startButton.isPressed);
+
+        if(pauseButton) ChangePauseState();
     }
 
     public override void OnPointerClick(PointerEventData eventData) {
-        animator.SetTrigger("Press");
-
-        if(GameManager.Instance.paused)
-            GameManager.Instance.Resume();
-        else
-            GameManager.Instance.Pause();
+        ChangePauseState();
     }
 
     public override void OnSubmit(BaseEventData eventData) {
-        animator.SetTrigger("Press");
+        ChangePauseState();
+    }
 
-        if(GameManager.Instance.paused)
-            GameManager.Instance.Resume();
-        else
-            GameManager.Instance.Pause();
+    private void ChangePauseState() {
+
+        if(gameManager.paused) {
+            animator.SetBool("Paused", false);
+            gameManager.Resume();
+        }
+        else {
+            animator.SetBool("Paused", true);
+            gameManager.Pause();
+        }
     }
 
     public void Animate() {
-        animator.SetTrigger("Press");
+        animator.SetBool("Paused", gameManager.paused);
     }
 
     public void OnMatchEnd() {
