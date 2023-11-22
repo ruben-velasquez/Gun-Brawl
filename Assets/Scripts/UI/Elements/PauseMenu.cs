@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
+    [SerializeField]
+    private Button resumeButton;
 
     private void Start()
     {
@@ -14,6 +16,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Show() {
         if(canvasGroup == null) return;
+        resumeButton.Select();
         LeanTween.alphaCanvas(canvasGroup, 1f, .5f);
         canvasGroup.blocksRaycasts = true;
         canvasGroup.interactable = true;
