@@ -38,12 +38,12 @@ public class PauseButton : Button
     private void ChangePauseState() {
 
         if(gameManager.paused) {
-            animator.SetBool("Paused", false);
             gameManager.Resume();
+            animator.SetBool("Paused", false);
         }
         else {
-            animator.SetBool("Paused", true);
             gameManager.Pause();
+            animator.SetBool("Paused", true);
         }
     }
 
