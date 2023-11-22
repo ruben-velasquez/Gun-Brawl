@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
@@ -9,7 +10,9 @@ public class MatchPlayers : MonoBehaviour
     [SerializeField]
     private List<GameObject> playerBoxes;
     [SerializeField]
-    private GameObject addButton;
+    private Button addButton;
+    [SerializeField]
+    private Button startButton;
     [SerializeField]
     private Skin defaultSkin;
     [SerializeField]
@@ -240,6 +243,8 @@ public class MatchPlayers : MonoBehaviour
             if (controllerSelector.id > 0) controllerSelector.id -= 1;
         }
 
+        startButton.Select();
+
         UpdateDeleteButtons();
     }
 
@@ -262,9 +267,14 @@ public class MatchPlayers : MonoBehaviour
             }
         }
 
-        if(GameManager.Instance.playerInfo.Count < gameMode.maxPlayers)
-            addButton.SetActive(true);
-        else 
-            addButton.SetActive(false);
+        if(GameManager.Instance.playerInfo.Count < gameMode.maxPlayers) {
+            addButton.interactable = true;
+            addButton.gameObject.SetActive(true);
+        }
+        else  {
+            addButton.interactable = false;
+            addButton.gameObject.SetActive(false);
+            startButton.Select();
+        }
     }
 }
