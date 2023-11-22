@@ -6,6 +6,8 @@ public class WinMenu : MatchEndMenu
 {
     private CanvasGroup canvasGroup;
     public RectTransform heroText;
+    [SerializeField]
+    private Button replayButton;
     public string heroTextContent;
 
     // Start is called before the first frame update
@@ -22,6 +24,8 @@ public class WinMenu : MatchEndMenu
 
     public override void Show() {
         if(canvasGroup == null) return;
+
+        replayButton.Select();
 
         // Si el modo es Teams Mode
         if(GameManager.Instance.gameMode.name == "Teams Mode") {
