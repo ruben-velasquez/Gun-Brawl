@@ -69,6 +69,7 @@ namespace InputController
         }
 
         private void CheckItems() {
+            fighter.CheckItem();
             if(fighter.itemStay && fighter.item.ShouldUseItem(fighter)) {
                 actions.interact = true;
             }
