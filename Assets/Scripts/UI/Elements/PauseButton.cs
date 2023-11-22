@@ -36,6 +36,7 @@ public class PauseButton : Button
     }
 
     public void OnMatchEnd() {
+        interactable = false;
         GameManager.Instance.onPause -= Animate;
         GameManager.Instance.onResume -= Animate;
         GameManager.Instance.onMatchEnd -= OnMatchEnd;
