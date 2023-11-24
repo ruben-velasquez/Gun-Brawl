@@ -8,6 +8,7 @@ public class MatchManager : PlayerManager {
     public event Action onMatchEnd;
     public event Action<GameMode.GameMode> onGameModeChange;
     public bool matchEnd;
+    private Coroutine startGameCoroutine;
 
     public virtual void StartMatch() {
         if(onMatchStart != null)
@@ -23,7 +24,7 @@ public class MatchManager : PlayerManager {
 
         CreatePlayers();
 
-        StartCoroutine(StartGame());
+        startGameCoroutine = StartCoroutine(StartGame());
         
         gameMode.StartMatch();
     }
@@ -47,6 +48,9 @@ public class MatchManager : PlayerManager {
         onMatchEnd = null;
         matchEnd = true;
 
+        if(startGameCoroutine != null)
+            StopCoroutine(startGameCoroutine);
+
         foreach (GameObject player in playersState.players)
         {
             player.GetComponent<Fighter.Fighter>().OnMatchEnd();
@@ -58,6 +62,7 @@ public class MatchManager : PlayerManager {
 
         CheckMatch();
     }
+
 
     public virtual void ChangeGameMode(GameMode.GameMode newGameMode) {
         if(onGameModeChange != null) 
