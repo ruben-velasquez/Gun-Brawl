@@ -33,6 +33,7 @@ public class ManualFriction : MonoBehaviour
 
     private void CheckGroundAbove()
     {
+        if(!isOnGround) return;
         Vector2 positionCenter = (Vector2)transform.position + new Vector2(0, globalRaySideOffset.y);
         Vector2 direction = Vector2.down;
 
