@@ -15,11 +15,18 @@ public class ManualFriction : MonoBehaviour
     private Rigidbody2D rb;
     private bool isOnGround;
     private bool isOnGroundAbove;
+    private GameManager gameManager;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        gameManager = GameManager.Instance;
+        gameManager.onPause += OnPause;
+        gameManager.onResume += OnResume;
     }
+
+    private void OnPause() => rb.simulated = false;
+    private void OnResume() => rb.simulated = true;
 
     private void Update()
     {
