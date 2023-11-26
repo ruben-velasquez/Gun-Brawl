@@ -22,6 +22,10 @@ public static class GamePadHandler
         { ControllerButton.RThumbStickDown, (gamepad) => gamepad.rightStick.down.wasPressedThisFrame },
         { ControllerButton.RThumbStickRight, (gamepad) => gamepad.rightStick.right.wasPressedThisFrame },
         { ControllerButton.RThumbStickLeft, (gamepad) => gamepad.rightStick.left.wasPressedThisFrame },
+        { ControllerButton.LeftShoulder, (gamepad) => gamepad.leftShoulder.wasPressedThisFrame },
+        { ControllerButton.LeftTrigger, (gamepad) => gamepad.leftTrigger.wasPressedThisFrame },
+        { ControllerButton.RightShoulder, (gamepad) => gamepad.rightShoulder.wasPressedThisFrame },
+        { ControllerButton.RightTrigger, (gamepad) => gamepad.rightTrigger.wasPressedThisFrame }
     };
 
     public static bool GetButton(Gamepad gamepad, ControllerButton button)
@@ -53,6 +57,10 @@ public static class GamePadHandler
             if(gamepad.rightStick.down.wasPressedThisFrame) return ControllerButton.RThumbStickDown;
             if(gamepad.rightStick.right.wasPressedThisFrame) return ControllerButton.RThumbStickRight;
             if(gamepad.rightStick.left.wasPressedThisFrame) return ControllerButton.RThumbStickLeft;
+            if(gamepad.leftShoulder.wasPressedThisFrame) return ControllerButton.LeftShoulder;
+            if(gamepad.leftTrigger.wasPressedThisFrame) return ControllerButton.LeftTrigger;
+            if(gamepad.rightShoulder.wasPressedThisFrame) return ControllerButton.RightShoulder;
+            if(gamepad.rightTrigger.wasPressedThisFrame) return ControllerButton.RightTrigger;
         }
 
         return ControllerButton.None;
@@ -75,6 +83,10 @@ public static class GamePadHandler
         RThumbStickDown,
         RThumbStickLeft,
         RThumbStickRight,
+        LeftShoulder,
+        LeftTrigger,
+        RightShoulder,
+        RightTrigger,
         None
     }
 
