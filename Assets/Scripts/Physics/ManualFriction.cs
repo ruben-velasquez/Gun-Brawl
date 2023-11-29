@@ -23,10 +23,16 @@ public class ManualFriction : MonoBehaviour
         gameManager = GameManager.Instance;
         gameManager.onPause += OnPause;
         gameManager.onResume += OnResume;
+        gameManager.onMatchEnd += OnMatchEnd;
     }
 
     private void OnPause() => rb.simulated = false;
     private void OnResume() => rb.simulated = true;
+    private void OnMatchEnd() {
+        gameManager.onPause -= OnPause;
+        gameManager.onResume -= OnResume;
+        gameManager.onMatchEnd -= OnMatchEnd;
+    }
 
     private void Update()
     {
