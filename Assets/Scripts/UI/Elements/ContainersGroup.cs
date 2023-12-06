@@ -18,13 +18,15 @@ namespace UI
             {
                 CanvasGroup container = containers[i];
 
-                if (i != page)
+                if (i != GameManager.Instance.page)
                 {
                     container.alpha = 0;
                     container.interactable = false;
                     container.blocksRaycasts = false;
                 }
             }
+
+            GoToInmediatly(GameManager.Instance.page);
         }
 
         public void GoTo(int newPage)
@@ -40,6 +42,22 @@ namespace UI
 
             containers[page].interactable = true;
             containers[page].blocksRaycasts = true;
+
+            GameManager.Instance.page = page;
+        }
+
+        private void GoToInmediatly(int newPage) {
+            containers[page].alpha = 0;
+            containers[page].interactable = false;
+            containers[page].blocksRaycasts = false;
+
+            page = newPage;
+
+            containers[page].alpha = 1;
+            containers[page].interactable = true;
+            containers[page].blocksRaycasts = true;
+
+            GameManager.Instance.page = page;
         }
     }
 }

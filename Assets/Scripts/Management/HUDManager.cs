@@ -6,6 +6,8 @@ public class HUDManager : MonoBehaviour
     [SerializeField]
     private GameObject HUD;
 
+    public int page = 0;
+
     // Estilos del HUD en el modo de juego -> Teams Mode
     [SerializeField]
     private FighterUIStyle redTeamUIStyle;
