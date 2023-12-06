@@ -20,6 +20,8 @@ public class GamePadsConnected : MonoBehaviour
 
     private void Start() {
         canvasGroup = GetComponent<CanvasGroup>();
+        
+        Hide();
 
         GameManager.Instance.onCheckControllers += SetGamePadNumber;
     }
