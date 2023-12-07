@@ -124,6 +124,8 @@ namespace Animation
                     animation.FrameAction(transform);
                 }
 
+                yield return new WaitUntil(() => spr != null);
+
                 spr.sprite = frame.sprite; // Asignamos el sprite del frame
 
                 for (int i = 0; pause; i++)
